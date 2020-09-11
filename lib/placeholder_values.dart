@@ -99,7 +99,7 @@ class PlaceholderValues {
                 lastName: 'Abromaitis',
                 username: 'no_knucks'),
             score: ExerciseScoreModel(
-              exerciseSetDefinition: ExerciseSetModel(
+              exerciseSetDefini:tion: ExerciseSetModel(
                   exerciseName: 'Split Squat', targetReps: 10, isRest: false),
               value: 5,
               goodReps: 0,

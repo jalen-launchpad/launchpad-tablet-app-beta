@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/exercise_leaderboard/exercise_leaderboard_entry_model.dart';
 
-class ExerciseLeaderboardModel extends ChangeNotifier {
+import 'leaderboard_entry_model.dart';
+
+class LeaderboardModel extends ChangeNotifier {
   // Launchpad's leaderboard for a given exercise.
-  final List<ExerciseLeaderboardEntryModel> leaderboardEntries;
+  final List<LeaderboardEntryModel> leaderboardEntries;
 
   // The user is not saved in the leaderboard list until post exercise.
   // There's no manipulation of the leaderboard entries to save speed.
-  ExerciseLeaderboardEntryModel userEntry;
+  LeaderboardEntryModel userEntry;
   int userPosition;
   int nextScoreToBeat;
 
@@ -35,7 +36,7 @@ class ExerciseLeaderboardModel extends ChangeNotifier {
   }
 
   // Get the leaderboard entry that is one position above the user.
-  ExerciseLeaderboardEntryModel getAbove() {
+  LeaderboardEntryModel getAbove() {
     print("userPosition" + userPosition.toString());
     print("leaderboardEntries.length" + leaderboardEntries.length.toString());
     return (userPosition == maxPosition)
@@ -44,14 +45,14 @@ class ExerciseLeaderboardModel extends ChangeNotifier {
   }
 
   // Get the leaderboard entry that is one position below the user.
-  ExerciseLeaderboardEntryModel getBelow() {
+  LeaderboardEntryModel getBelow() {
     return (userPosition == 0)
         ? null
         : leaderboardEntries[
             userPosition == maxPosition ? userPosition : userPosition - 1];
   }
 
-  ExerciseLeaderboardModel(
+  LeaderboardModel(
       {this.leaderboardEntries,
       this.userPosition,
       this.nextScoreToBeat,

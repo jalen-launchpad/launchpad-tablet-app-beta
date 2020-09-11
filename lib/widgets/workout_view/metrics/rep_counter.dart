@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/models/exercise_score_model.dart';
-
-import 'exercise_leaderboard/exercise_leaderboard_entry_model.dart';
+import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
 
 class RepCounter extends StatefulWidget {
   final ExerciseScoreModel exerciseScore;
@@ -38,7 +37,7 @@ class _RepCounterState extends State<RepCounter> {
     return Container(
       width: widgetWidth,
       height: widgetHeight,
-      child: Consumer<ExerciseLeaderboardEntryModel>(
+      child: Consumer<LeaderboardEntryModel>(
           builder: (context, entry, child) {
         return Stack(
           children: [

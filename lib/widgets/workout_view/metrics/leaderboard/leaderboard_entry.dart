@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tabletapp/constants/colors.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/exercise_leaderboard/exercise_leaderboard_entry_model.dart';
 
-import 'exercise_leaderboard_model.dart';
+import 'leaderboard_entry_model.dart';
+import 'leaderboard_model.dart';
 
-class ExerciseLeaderboardEntry extends StatefulWidget {
-  final ExerciseLeaderboardEntryModel exerciseLeaderboardEntryModel;
+class LeaderboardEntry extends StatefulWidget {
+  final LeaderboardEntryModel exerciseLeaderboardEntryModel;
   // Is this the user or a launchpad leaderboard entry?
   final bool isUser;
   // Is this the launchpad leaderboard entry one spot above the user?
@@ -16,28 +16,28 @@ class ExerciseLeaderboardEntry extends StatefulWidget {
 
   static const double height = 40;
 
-  ExerciseLeaderboardEntry(
+  LeaderboardEntry(
       {this.exerciseLeaderboardEntryModel,
       this.isUser = false,
       this.isAbove = false,
       this.isBelow = false});
   @override
-  _ExerciseLeaderboardEntryState createState() =>
-      _ExerciseLeaderboardEntryState(
+  _LeaderboardEntryState createState() =>
+      _LeaderboardEntryState(
           exerciseLeaderboardEntryModel: this.exerciseLeaderboardEntryModel,
           isAbove: this.isAbove,
           isBelow: this.isBelow,
           isUser: this.isUser);
 }
 
-class _ExerciseLeaderboardEntryState extends State<ExerciseLeaderboardEntry> {
-  ExerciseLeaderboardEntryModel exerciseLeaderboardEntryModel;
+class _LeaderboardEntryState extends State<LeaderboardEntry> {
+  LeaderboardEntryModel exerciseLeaderboardEntryModel;
   int offset;
   final bool isUser;
   final bool isAbove;
   final bool isBelow;
 
-  _ExerciseLeaderboardEntryState(
+  _LeaderboardEntryState(
       {this.exerciseLeaderboardEntryModel,
       this.isUser,
       this.isAbove,
@@ -46,13 +46,12 @@ class _ExerciseLeaderboardEntryState extends State<ExerciseLeaderboardEntry> {
   static const double textPadding = 30;
   static const double fontSize = 16;
 
-
-  // Consumes -> ExerciseLeaderboardModel (from ExerciseLeaderboard)
+  // Consumes -> LeaderboardModel (from Leaderboard)
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: ExerciseLeaderboardEntry.height,
-        child: Consumer<ExerciseLeaderboardModel>(
+        height: LeaderboardEntry.height,
+        child: Consumer<LeaderboardModel>(
           builder: (context, leaderboard, child) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

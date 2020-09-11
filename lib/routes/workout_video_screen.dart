@@ -8,8 +8,8 @@ import 'package:tabletapp/models/user_model.dart';
 import 'package:tabletapp/models/workout_details.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/placeholder_values.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/exercise_leaderboard/exercise_leaderboard.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/exercise_leaderboard/exercise_leaderboard_entry_model.dart';
+import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard.dart';
+import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/rep_counter.dart';
 import 'package:video_player/video_player.dart';
 
@@ -49,7 +49,7 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
       });
   }
 
-  final exerciseLeaderboardEntryModel = ExerciseLeaderboardEntryModel(
+  final exerciseLeaderboardEntryModel = LeaderboardEntryModel(
       user: UserModel(
           firstName: 'Jalen', lastName: 'Gabbidon', username: 'gabbyyy'),
       exerciseSetDefinition: ExerciseSetModel(
@@ -69,7 +69,7 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
     return Scaffold(
       body: MultiProvider(
         providers: [
-          ChangeNotifierProvider<ExerciseLeaderboardEntryModel>(
+          ChangeNotifierProvider<LeaderboardEntryModel>(
               // TODO define initial exerciseleaderboardentrymodel
               create: (context) => exerciseLeaderboardEntryModel),
         ],
@@ -104,11 +104,11 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
           ),
           */
           Positioned(
-              child: ExerciseLeaderboard(
-                currentExerciseLeaderboard: PlaceholderValues().leaderboard,
+              child: Leaderboard(
+                currentLeaderboard: PlaceholderValues().leaderboard,
               ),
               top: repCounterTopPosition +
-                  ExerciseLeaderboard.workoutLeaderboardHeight +
+                  Leaderboard.workoutLeaderboardHeight +
                   75,
               left: repCounterLeftPosition)
         ]),
