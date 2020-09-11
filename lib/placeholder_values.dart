@@ -124,7 +124,7 @@ class PlaceholderValues {
                   exerciseName: 'Split Squat', targetReps: 10, isRest: false),
               value: 20,
               goodReps: 10,
-              badReps: 10,
+              badReps: 0,
             )),
         ExerciseLeaderboardEntryModel(
             user: UserModel(
@@ -135,7 +135,7 @@ class PlaceholderValues {
                 exerciseSetDefinition: ExerciseSetModel(
                     exerciseName: 'Split Squat', targetReps: 10, isRest: false),
                 value: 30,
-                goodReps: 20,
+                goodReps: 2,
                 badReps: 10)),
         ExerciseLeaderboardEntryModel(
             user: UserModel(
@@ -146,8 +146,8 @@ class PlaceholderValues {
                 exerciseSetDefinition: ExerciseSetModel(
                     exerciseName: 'Split Squat', targetReps: 10, isRest: false),
                 value: 66,
-                goodReps: 70,
-                badReps: -4)),
+                goodReps: 10,
+                badReps: 3)),
         ExerciseLeaderboardEntryModel(
             user: UserModel(
                 firstName: 'Candice',
@@ -157,8 +157,8 @@ class PlaceholderValues {
                 exerciseSetDefinition: ExerciseSetModel(
                     exerciseName: 'Split Squat', targetReps: 10, isRest: false),
                 value: 130,
-                goodReps: 70,
-                badReps: 60)),
+                goodReps: 7,
+                badReps: 10)),
         ExerciseLeaderboardEntryModel(
             user: UserModel(
                 firstName: 'Brooks',
@@ -168,8 +168,8 @@ class PlaceholderValues {
               exerciseSetDefinition: ExerciseSetModel(
                   exerciseName: 'Split Squat', targetReps: 10, isRest: false),
               value: 1000,
-              goodReps: 500,
-              badReps: 500,
+              goodReps: 5,
+              badReps: 15,
             )),
       ]);
 }

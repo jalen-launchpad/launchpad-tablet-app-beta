@@ -33,8 +33,9 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
 
   @override
   void initState() {
-    Timer.periodic(Duration(seconds: 3), (timer) {
+    Timer.periodic(Duration(seconds: 1), (timer) {
       exerciseLeaderboardEntryModel.addGoodRep();
+      exerciseLeaderboardEntryModel.addBadRep();
     });
     super.initState();
     _controller = VideoPlayerController.asset(

@@ -46,7 +46,6 @@ class _ExerciseLeaderboardEntryState extends State<ExerciseLeaderboardEntry> {
   static const double textPadding = 30;
   static const double fontSize = 16;
 
-  static const int indexToPositionNormalizer = 1;
 
   // Consumes -> ExerciseLeaderboardModel (from ExerciseLeaderboard)
   @override
@@ -63,18 +62,15 @@ class _ExerciseLeaderboardEntryState extends State<ExerciseLeaderboardEntry> {
                 child: Text(
                   this.isUser
                       ? (leaderboard.leaderboardEntries.length -
-                              leaderboard.userPosition +
-                              indexToPositionNormalizer)
+                              leaderboard.userPosition)
                           .toString()
                       : this.isAbove
                           ? (leaderboard.leaderboardEntries.length -
-                                  leaderboard.userPosition +
-                                  indexToPositionNormalizer -
+                                  leaderboard.userPosition -
                                   1)
                               .toString()
                           : (leaderboard.leaderboardEntries.length -
                                   leaderboard.userPosition +
-                                  indexToPositionNormalizer +
                                   1)
                               .toString(),
                   style: TextStyle(
