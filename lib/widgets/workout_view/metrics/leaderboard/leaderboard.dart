@@ -40,10 +40,8 @@ class _LeaderboardState extends State<Leaderboard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Consumer<LeaderboardEntryModel>(
-          builder: (context, model, child) {
-        if (model.score.getValue >=
-            currentLeaderboard.nextScoreToBeat) {
+      child: Consumer<LeaderboardEntryModel>(builder: (context, model, child) {
+        if (model.score.getValue >= currentLeaderboard.nextScoreToBeat) {
           currentLeaderboard.updateUserPosition(model.score.getValue);
         }
         return Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tabletapp/placeholder_values.dart';
+import 'package:tabletapp/routes/bluetooth_setup_screen.dart';
 import 'package:tabletapp/routes/workout_video_screen.dart';
 
 void main() {
@@ -58,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     return Center(
-        child: WorkoutVideoScreen(
+        child: BluetoothSetupScreen(
       workoutDetails: PlaceholderValues.workoutCardList[0],
     ));
   }

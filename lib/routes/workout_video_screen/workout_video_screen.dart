@@ -1,66 +1,47 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tabletapp/constants/colors.dart';
-import 'package:tabletapp/models/exercise_score_model.dart';
-import 'package:tabletapp/models/exercise_set_model.dart';
-import 'package:tabletapp/models/user_model.dart';
-import 'package:tabletapp/models/workout_details.dart';
-import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/placeholder_values.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/rep_counter.dart';
+import 'package:tabletapp/widgets/workout_view/metrics/rep_counter/rep_counter.dart';
 import 'package:video_player/video_player.dart';
 
 class WorkoutVideoScreen extends StatefulWidget {
-  final WorkoutDetails workoutDetails;
-  final WorkoutMetadata workoutMetadata;
-  WorkoutVideoScreen({this.workoutDetails, this.workoutMetadata});
+  final WorkoutVideoScreenModel workoutVideoScreenModel;
+  WorkoutVideoScreen(this.workoutVideoScreenModel);
 
   @override
-  _WorkoutVideoScreenState createState() => _WorkoutVideoScreenState(
-      workoutDetails: this.workoutDetails,
-      workoutMetadata: this.workoutMetadata);
+  _WorkoutVideoScreenState createState() =>
+      _WorkoutVideoScreenState(this.workoutVideoScreenModel);
 }
 
 class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
-  final WorkoutDetails workoutDetails;
-  final WorkoutMetadata workoutMetadata;
+  // The controller for the streaming video.
   VideoPlayerController _controller;
+  final WorkoutVideoScreenModel workoutVideoScreenModel;
 
-  _WorkoutVideoScreenState({this.workoutDetails, this.workoutMetadata});
+  _WorkoutVideoScreenState(this.workoutVideoScreenModel);
 
   @override
   void initState() {
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      exerciseLeaderboardEntryModel.addGoodRep();
-      exerciseLeaderboardEntryModel.addBadRep();
-    });
     super.initState();
+
+    // Load video.
     _controller = VideoPlayerController.asset(
-        'assets/' + workoutDetails.workoutId + '.mp4');
+        'assets/' + workoutVideoScreenModel.workoutDetails.workoutId + '.mp4');
     _controller.setLooping(true);
 
+    // Play video.
     _controller
       ..initialize().then((_) {
         _controller.play();
+        // Start timer on workout with corrections.
+        workoutVideoScreenModel.startWorkout();
         setState(() {});
       });
   }
-
-  final exerciseLeaderboardEntryModel = LeaderboardEntryModel(
-      user: UserModel(
-          firstName: 'Jalen', lastName: 'Gabbidon', username: 'gabbyyy'),
-      exerciseSetDefinition: ExerciseSetModel(
-          exerciseName: 'Split Squat', targetReps: 10, isRest: false),
-      score: ExerciseScoreModel(
-          exerciseSetDefinition: ExerciseSetModel(
-              exerciseName: 'Split Squat', targetReps: 10, isRest: false),
-          value: 0,
-          goodReps: 0,
-          badReps: 0));
 
   static const double repCounterLeftPosition = 30;
   static const double repCounterTopPosition = 200;
@@ -71,10 +52,13 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
       body: MultiProvider(
         providers: [
           ChangeNotifierProvider<LeaderboardEntryModel>(
-              // TODO define initial exerciseleaderboardentrymodel
-              create: (context) => exerciseLeaderboardEntryModel),
+              create: (context) => workoutVideoScreenModel.leaderboardEntries[workoutVideoScreenModel.currentExerciseIndex]),
+          ChangeNotifierProvider<WorkoutVideoScreenModel>(
+            create: (context) => workoutVideoScreenModel,
+          )
         ],
         child: Stack(children: [
+          // Video Player.
           Align(
             alignment: Alignment.topLeft,
             child: Column(
@@ -90,25 +74,18 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
               ],
             ),
           ),
+          // Blue gradient effect from left side of screen.
           Align(
             alignment: Alignment.topLeft,
             child: Row(
               children: [
-                /*
-                Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width / 6,
-                    decoration: BoxDecoration(
-                        color: ColorConstants.launchpadPrimaryBlue)),
-                        */
                 Container(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width / 2,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.centerLeft,
-                      end: Alignment
-                          .centerRight, // 10% of the width, so there are ten blinds.
+                      end: Alignment.centerRight,
                       colors: [
                         ColorConstants.launchpadPrimaryBlue,
                         ColorConstants.launchpadPrimaryBlue.withOpacity(0)
@@ -119,6 +96,7 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
               ],
             ),
           ),
+          // Rep Counter.
           Positioned(
             child: RepCounter(),
             left: repCounterLeftPosition,
@@ -133,6 +111,8 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
             right: workoutMenuOptionsButtonRightPosition,
           ),
           */
+
+          // Leaderboard.
           Positioned(
               child: Leaderboard(
                 currentLeaderboard: PlaceholderValues().leaderboard,

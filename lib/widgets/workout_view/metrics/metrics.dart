@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
 
-import 'rep_counter.dart';
+import 'rep_counter/rep_counter.dart';
 
 class Metrics extends StatefulWidget {
   @override

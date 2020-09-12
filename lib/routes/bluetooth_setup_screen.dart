@@ -4,7 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/models/workout_details.dart';
-import 'package:tabletapp/routes/workout_video_screen.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen.dart';
+
+import 'workout_video_screen/workout_video_screen_model.dart';
 
 class BluetoothSetupScreen extends StatefulWidget {
   final WorkoutDetails workoutDetails;
@@ -38,14 +40,28 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: _buildColumnOfDevices()));
+    if (this.devicesList.length > 1) {
+      return Container();
+    } else if (this.devicesList.length == 0) {
+      // Prompt user to open LCA here.
+    } else {
+      // Bluetooth connected without issues. Go straight to workout class.
+      Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => WorkoutVideoScreen(WorkoutVideoScreenModel(
+                    workoutDetails: this.workoutDetails,
+                    bluetoothDevice: this.devicesList.first,
+                  ))));
+    }
+    return Container();
   }
 
   @override
   initState() {
     super.initState();
+    // Populates this.devicesList with all found LCA apps.
     setupBluetooth();
-    scanForDevices();
   }
 
   Future<void> connectToBluetoothDevice(BluetoothDevice device) async {
@@ -55,16 +71,8 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
     print("Finished connecting to Launchpad Companion App");
   }
 
-  void scanForDevices() async {
-    this.devicesList = [];
-    print("Scanning for bluetooth in progress");
-    await this
-        .flutterBlue
-        .startScan(timeout: Duration(seconds: scanTimeDuration));
-    print("Scanning complete");
-  }
-
-  void setupBluetooth() {
+  void setupBluetooth() async {
+    // Get all currently connected LCA apps.
     this
         .flutterBlue
         .connectedDevices
@@ -72,20 +80,38 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
         .listen((List<BluetoothDevice> devices) {
       for (BluetoothDevice device in devices) {
         if (device.name.contains(launchpadCompanionAppAbbreviation)) {
+          print("Device already connected");
           _addDeviceTolist(device);
+          return;
         }
       }
     });
+
+    // No LCA app currently found, so prepare for a bluetooth scan.
+    // If any LCA apps are found, add them to device list.
     this.flutterBlue.scanResults.listen((List<ScanResult> results) {
       for (ScanResult result in results) {
+        print(result.device.name);
         if (result.device.name.contains(launchpadCompanionAppAbbreviation)) {
-          _addDeviceTolist(result.device);
+          print("\n\n\n\n\nContains LCA in title");
+          if (!this.devicesList.contains(result.device)) {
+            print("Device added");
+            _addDeviceTolist(result.device);
+          }
+          // There were no devices found, open LCA.
         }
       }
     });
+
+    // Scan for local BLE devices.
+    print("Scanning for bluetooth in progress");
+    await this
+        .flutterBlue
+        .startScan(timeout: Duration(seconds: scanTimeDuration));
+    print("Scanning complete");
   }
 
-  _addDeviceTolist(final BluetoothDevice device) {
+  void _addDeviceTolist(final BluetoothDevice device) {
     if (!this.devicesList.contains(device)) {
       setState(() {
         this.devicesList.add(device);
@@ -93,6 +119,7 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
     }
   }
 
+/*
   List<Container> _getDevicesAsContainerList() {
     List<Container> containers = new List<Container>();
     for (BluetoothDevice device in this.devicesList) {
@@ -112,6 +139,8 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                   await connectToBluetoothDevice(device);
                   // print("Connection Made");
                   // print(await device.discoverServices());
+
+
                   Navigator.push(
                       context,
                       CupertinoPageRoute(
@@ -126,6 +155,7 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
     }
     return containers;
   }
+
 
   Container _buildColumnOfDevices() {
     List<Container> containers = _getDevicesAsContainerList();
@@ -145,11 +175,9 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
           FlatButton(
               color: Colors.blue,
               child: Text('Search for Companion App Again'),
-              onPressed: () async {
-                scanForDevices();
-              }),
+              onPressed: () async {}),
         ],
       ),
     );
-  }
+  }*/
 }

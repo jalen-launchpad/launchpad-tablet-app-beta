@@ -12,8 +12,8 @@ class RepCounter extends StatefulWidget {
   _RepCounterState createState() => _RepCounterState();
 }
 
-// TODO INVESTIGATE COLOR LEAK
 
+// Consumes -> LeaderboardEntryModel
 class _RepCounterState extends State<RepCounter> {
   static const double widgetWidth = 250;
   static const double widgetHeight = 220;

@@ -12,5 +12,7 @@ class ExerciseScoreModel extends ChangeNotifier {
       {this.exerciseSetDefinition, this.value, this.goodReps, this.badReps});
 
   int get totalReps => goodReps + badReps;
+
+  // Replace with real information from a scoring heuristic.
   int get getValue => goodReps + badReps;
 }
