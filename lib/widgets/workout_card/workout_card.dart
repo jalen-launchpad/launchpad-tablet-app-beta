@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/models/workout_details.dart';
 import 'package:tabletapp/routes/bluetooth_setup_screen.dart';
-import 'package:tabletapp/routes/workout_video_screen.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen.dart';
 import 'package:tabletapp/widgets/workout_card/mods_indicator.dart';
 
 // A WorkoutCard is the card that is displayed on the homepage

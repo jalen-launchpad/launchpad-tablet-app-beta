@@ -22,6 +22,8 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
   static const String launchpadCompanionAppAbbreviation = "LCA";
   static const int scanTimeDuration = 5;
   static const int connectTimeoutDuration = 10;
+
+  /* 
   static const double deviceListHeight = 50;
   static const Text connectButtonTextWidget =
       Text('Connect', style: TextStyle(color: Colors.white));
@@ -29,6 +31,7 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
   static const double containerWidth = 500;
   static const double containerBorderRadius = 10;
   static const EdgeInsets containerRowEntryMargin = EdgeInsets.only(right: 30);
+*/
 
   final FlutterBlue flutterBlue = FlutterBlue.instance;
   List<BluetoothDevice> devicesList = [];

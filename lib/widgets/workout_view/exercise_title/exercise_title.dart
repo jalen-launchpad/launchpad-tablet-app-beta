@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
 class ExerciseTitle extends StatefulWidget {
   @override
@@ -11,9 +11,11 @@ class _ExerciseTitleState extends State<ExerciseTitle> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Consumer<LeaderboardEntryModel>(
-      builder: (context, leaderboardEntryModel, child) {
-        return Container(height: 100, child: Text(leaderboardEntryModel.exerciseSetDefinition.exerciseName));
+        child: StoreConnector<WorkoutVideoScreenModel, String>(
+      converter: (store) =>
+          store.state.currentExercise.exerciseSetDefinition.exerciseName,
+      builder: (context, exerciseTitle) {
+        return Text(exerciseTitle);
       },
     ));
   }

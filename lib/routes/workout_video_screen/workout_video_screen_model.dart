@@ -6,46 +6,67 @@ import 'package:tabletapp/models/workout_details.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/models/workout_set_model.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
+import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_model.dart';
 
 class WorkoutVideoScreenModel extends ChangeNotifier {
   // Workout details from home page.
   final WorkoutDetails workoutDetails;
   // All video metadata.
   final WorkoutMetadata workoutMetadata;
-  // All programmed workout sets for this workout.
-  final List<WorkoutSetModel> workoutSets;
-  // A list of empty WorkoutLeaderboardEntries ready to be populated
-  // during the workout.
-  final List<LeaderboardEntryModel> leaderboardEntries;
+  // A list of WorkoutLeaderboardEntries pre-populated with previous users.
+  final List<LeaderboardModel> leaderboards;
+  // A list of LeaderboardEntries for the user
+  final List<LeaderboardEntryModel> userLeaderboardEntries;
   // The bluetooth connected Launchpad Companion App
   final BluetoothDevice bluetoothDevice;
   // The workout set happening currently.
   Timer exerciseTimer;
-  int _currentWorkoutSetIndex;
+  int currentWorkoutSetIndex;
 
-  WorkoutVideoScreenModel({
-    this.workoutDetails,
-    this.workoutMetadata,
-    this.bluetoothDevice,
-    this.leaderboardEntries,
-  }) : workoutSets = workoutMetadata.workoutSets {
-    _currentWorkoutSetIndex = 0;
+  WorkoutVideoScreenModel(
+      {this.workoutDetails,
+      this.workoutMetadata,
+      this.bluetoothDevice,
+      this.leaderboards,
+      this.userLeaderboardEntries,
+      this.currentWorkoutSetIndex = 0,
+      this.exerciseTimer});
+
+  WorkoutVideoScreenModel copyWith({
+    WorkoutDetails workoutDetails,
+    WorkoutMetadata workoutMetadata,
+    List<LeaderboardModel> leaderboards,
+    BluetoothDevice bluetoothDevice,
+    Timer exerciseTimer,
+    int currentWorkoutSetIndex,
+    List<LeaderboardEntryModel> userLeaderboardEntries,
+  }) {
+    return WorkoutVideoScreenModel(
+      workoutDetails: workoutDetails ?? this.workoutDetails,
+      workoutMetadata: workoutMetadata ?? this.workoutMetadata,
+      bluetoothDevice: bluetoothDevice ?? this.bluetoothDevice,
+      leaderboards: leaderboards ?? this.leaderboards,
+      currentWorkoutSetIndex:
+          currentWorkoutSetIndex ?? this.currentWorkoutSetIndex,
+      exerciseTimer: exerciseTimer ?? this.exerciseTimer,
+      userLeaderboardEntries:
+          userLeaderboardEntries ?? this.userLeaderboardEntries,
+    );
   }
 
-  void _changeToNextExercise() {
-    _currentWorkoutSetIndex++;
-    notifyListeners();
+  void changeToNextExercise() {
+    currentWorkoutSetIndex++;
   }
 
   // Get the difference in time from the current exercise to the next
   // queued exercise.
-  int getTimeFromCurrentExerciseToNextExercise() {
+  int _getTimeFromCurrentExerciseToNextExercise() {
     // If this is the first exericse.
-    if (_currentWorkoutSetIndex == 0) {
+    if (currentWorkoutSetIndex == 0) {
       return workoutSets.first.videoTimeStamp;
     }
     // Else if this is the last exercise.
-    else if (_currentWorkoutSetIndex == workoutSets.length - 1) {
+    else if (currentWorkoutSetIndex == workoutSets.length - 1) {
       // End the timer.
       // Or add timer until end of video then end timer.
       return 0;
@@ -53,7 +74,7 @@ class WorkoutVideoScreenModel extends ChangeNotifier {
     // If this is in the middle of the workout,
     // return the time from current exercise until the next
     // exercise.
-    return workoutSets[_currentWorkoutSetIndex + 1].videoTimeStamp -
+    return workoutSets[currentWorkoutSetIndex + 1].videoTimeStamp -
         currentExercise.videoTimeStamp;
   }
 
@@ -66,16 +87,17 @@ class WorkoutVideoScreenModel extends ChangeNotifier {
   void _recursiveTimer() {
     exerciseTimer = Timer(
         Duration(
-          milliseconds: getTimeFromCurrentExerciseToNextExercise(),
+          milliseconds: _getTimeFromCurrentExerciseToNextExercise(),
         ), () {
-      _changeToNextExercise();
+      changeToNextExercise();
       if (!isLastSet) {
         _recursiveTimer();
       }
     });
   }
 
-  WorkoutSetModel get currentExercise => workoutSets[_currentWorkoutSetIndex];
-  bool get isLastSet => _currentWorkoutSetIndex == (workoutSets.length - 1);
-  int get currentExerciseIndex => _currentWorkoutSetIndex;
+  WorkoutSetModel get currentExercise => workoutSets[currentWorkoutSetIndex];
+  bool get isLastSet => currentWorkoutSetIndex == (workoutSets.length - 1);
+  int get currentExerciseIndex => currentWorkoutSetIndex;
+  List<WorkoutSetModel> get workoutSets => workoutMetadata.workoutSets;
 }

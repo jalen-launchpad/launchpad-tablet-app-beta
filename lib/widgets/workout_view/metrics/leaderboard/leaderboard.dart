@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tabletapp/constants/colors.dart';
-
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
 import 'leaderboard_entry.dart';
 import 'leaderboard_entry_model.dart';
 import 'leaderboard_model.dart';
@@ -40,53 +40,52 @@ class _LeaderboardState extends State<Leaderboard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Consumer<LeaderboardEntryModel>(builder: (context, model, child) {
-        if (model.score.getValue >= currentLeaderboard.nextScoreToBeat) {
-          currentLeaderboard.updateUserPosition(model.score.getValue);
-        }
-        return Container(
-          width: Leaderboard.workoutLeaderboardWidth,
-          height: Leaderboard.workoutLeaderboardHeight,
-          decoration: BoxDecoration(
-            color: ColorConstants.launchpadPrimaryBlack
-                .withOpacity(workoutLeaderboardOpacity),
-            borderRadius: BorderRadius.circular(borderRadius),
-          ),
-          child: ChangeNotifierProvider<LeaderboardModel>(
-            create: (context) => this.currentLeaderboard,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                currentLeaderboard.getAbove() == null
-                    ? Container(
-                        height: LeaderboardEntry.height,
-                      )
-                    : LeaderboardEntry(
-                        exerciseLeaderboardEntryModel:
-                            currentLeaderboard.getAbove(),
-                        isAbove: true,
-                        // TODO - fill with LeaderboardEntryModel
-                      ),
-                LeaderboardEntry(
-                  exerciseLeaderboardEntryModel: model,
-                  isUser: true,
-                  // TODO - fill with LeaderboardEntryModel
-                ),
-                currentLeaderboard.getBelow() == null
-                    ? Container(
-                        height: LeaderboardEntry.height,
-                      )
-                    : LeaderboardEntry(
-                        exerciseLeaderboardEntryModel:
-                            currentLeaderboard.getBelow(),
-                        isBelow: true,
-                        // TODO - fill with LeaderboardEntryModel
-                      ),
-              ],
-            ),
-          ),
-        );
-      }),
+      child: StoreConnector<WorkoutVideoScreenModel, LeaderboardModel>(
+          converter: (store) => store
+              .state.leaderboards[store.state.currentExerciseIndex],
+          builder: (context, model) {
+            currentLeaderboard = model;
+            return Container(
+              width: Leaderboard.workoutLeaderboardWidth,
+              height: Leaderboard.workoutLeaderboardHeight,
+              decoration: BoxDecoration(
+                color: ColorConstants.launchpadPrimaryBlack
+                    .withOpacity(workoutLeaderboardOpacity),
+                borderRadius: BorderRadius.circular(borderRadius),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  currentLeaderboard.getAbove() == null
+                      ? Container(
+                          height: LeaderboardEntry.height,
+                        )
+                      : LeaderboardEntry(
+                          exerciseLeaderboardEntryModel:
+                              currentLeaderboard.getAbove(),
+                          isAbove: true,
+                          // TODO - fill with LeaderboardEntryModel
+                        ),
+                  LeaderboardEntry(
+                    exerciseLeaderboardEntryModel: model.userEntry,
+                    isUser: true,
+                    // TODO - fill with LeaderboardEntryModel
+                  ),
+                  currentLeaderboard.getBelow() == null
+                      ? Container(
+                          height: LeaderboardEntry.height,
+                        )
+                      : LeaderboardEntry(
+                          exerciseLeaderboardEntryModel:
+                              currentLeaderboard.getBelow(),
+                          isBelow: true,
+                          // TODO - fill with LeaderboardEntryModel
+                        ),
+                ],
+              ),
+            );
+          }),
     );
   }
 }
+

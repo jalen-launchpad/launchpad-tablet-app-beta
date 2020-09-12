@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
 
 import 'leaderboard_entry_model.dart';
 import 'leaderboard_model.dart';
@@ -22,12 +23,11 @@ class LeaderboardEntry extends StatefulWidget {
       this.isAbove = false,
       this.isBelow = false});
   @override
-  _LeaderboardEntryState createState() =>
-      _LeaderboardEntryState(
-          exerciseLeaderboardEntryModel: this.exerciseLeaderboardEntryModel,
-          isAbove: this.isAbove,
-          isBelow: this.isBelow,
-          isUser: this.isUser);
+  _LeaderboardEntryState createState() => _LeaderboardEntryState(
+      exerciseLeaderboardEntryModel: this.exerciseLeaderboardEntryModel,
+      isAbove: this.isAbove,
+      isBelow: this.isBelow,
+      isUser: this.isUser);
 }
 
 class _LeaderboardEntryState extends State<LeaderboardEntry> {
@@ -51,8 +51,10 @@ class _LeaderboardEntryState extends State<LeaderboardEntry> {
   Widget build(BuildContext context) {
     return Container(
         height: LeaderboardEntry.height,
-        child: Consumer<LeaderboardModel>(
-          builder: (context, leaderboard, child) => Row(
+        child: StoreConnector<WorkoutVideoScreenModel, LeaderboardModel>(
+          converter: (store) =>
+              store.state.leaderboards[store.state.currentExerciseIndex],
+          builder: (context, leaderboard) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Leaderboard position.

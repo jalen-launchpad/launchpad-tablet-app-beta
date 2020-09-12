@@ -1,12 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/placeholder_values.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
+import 'package:redux/redux.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/rep_counter/rep_counter.dart';
 import 'package:video_player/video_player.dart';
+
+import 'workout_video_screen_reducer.dart';
 
 class WorkoutVideoScreen extends StatefulWidget {
   final WorkoutVideoScreenModel workoutVideoScreenModel;
@@ -22,12 +26,20 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
   VideoPlayerController _controller;
   final WorkoutVideoScreenModel workoutVideoScreenModel;
 
-  _WorkoutVideoScreenState(this.workoutVideoScreenModel);
+  final Store<WorkoutVideoScreenModel> store;
+
+  _WorkoutVideoScreenState(this.workoutVideoScreenModel)
+      : store = Store(rootReducer, initialState: workoutVideoScreenModel);
 
   @override
   void initState() {
     super.initState();
 
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      print("Action Dispatched");
+      store.dispatch(AddGoodRepAction());
+      store.dispatch(UpdateUserPositionAction());
+    });
     // Load video.
     _controller = VideoPlayerController.asset(
         'assets/' + workoutVideoScreenModel.workoutDetails.workoutId + '.mp4');
@@ -38,7 +50,7 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
       ..initialize().then((_) {
         _controller.play();
         // Start timer on workout with corrections.
-        workoutVideoScreenModel.startWorkout();
+        // workoutVideoScreenModel.startWorkout();
         setState(() {});
       });
   }
@@ -48,16 +60,10 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: MultiProvider(
-        providers: [
-          ChangeNotifierProvider<LeaderboardEntryModel>(
-              create: (context) => workoutVideoScreenModel.leaderboardEntries[workoutVideoScreenModel.currentExerciseIndex]),
-          ChangeNotifierProvider<WorkoutVideoScreenModel>(
-            create: (context) => workoutVideoScreenModel,
-          )
-        ],
-        child: Stack(children: [
+    return StoreProvider<WorkoutVideoScreenModel>(
+      store: store,
+      child: Scaffold(
+        body: Stack(children: [
           // Video Player.
           Align(
             alignment: Alignment.topLeft,
@@ -103,14 +109,14 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
             top: repCounterTopPosition,
           ),
           /*
-          Positioned(
-            child: WorkoutMenuOptionsButtons(
-              videoPlayerController: _controller,
+            Positioned(
+              child: WorkoutMenuOptionsButtons(
+                videoPlayerController: _controller,
+              ),
+              bottom: workoutMenuOptionsButtonBottomPosition,
+              right: workoutMenuOptionsButtonRightPosition,
             ),
-            bottom: workoutMenuOptionsButtonBottomPosition,
-            right: workoutMenuOptionsButtonRightPosition,
-          ),
-          */
+            */
 
           // Leaderboard.
           Positioned(

@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tabletapp/models/exercise_score_model.dart';
+import 'package:tabletapp/models/exercise_set_model.dart';
+import 'package:tabletapp/models/user_model.dart';
 import 'package:tabletapp/placeholder_values.dart';
 import 'package:tabletapp/routes/bluetooth_setup_screen.dart';
-import 'package:tabletapp/routes/workout_video_screen.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
+import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
+
+import 'enums/mods_enum.dart';
+import 'models/workout_details.dart';
 
 void main() {
   runApp(MyApp());
@@ -59,8 +67,24 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     return Center(
-        child: BluetoothSetupScreen(
-      workoutDetails: PlaceholderValues.workoutCardList[0],
-    ));
+        child: WorkoutVideoScreen(WorkoutVideoScreenModel(
+            workoutDetails: WorkoutDetails(
+                title: "Vertical Jump Plyos",
+                trainer: "Doug Goldstein",
+                athlete: "Jalen Gabbidon",
+                modsList: [ModsEnum.plio, ModsEnum.fit],
+                workoutId: '123456'),
+            userLeaderboardEntries: [
+          LeaderboardEntryModel(
+              exerciseSetDefinition: ExerciseSetModel(targetReps: 10),
+              user: UserModel(username: 'jalen'),
+              score: ExerciseScoreModel(
+                goodReps: 0,
+                badReps: 0,
+              )),
+        ],
+            leaderboards: [
+          PlaceholderValues().leaderboard
+        ])));
   }
 }
