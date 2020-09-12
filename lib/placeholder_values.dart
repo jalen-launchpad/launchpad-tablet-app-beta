@@ -1,12 +1,12 @@
 import 'package:tabletapp/enums/mods_enum.dart';
 import 'package:tabletapp/widgets/body_composite/body_composite_model.dart';
 import 'package:tabletapp/models/workout_details.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/exercise_leaderboard/exercise_leaderboard_model.dart';
 
 import 'models/exercise_score_model.dart';
 import 'models/exercise_set_model.dart';
 import 'models/user_model.dart';
-import 'widgets/workout_view/metrics/exercise_leaderboard/exercise_leaderboard_entry_model.dart';
+import 'widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
+import 'widgets/workout_view/metrics/leaderboard/leaderboard_model.dart';
 
 class PlaceholderValues {
   static List<MuscleFatiguePoint> fatiguePoints = [
@@ -86,26 +86,26 @@ class PlaceholderValues {
         modsList: [ModsEnum.plio, ModsEnum.kids],
         workoutId: '456789'),
   ];
-  var leaderboard = ExerciseLeaderboardModel(
+  var leaderboard = LeaderboardModel(
       userPosition: 0,
       nextScoreToBeat: 5,
-      userEntry: ExerciseLeaderboardEntryModel(
+      userEntry: LeaderboardEntryModel(
           user: UserModel(username: 'gabbyyyy'),
           score: ExerciseScoreModel(goodReps: 0, badReps: 0)),
       leaderboardEntries: [
-        ExerciseLeaderboardEntryModel(
+        LeaderboardEntryModel(
             user: UserModel(
                 firstName: 'Ellie',
                 lastName: 'Abromaitis',
                 username: 'no_knucks'),
             score: ExerciseScoreModel(
-              exerciseSetDefini:tion: ExerciseSetModel(
+              exerciseSetDefinition: ExerciseSetModel(
                   exerciseName: 'Split Squat', targetReps: 10, isRest: false),
               value: 5,
               goodReps: 0,
               badReps: 5,
             )),
-        ExerciseLeaderboardEntryModel(
+        LeaderboardEntryModel(
             user: UserModel(
                 firstName: 'Jack',
                 lastName: 'Abromaitis',
@@ -116,7 +116,7 @@ class PlaceholderValues {
                 value: 7,
                 goodReps: 2,
                 badReps: 5)),
-        ExerciseLeaderboardEntryModel(
+        LeaderboardEntryModel(
             user: UserModel(
                 firstName: 'Doug', lastName: 'Goldstein', username: 'dougie'),
             score: ExerciseScoreModel(
@@ -126,7 +126,7 @@ class PlaceholderValues {
               goodReps: 10,
               badReps: 0,
             )),
-        ExerciseLeaderboardEntryModel(
+        LeaderboardEntryModel(
             user: UserModel(
                 firstName: 'Ann',
                 lastName: 'Abromaitis',
@@ -137,7 +137,7 @@ class PlaceholderValues {
                 value: 30,
                 goodReps: 2,
                 badReps: 10)),
-        ExerciseLeaderboardEntryModel(
+        LeaderboardEntryModel(
             user: UserModel(
                 firstName: 'Lee',
                 lastName: 'Goldstein',
@@ -148,7 +148,7 @@ class PlaceholderValues {
                 value: 66,
                 goodReps: 10,
                 badReps: 3)),
-        ExerciseLeaderboardEntryModel(
+        LeaderboardEntryModel(
             user: UserModel(
                 firstName: 'Candice',
                 lastName: 'Goldstein',
@@ -159,7 +159,7 @@ class PlaceholderValues {
                 value: 130,
                 goodReps: 7,
                 badReps: 10)),
-        ExerciseLeaderboardEntryModel(
+        LeaderboardEntryModel(
             user: UserModel(
                 firstName: 'Brooks',
                 lastName: 'Goldstein',

@@ -18,7 +18,7 @@ class Leaderboard extends StatefulWidget {
   });
 
   static const double workoutLeaderboardHeight = 150;
-  static const double workoutLeaderboardWidth = 400;
+  static const double workoutLeaderboardWidth = 300;
 
   @override
   _LeaderboardState createState() => _LeaderboardState(

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/models/exercise_score_model.dart';
 import 'package:tabletapp/models/exercise_set_model.dart';
 import 'package:tabletapp/models/user_model.dart';
@@ -86,6 +87,35 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
                             aspectRatio: _controller.value.aspectRatio,
                             child: VideoPlayer(_controller))
                         : Container()),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Row(
+              children: [
+                /*
+                Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width / 6,
+                    decoration: BoxDecoration(
+                        color: ColorConstants.launchpadPrimaryBlue)),
+                        */
+                Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width / 2,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment
+                          .centerRight, // 10% of the width, so there are ten blinds.
+                      colors: [
+                        ColorConstants.launchpadPrimaryBlue,
+                        ColorConstants.launchpadPrimaryBlue.withOpacity(0)
+                      ], // Blueish to Opaque
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
