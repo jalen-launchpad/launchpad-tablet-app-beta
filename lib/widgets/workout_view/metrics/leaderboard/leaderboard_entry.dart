@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
-import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 
 import 'leaderboard_entry_model.dart';
 import 'leaderboard_model.dart';
@@ -51,7 +51,7 @@ class _LeaderboardEntryState extends State<LeaderboardEntry> {
   Widget build(BuildContext context) {
     return Container(
         height: LeaderboardEntry.height,
-        child: StoreConnector<WorkoutVideoScreenModel, LeaderboardModel>(
+        child: StoreConnector<WorkoutVideoScreenState, LeaderboardModel>(
           converter: (store) =>
               store.state.leaderboards[store.state.currentExerciseIndex],
           builder: (context, leaderboard) => Row(
@@ -95,11 +95,7 @@ class _LeaderboardEntryState extends State<LeaderboardEntry> {
                 padding: EdgeInsets.only(right: textPadding),
                 child: Text(
                   this.isUser
-                      ? this
-                          .exerciseLeaderboardEntryModel
-                          .score
-                          .getValue
-                          .toString()
+                      ? leaderboard.userEntry.score.getValue.toString()
                       : this.isAbove
                           ? leaderboard.getAbove().score.getValue.toString()
                           : leaderboard.getBelow().score.getValue.toString(),

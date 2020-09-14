@@ -6,7 +6,7 @@ class ExerciseScoreModel extends ChangeNotifier {
   ExerciseSetModel exerciseSetDefinition;
   int goodReps;
   int badReps;
-  double value;
+  int value;
 
   ExerciseScoreModel(
       {this.exerciseSetDefinition, this.value, this.goodReps, this.badReps});

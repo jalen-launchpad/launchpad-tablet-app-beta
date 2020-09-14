@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/models/exercise_score_model.dart';
-import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
 
 class RepCounter extends StatefulWidget {
@@ -37,9 +37,9 @@ class _RepCounterState extends State<RepCounter> {
     return Container(
       width: widgetWidth,
       height: widgetHeight,
-      child: StoreConnector<WorkoutVideoScreenModel, LeaderboardEntryModel>(
+      child: StoreConnector<WorkoutVideoScreenState, LeaderboardEntryModel>(
         converter: (store) => store
-            .state.userLeaderboardEntries[store.state.currentExerciseIndex],
+            .state.leaderboards[store.state.currentExerciseIndex].userEntry,
         builder: (context, entry) => Stack(
           children: [
             // Main Rep Counter

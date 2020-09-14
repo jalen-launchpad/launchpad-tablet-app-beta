@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 import 'leaderboard_entry.dart';
-import 'leaderboard_entry_model.dart';
 import 'leaderboard_model.dart';
 
 // @params
@@ -35,27 +34,25 @@ class _LeaderboardState extends State<Leaderboard> {
   static const double workoutLeaderboardOpacity = 0.75;
   static const double borderRadius = 30;
 
-  // Provides -> LeaderboardModel (to LeaderboardEntry)
-  // Consumes -> LeaderboardEntryModel (from WorkoutVideoScreen)
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: StoreConnector<WorkoutVideoScreenModel, LeaderboardModel>(
-          converter: (store) => store
-              .state.leaderboards[store.state.currentExerciseIndex],
-          builder: (context, model) {
-            currentLeaderboard = model;
+      child: StoreConnector<WorkoutVideoScreenState, LeaderboardModel>(
+          converter: (store) =>
+              store.state.leaderboards[store.state.currentExerciseIndex],
+          builder: (context, state) {
+            currentLeaderboard = state;
             return Container(
               width: Leaderboard.workoutLeaderboardWidth,
               height: Leaderboard.workoutLeaderboardHeight,
               decoration: BoxDecoration(
-                color: ColorConstants.launchpadPrimaryBlack
-                    .withOpacity(workoutLeaderboardOpacity),
+                color: ColorConstants.launchpadPrimaryBlack,
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  // Get user one position ahead of you.
                   currentLeaderboard.getAbove() == null
                       ? Container(
                           height: LeaderboardEntry.height,
@@ -67,10 +64,11 @@ class _LeaderboardState extends State<Leaderboard> {
                           // TODO - fill with LeaderboardEntryModel
                         ),
                   LeaderboardEntry(
-                    exerciseLeaderboardEntryModel: model.userEntry,
+                    exerciseLeaderboardEntryModel: state.userEntry,
                     isUser: true,
                     // TODO - fill with LeaderboardEntryModel
                   ),
+                  // Get user one position behind you.
                   currentLeaderboard.getBelow() == null
                       ? Container(
                           height: LeaderboardEntry.height,
@@ -88,4 +86,3 @@ class _LeaderboardState extends State<Leaderboard> {
     );
   }
 }
-

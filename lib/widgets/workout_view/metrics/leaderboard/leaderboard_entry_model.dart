@@ -10,7 +10,5 @@ class LeaderboardEntryModel extends ChangeNotifier {
   final ExerciseSetModel exerciseSetDefinition;
   ExerciseScoreModel score;
 
-  LeaderboardEntryModel(
-      {this.user, this.exerciseSetDefinition, this.score});
-
+  LeaderboardEntryModel({this.user, this.exerciseSetDefinition, this.score});
 }

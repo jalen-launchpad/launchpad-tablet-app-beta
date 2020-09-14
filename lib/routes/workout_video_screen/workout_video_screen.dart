@@ -1,66 +1,71 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/placeholder_values.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_bluetooth_handler.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 import 'package:redux/redux.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/rep_counter/rep_counter.dart';
 import 'package:video_player/video_player.dart';
-
-import 'workout_video_screen_reducer.dart';
+import 'workout_video_screen_reducers.dart';
 
 class WorkoutVideoScreen extends StatefulWidget {
-  final WorkoutVideoScreenModel workoutVideoScreenModel;
-  WorkoutVideoScreen(this.workoutVideoScreenModel);
+  final WorkoutVideoScreenState workoutVideoScreenState;
+  final BluetoothDevice bluetoothDevice;
+  WorkoutVideoScreen(this.workoutVideoScreenState, {this.bluetoothDevice});
 
   @override
   _WorkoutVideoScreenState createState() =>
-      _WorkoutVideoScreenState(this.workoutVideoScreenModel);
+      _WorkoutVideoScreenState(this.workoutVideoScreenState,
+          bluetoothDevice: this.bluetoothDevice);
 }
 
 class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
   // The controller for the streaming video.
   VideoPlayerController _controller;
-  final WorkoutVideoScreenModel workoutVideoScreenModel;
+  final WorkoutVideoScreenState workoutVideoScreenState;
+  final BluetoothDevice bluetoothDevice;
+  WorkoutVideoBluetoothHandler bluetoothHandler;
+  WorkoutVideoScreenModel model;
+  final Store<WorkoutVideoScreenState> store;
 
-  final Store<WorkoutVideoScreenModel> store;
-
-  _WorkoutVideoScreenState(this.workoutVideoScreenModel)
-      : store = Store(rootReducer, initialState: workoutVideoScreenModel);
+  _WorkoutVideoScreenState(this.workoutVideoScreenState, {this.bluetoothDevice})
+      : store = Store(rootReducer, initialState: workoutVideoScreenState) {
+    bluetoothHandler = WorkoutVideoBluetoothHandler(bluetoothDevice, store);
+    bluetoothHandler.getBluetoothServices();
+    model = WorkoutVideoScreenModel(store);
+  }
 
   @override
   void initState() {
     super.initState();
 
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      print("Action Dispatched");
-      store.dispatch(AddGoodRepAction());
-      store.dispatch(UpdateUserPositionAction());
-    });
     // Load video.
-    _controller = VideoPlayerController.asset(
-        'assets/' + workoutVideoScreenModel.workoutDetails.workoutId + '.mp4');
+    _controller = VideoPlayerController.asset('assets/' +
+        workoutVideoScreenState.workoutMetadata.workoutDetails.workoutId +
+        '.mp4');
     _controller.setLooping(true);
 
-    // Play video.
+    // Initialize the controller.
     _controller
       ..initialize().then((_) {
+        // Play video.
         _controller.play();
-        // Start timer on workout with corrections.
-        // workoutVideoScreenModel.startWorkout();
+        // Start timer on workout to auto-rotate through exercises.
+        model.startWorkout();
         setState(() {});
       });
   }
 
   static const double repCounterLeftPosition = 30;
-  static const double repCounterTopPosition = 200;
+  static const double repCounterBottomPosition = 75;
 
   @override
   Widget build(BuildContext context) {
-    return StoreProvider<WorkoutVideoScreenModel>(
+    return StoreProvider<WorkoutVideoScreenState>(
       store: store,
       child: Scaffold(
         body: Stack(children: [
@@ -102,30 +107,38 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
               ],
             ),
           ),
+          StoreConnector<WorkoutVideoScreenState, String>(
+            builder: (context, string) => Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                padding: EdgeInsets.only(top: 50, left: 25),
+                child: Text(
+                  string,
+                  style: TextStyle(
+                    color: ColorConstants.launchpadPrimaryWhite,
+                    fontSize: 50,
+                  ),
+                ),
+              ),
+            ),
+            converter: (store) =>
+                store.state.currentExercise.exerciseSetDefinition.exerciseName,
+          ),
           // Rep Counter.
           Positioned(
             child: RepCounter(),
             left: repCounterLeftPosition,
-            top: repCounterTopPosition,
+            bottom: repCounterBottomPosition,
           ),
-          /*
-            Positioned(
-              child: WorkoutMenuOptionsButtons(
-                videoPlayerController: _controller,
-              ),
-              bottom: workoutMenuOptionsButtonBottomPosition,
-              right: workoutMenuOptionsButtonRightPosition,
-            ),
-            */
 
           // Leaderboard.
           Positioned(
               child: Leaderboard(
                 currentLeaderboard: PlaceholderValues().leaderboard,
               ),
-              top: repCounterTopPosition +
+              bottom: repCounterBottomPosition +
                   Leaderboard.workoutLeaderboardHeight +
-                  75,
+                  120,
               left: repCounterLeftPosition)
         ]),
       ),
