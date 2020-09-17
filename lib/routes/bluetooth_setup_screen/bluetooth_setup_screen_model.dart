@@ -78,7 +78,7 @@ class BluetoothSetupScreenModel {
       await connectedDevice.connect(
         timeout: Duration(seconds: 15),
         // This takes up to 30 seconds or more when set true.
-        // 
+        //
         autoConnect: false,
       );
       //
@@ -102,6 +102,9 @@ class BluetoothSetupScreenModel {
   Future<void> scanBluetooth() async {
     // Clear all connected LCA.
     await clearBluetooth();
+    print("connected devices length: " +
+        (await this.flutterBlue.connectedDevices).length.toString());
+    print("this._devicesList.length: " + this._devicesList.length.toString());
     // Scan for local BLE devices.
     print("Scanning for bluetooth in progress");
     await this.flutterBlue.startScan(timeout: Duration(seconds: 3));

@@ -1,16 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tabletapp/models/exercise_score_model.dart';
-import 'package:tabletapp/models/exercise_set_model.dart';
-import 'package:tabletapp/models/user_model.dart';
-import 'package:tabletapp/placeholder_values.dart';
 import 'package:tabletapp/routes/bluetooth_setup_screen/bluetooth_setup_screen.dart';
-import 'package:tabletapp/routes/workout_video_screen/workout_video_screen.dart';
-import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
-
-import 'enums/mods_enum.dart';
-import 'models/workout_details.dart';
 
 void main() {
   runApp(MyApp());

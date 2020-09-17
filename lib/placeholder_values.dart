@@ -345,6 +345,8 @@ class PlaceholderValues {
 
   WorkoutVideoScreenState getWorkoutState() {
     return WorkoutVideoScreenState(
+      workoutNotification: null,
+      showNotification: false,
       workoutMetadata: WorkoutMetadata(
         workoutDetails: WorkoutDetails(
           title: "Get you a 50 inch vertical today!",

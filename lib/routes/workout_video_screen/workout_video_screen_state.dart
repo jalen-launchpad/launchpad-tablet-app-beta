@@ -7,6 +7,7 @@ import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/models/workout_set_model.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_model.dart';
+import 'package:tabletapp/widgets/workout_view/notification_bar/workout_notification.dart';
 
 class WorkoutVideoScreenState extends ChangeNotifier {
   // All video metadata.
@@ -15,7 +16,9 @@ class WorkoutVideoScreenState extends ChangeNotifier {
   final List<LeaderboardModel> leaderboards;
   // The bluetooth connected Launchpad Companion App
   final BluetoothDevice bluetoothDevice;
-  // The workout set happening currently.
+  final bool showNotification;
+  // The workout notification currently shown on screen.
+  final WorkoutNotification workoutNotification;
   Timer exerciseTimer;
   int currentWorkoutSetIndex;
 
@@ -24,7 +27,9 @@ class WorkoutVideoScreenState extends ChangeNotifier {
       this.bluetoothDevice,
       this.leaderboards,
       this.currentWorkoutSetIndex = 0,
-      this.exerciseTimer});
+      this.exerciseTimer,
+      this.showNotification,
+      this.workoutNotification});
 
   WorkoutVideoScreenState copyWith({
     WorkoutDetails workoutDetails,
@@ -34,6 +39,8 @@ class WorkoutVideoScreenState extends ChangeNotifier {
     Timer exerciseTimer,
     int currentWorkoutSetIndex,
     List<LeaderboardEntryModel> userLeaderboardEntries,
+    bool showNotification,
+    WorkoutNotification workoutNotification,
   }) {
     return WorkoutVideoScreenState(
       workoutMetadata: workoutMetadata ?? this.workoutMetadata,
@@ -42,6 +49,8 @@ class WorkoutVideoScreenState extends ChangeNotifier {
       currentWorkoutSetIndex:
           currentWorkoutSetIndex ?? this.currentWorkoutSetIndex,
       exerciseTimer: exerciseTimer ?? this.exerciseTimer,
+      workoutNotification: workoutNotification ?? this.workoutNotification,
+      showNotification: showNotification ?? this.showNotification,
     );
   }
 

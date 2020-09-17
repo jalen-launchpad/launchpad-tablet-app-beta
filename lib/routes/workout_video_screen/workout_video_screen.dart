@@ -9,6 +9,8 @@ import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state
 import 'package:redux/redux.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/rep_counter/rep_counter.dart';
+import 'package:tabletapp/widgets/workout_view/notification_bar/workout_notification.dart';
+import 'package:tabletapp/widgets/workout_view/notification_bar/workout_notification_bar.dart';
 import 'package:video_player/video_player.dart';
 import 'workout_video_screen_reducers.dart';
 
@@ -36,7 +38,9 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
       : store = Store(rootReducer, initialState: workoutVideoScreenState) {
     bluetoothHandler = WorkoutVideoBluetoothHandler(bluetoothDevice, store);
     bluetoothHandler.getBluetoothServices();
+    print("getBluetoothServices done");
     model = WorkoutVideoScreenModel(store);
+    print("model set");
   }
 
   @override
@@ -107,6 +111,7 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
               ],
             ),
           ),
+          // Exercise Name.
           StoreConnector<WorkoutVideoScreenState, String>(
             builder: (context, string) => Align(
               alignment: Alignment.topLeft,
@@ -139,7 +144,24 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
               bottom: repCounterBottomPosition +
                   Leaderboard.workoutLeaderboardHeight +
                   120,
-              left: repCounterLeftPosition)
+              left: repCounterLeftPosition),
+          StoreConnector<WorkoutVideoScreenState, WorkoutNotification>(
+            builder: (context, workoutNotification) => store
+                        .state.showNotification ==
+                    false
+                ? Container(
+                    height: 0,
+                    width: 0,
+                  )
+                : Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      child: WorkoutNotificationBar(workoutNotification, store),
+                      padding: EdgeInsets.only(bottom: 85, right: 15),
+                    ),
+                  ),
+            converter: (store) => store.state.workoutNotification,
+          ),
         ]),
       ),
     );

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:redux/redux.dart';
+import 'package:tabletapp/widgets/workout_view/notification_bar/workout_notification.dart';
 import 'workout_video_screen_state.dart';
 
 class ChangeToNextExerciseAction {}
@@ -18,6 +19,13 @@ class AddBadRepAction {}
 
 class ClearScoreAction {}
 
+class UpdateNotificationBarAction {
+  WorkoutNotification workoutNotification;
+  UpdateNotificationBarAction({this.workoutNotification});
+}
+
+class ClearNotificationBarAction {}
+
 // Root Reducer that contains all other reducers.
 WorkoutVideoScreenState Function(WorkoutVideoScreenState, dynamic) rootReducer =
     combineReducers([
@@ -30,8 +38,32 @@ WorkoutVideoScreenState Function(WorkoutVideoScreenState, dynamic) rootReducer =
   TypedReducer<WorkoutVideoScreenState, AddGoodRepAction>(addGoodRepReducer),
   TypedReducer<WorkoutVideoScreenState, AddBadRepAction>(addBadRepReducer),
   TypedReducer<WorkoutVideoScreenState, ClearScoreAction>(clearScoreReducer),
+  TypedReducer<WorkoutVideoScreenState, UpdateNotificationBarAction>(
+      updateNotificationBarReducer),
+  TypedReducer<WorkoutVideoScreenState, ClearNotificationBarAction>(
+      clearNotificationBarReducer),
 ]);
 
+final Function(WorkoutVideoScreenState, ClearNotificationBarAction)
+    clearNotificationBarReducer =
+    (WorkoutVideoScreenState state, ClearNotificationBarAction action) {
+  return state.copyWith(
+    showNotification: false,
+    workoutNotification: null,
+  );
+};
+
+final Function(WorkoutVideoScreenState, UpdateNotificationBarAction)
+    updateNotificationBarReducer =
+    (WorkoutVideoScreenState state, UpdateNotificationBarAction action) {
+  print(action.workoutNotification.notification);
+  var newState = state.copyWith(
+    showNotification: true,
+    workoutNotification: action.workoutNotification,
+  );
+  print(newState.workoutNotification.notification);
+  return newState;
+};
 // Clear Score Reducer
 final Function(WorkoutVideoScreenState, ClearScoreAction) clearScoreReducer =
     (WorkoutVideoScreenState state, ClearScoreAction action) {
