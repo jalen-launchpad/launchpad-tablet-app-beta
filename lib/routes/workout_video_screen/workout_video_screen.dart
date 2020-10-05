@@ -48,11 +48,7 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
     super.initState();
 
     // Load video.
-    _controller = VideoPlayerController.asset('assets/' +
-        workoutVideoScreenState.workoutMetadata.workoutDetails.workoutId +
-        '.mp4');
-    _controller.setLooping(true);
-
+    _controller = VideoPlayerController.asset('assets/demo_compilation.mp4');
     // Initialize the controller.
     _controller
       ..initialize().then((_) {
