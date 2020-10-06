@@ -4,7 +4,8 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:redux/redux.dart';
 import 'package:tabletapp/constants/bluetooth_uuid.dart';
 import 'package:tabletapp/constants/colors.dart';
-import 'package:tabletapp/widgets/workout_view/notification_bar/workout_notification.dart';
+import 'notification_bar/workout_notification.dart';
+import 'workout_video_screen_actions.dart';
 import 'workout_video_screen_reducers.dart';
 import 'workout_video_screen_state.dart';
 

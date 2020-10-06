@@ -9,9 +9,9 @@ import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state
 import 'package:redux/redux.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/rep_counter/rep_counter.dart';
-import 'package:tabletapp/widgets/workout_view/notification_bar/workout_notification.dart';
-import 'package:tabletapp/widgets/workout_view/notification_bar/workout_notification_bar.dart';
 import 'package:video_player/video_player.dart';
+import 'notification_bar/workout_notification.dart';
+import 'notification_bar/workout_notification_bar.dart';
 import 'workout_video_screen_reducers.dart';
 
 class WorkoutVideoScreen extends StatefulWidget {

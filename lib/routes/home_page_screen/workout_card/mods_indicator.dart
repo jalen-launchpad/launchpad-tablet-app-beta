@@ -9,14 +9,12 @@ import 'package:tabletapp/enums/mods_enum.dart';
 // List<ModsEnum> modsList
 
 class ModsInidcator extends StatelessWidget {
-  static const double height = 24;
+  static const double height = 20;
 
   static const double width = 60;
 
   static const BorderRadius borderRadius =
       BorderRadius.all(Radius.circular(20));
-
-  static const EdgeInsets containerPadding = EdgeInsets.fromLTRB(0, 0, 10, 5);
 
   static const SizedBox sizedBoxSpacer = SizedBox(width: 5, height: 10);
 
@@ -34,18 +32,22 @@ class ModsInidcator extends StatelessWidget {
           height: height,
           width: width,
           decoration: BoxDecoration(
-              color: ModsEnumToColorMap[mod],
-              borderRadius:
-                  borderRadius),
+              color: ModsEnumToColorMap[mod], borderRadius: borderRadius),
           child: Center(
             child: Text(
               ModsEnumToStringMap[mod],
-              style: TextStyle(color: ColorConstants.launchpadPrimaryBlue),
+              style: TextStyle(
+                color: ColorConstants.launchpadPrimaryWhite,
+                fontFamily: 'Jost',
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
             ),
           ),
         )
       ]);
     });
+    modListWidgets.removeAt(0);
     return modListWidgets;
   }
 

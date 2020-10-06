@@ -10,7 +10,7 @@ import 'package:tabletapp/widgets/workout_card/workout_card.dart';
 // WorkoutCardScrollviewModel model
 
 class WorkoutCardScrollview extends StatelessWidget {
-  static const height = WorkoutCard.height + 65;
+  static const height = 0;
 
   static const headerPadding = EdgeInsets.only(left: 25, bottom: 10);
 
@@ -31,7 +31,7 @@ class WorkoutCardScrollview extends StatelessWidget {
       WorkoutCardScrollviewModel model) {
     List<Widget> list = [];
     model.details.forEach((workoutDetail) {
-      list.add(WorkoutCard(workoutDetail));
+      list.add(WorkoutCard());
     });
     return list;
   }

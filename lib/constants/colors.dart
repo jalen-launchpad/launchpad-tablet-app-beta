@@ -13,11 +13,13 @@ class ColorConstants {
       const Color.fromRGBO(47, 85, 151, 1);
   static const Color launchpadSecondaryLightBlue =
       const Color.fromRGBO(86, 204, 242, 1);
-  static const Color launchpadMenuButtonBlue =
-      const Color.fromRGBO(47, 128, 237, 1);
   static const Color launchpadPrimaryDarkGrey =
       const Color.fromRGBO(30, 30, 30, 1);
   static const Color launchpadPrimaryBlack = const Color.fromRGBO(0, 0, 0, 1);
   static const Color launchpadGreen = Color.fromRGBO(39, 174, 96, 1);
   static const Color launchpadRed = Color.fromRGBO(235, 87, 87, 1);
+  static const Color launchpadMenuSecondaryBlue =
+      Color.fromRGBO(181, 199, 231, 1);
+  static const Color launchpadMenuExerciseBlue = Color.fromRGBO(5, 145, 234, 1);
+  static const Color launchpadPlayButtonBlue = Color.fromRGBO(47, 128, 237, 1);
 }

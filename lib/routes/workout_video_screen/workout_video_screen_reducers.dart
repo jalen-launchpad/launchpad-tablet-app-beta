@@ -1,30 +1,8 @@
 import 'dart:math';
 
 import 'package:redux/redux.dart';
-import 'package:tabletapp/widgets/workout_view/notification_bar/workout_notification.dart';
+import 'workout_video_screen_actions.dart';
 import 'workout_video_screen_state.dart';
-
-class ChangeToNextExerciseAction {}
-
-class UpdateUserPositionAction {}
-
-class ChangeScoreValueAction {
-  final int newScoreValue;
-  ChangeScoreValueAction({this.newScoreValue});
-}
-
-class AddGoodRepAction {}
-
-class AddBadRepAction {}
-
-class ClearScoreAction {}
-
-class UpdateNotificationBarAction {
-  WorkoutNotification workoutNotification;
-  UpdateNotificationBarAction({this.workoutNotification});
-}
-
-class ClearNotificationBarAction {}
 
 // Root Reducer that contains all other reducers.
 WorkoutVideoScreenState Function(WorkoutVideoScreenState, dynamic) rootReducer =

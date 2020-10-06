@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 import 'package:redux/redux.dart';
 
+import 'workout_video_screen_actions.dart';
 import 'workout_video_screen_reducers.dart';
 
 class WorkoutVideoScreenModel {

@@ -7,7 +7,8 @@ import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/models/workout_set_model.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
 import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_model.dart';
-import 'package:tabletapp/widgets/workout_view/notification_bar/workout_notification.dart';
+
+import 'notification_bar/workout_notification.dart';
 
 class WorkoutVideoScreenState extends ChangeNotifier {
   // All video metadata.
