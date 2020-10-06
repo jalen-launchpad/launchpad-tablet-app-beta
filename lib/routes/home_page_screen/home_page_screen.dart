@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
+import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/routes/home_page_screen/selected_class_sidebar/selected_class_sidebar.dart';
 
 import 'class_preview.dart';
@@ -19,19 +20,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
         child: Stack(
           children: [
             Container(
-              width: MediaQuery.of(context).size.width -
-                  MediaQuery.of(context).size.width / 3,
+              width: SizeConfig.blockSizeHorizontal * 67,
               child: ListView(children: [
                 Container(
                   child: ClassPreview(),
-                  height: MediaQuery.of(context).size.height -
-                      MediaQuery.of(context).size.height / 5,
+                  height: SizeConfig.blockSizeVertical * 80,
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                    left: 30,
-                    top: 20,
-                    bottom: 45,
+                    left: SizeConfig.blockSizeHorizontal * 3,
+                    top: SizeConfig.blockSizeVertical * 5,
+                    bottom: SizeConfig.blockSizeVertical * 5,
                   ),
                   child: Text("Other Workout Options",
                       style: TextStyle(
@@ -40,9 +39,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                    bottom: 45,
+                    left: SizeConfig.blockSizeHorizontal * 3,
+                    right: SizeConfig.blockSizeHorizontal * 3,
+                    bottom: SizeConfig.blockSizeVertical * 5,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,9 +54,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                    bottom: 45,
+                    left: SizeConfig.blockSizeHorizontal * 3,
+                    right: SizeConfig.blockSizeHorizontal * 3,
+                    bottom: SizeConfig.blockSizeVertical * 5,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,9 +69,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                    bottom: 45,
+                    left: SizeConfig.blockSizeHorizontal * 3,
+                    right: SizeConfig.blockSizeHorizontal * 3,
+                    bottom: SizeConfig.blockSizeVertical * 5,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,9 +84,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                    bottom: 45,
+                    left: SizeConfig.blockSizeHorizontal * 3,
+                    right: SizeConfig.blockSizeHorizontal * 3,
+                    bottom: SizeConfig.blockSizeVertical * 5,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,9 +99,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                    left: 30,
-                    right: 30,
-                    bottom: 45,
+                    left: SizeConfig.blockSizeHorizontal * 3,
+                    right: SizeConfig.blockSizeHorizontal * 3,
+                    bottom: SizeConfig.blockSizeVertical * 5,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -119,7 +118,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
               alignment: Alignment.topRight,
               child: Container(
                 child: SelectedClassSidebar(),
-                width: MediaQuery.of(context).size.width / 3,
+                width: SizeConfig.blockSizeHorizontal * 33,
               ),
             ),
           ],

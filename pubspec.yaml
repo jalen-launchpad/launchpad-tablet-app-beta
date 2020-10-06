@@ -52,10 +52,15 @@ flutter:
     - assets/234567.mp4
     - assets/345678.mp4
     - assets/456789.mp4
-    - assets/bodycomp.png
-    - assets/homepagemontage.gif
-    - assets/launchpadlogo.png
-
+    - assets/demo_compilation.mp4
+    - assets/images/homePageLogo.png
+    - assets/images/calendarVector.png
+    - assets/images/timeVector.png
+    - assets/images/exerciseCountVector.png
+    - assets/images/playVector.png
+    - assets/images/backgroundPlaceholder.png
+    - assets/images/workoutCardImagePlaceholder.png
+    - assets/images/smallTimeVector.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -78,6 +83,10 @@ flutter:
         - asset: assets/fonts/Jost-Bold.ttf
         - asset: assets/fonts/Jost-Medium.ttf 
           weight: 700
+    - family: SF Pro Display
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-Bold.otf
+
   # fonts:
   #   - family: Schyler
   #     fonts:

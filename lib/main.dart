@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/routes/bluetooth_setup_screen/bluetooth_setup_screen.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen.dart';
 
@@ -57,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
+    SizeConfig().init(context);
     return Center(child: HomePageScreen());
   }
 }

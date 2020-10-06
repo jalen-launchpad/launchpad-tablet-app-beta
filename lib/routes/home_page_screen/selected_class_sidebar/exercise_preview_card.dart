@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
+import 'package:tabletapp/constants/size_config.dart';
 
 class ExercisePreviewCard extends StatelessWidget {
   @override
@@ -10,7 +11,7 @@ class ExercisePreviewCard extends StatelessWidget {
         color: ColorConstants.launchpadPrimaryWhite,
       ),
       child: Container(
-          width: 120,
+          width: SizeConfig.blockSizeHorizontal * 12,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             color: ColorConstants.launchpadMenuExerciseBlue.withOpacity(0.8),
@@ -24,16 +25,15 @@ class ExercisePreviewCard extends StatelessWidget {
                   child: Text(
                     "Shoulder Press",
                     style: TextStyle(
-                      color: ColorConstants.launchpadPrimaryWhite,
-                      fontSize: 16,
-                      fontFamily: 'Jost',
-                      fontWeight: FontWeight.bold
-                    ),
+                        color: ColorConstants.launchpadPrimaryWhite,
+                        fontSize: 16,
+                        fontFamily: 'Jost',
+                        fontWeight: FontWeight.bold),
                   ),
                   padding: EdgeInsets.only(
-                    left: 15,
-                    right: 15,
-                    bottom: 15,
+                    left: SizeConfig.blockSizeHorizontal,
+                    right: SizeConfig.blockSizeHorizontal,
+                    bottom: SizeConfig.blockSizeVertical * 2,
                   ),
                 ),
               ),

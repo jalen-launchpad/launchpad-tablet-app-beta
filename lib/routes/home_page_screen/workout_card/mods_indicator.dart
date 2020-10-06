@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:tabletapp/constants/colors.dart';
+import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/enums/mods_enum.dart';
 
 // The indicator in bottom right of WorkoutCard telling users which
@@ -9,14 +10,14 @@ import 'package:tabletapp/enums/mods_enum.dart';
 // List<ModsEnum> modsList
 
 class ModsInidcator extends StatelessWidget {
-  static const double height = 20;
+  static double height = SizeConfig.blockSizeVertical * 3;
 
-  static const double width = 60;
+  static double width = SizeConfig.blockSizeHorizontal * 5;
 
   static const BorderRadius borderRadius =
       BorderRadius.all(Radius.circular(20));
 
-  static const SizedBox sizedBoxSpacer = SizedBox(width: 5, height: 10);
+  static SizedBox sizedBoxSpacer = SizedBox(width: SizeConfig.blockSizeHorizontal * 0.5, height: SizeConfig.blockSizeVertical * 2);
 
   final List<ModsEnum> modsList;
 

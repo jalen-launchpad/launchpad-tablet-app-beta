@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
+import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/routes/home_page_screen/selected_class_sidebar/exercise_preview_card.dart';
 
 import 'intensity_graph.dart';
@@ -10,12 +11,40 @@ class SelectedClassSidebar extends StatefulWidget {
 }
 
 class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
+  static const String title = "Shoulder Blast";
+  static const double time = 50;
+  static const double exerciseCount = 12;
+  static const intensities = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    3,
+    4,
+    2,
+    4,
+    5,
+    4,
+    3,
+    2,
+    3,
+    4,
+    1,
+  ];
+
+  static double horizontalOutsidePadding =
+      SizeConfig.blockSizeHorizontal * 2.75;
+  static const double workoutInformationBucketHeight = 80;
+  static double timeExerciseBucketWidth = SizeConfig.blockSizeHorizontal * 12.8;
+  static const double timeExerciseIconTextSpacing = 8;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: ColorConstants.launchpadPrimaryBlue,
       padding: EdgeInsets.only(
-        left: 30,
+        left: horizontalOutsidePadding,
       ),
       child: Column(
         children: [
@@ -24,13 +53,13 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
           // ************
           Container(
             padding: EdgeInsets.only(
-              top: 25,
+              top: SizeConfig.blockSizeVertical * 4,
             ),
             child: Row(
               children: [
                 Container(
                   child: Image.asset('assets/images/calendarVector.png',
-                      height: 20),
+                      height: SizeConfig.blockSizeVertical * 3.5),
                 ),
                 Container(
                   child: Text(
@@ -41,7 +70,8 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                         fontFamily: 'Jost',
                         fontWeight: FontWeight.bold),
                   ),
-                  padding: EdgeInsets.only(left: 15),
+                  padding: EdgeInsets.only(
+                      left: 1.5 * SizeConfig.blockSizeHorizontal),
                 ),
               ],
             ),
@@ -53,7 +83,8 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Shoulder Blast",
+                // TODO(jalen): REAL VALUE NEEDED
+                Text(title,
                     style: TextStyle(
                       fontFamily: 'SF Pro Display',
                       fontSize: 35,
@@ -62,7 +93,7 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
               ],
             ),
             padding: EdgeInsets.only(
-              top: 15,
+              top: SizeConfig.blockSizeVertical * 2.25,
             ),
           ),
           // ************
@@ -83,7 +114,7 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
               ],
             ),
             padding: EdgeInsets.only(
-              top: 15,
+              top: SizeConfig.blockSizeVertical * 2.25,
             ),
           ),
           // ************
@@ -91,20 +122,21 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
           // ************
           Container(
             margin: EdgeInsets.only(
-              top: 25,
+              top: SizeConfig.blockSizeVertical * 3.5,
             ),
-            height: 130,
+            height: SizeConfig.blockSizeVertical * 19.25,
+            // TODO(jalen): REAL VALUE NEEDED
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.only(
-                right: 15,
+                right: SizeConfig.blockSizeHorizontal * 2,
               ),
               itemCount: 7,
               itemBuilder: (BuildContext context, int index) =>
                   ExercisePreviewCard(),
               separatorBuilder: (BuildContext context, int index) => Divider(
                 indent: 0,
-                endIndent: 20,
+                endIndent: SizeConfig.blockSizeHorizontal * 2,
               ),
             ),
           ),
@@ -114,8 +146,7 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
           // ************
           Container(
             padding: EdgeInsets.only(
-              top: 25,
-              right: 30,
+              top: SizeConfig.blockSizeVertical * 3.5,
             ),
             child: Row(
               children: [
@@ -123,16 +154,16 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                 // Time Bucket
                 // ************
                 Container(
-                  margin: EdgeInsets.only(
-                    right: 25,
+                  padding: EdgeInsets.only(
+                    right: SizeConfig.blockSizeHorizontal * 2.5,
                   ),
                   child: Column(
                     children: [
                       Container(
                         padding: EdgeInsets.only(
-                          bottom: 10,
+                          bottom: SizeConfig.blockSizeVertical,
                         ),
-                        width: 140,
+                        width: timeExerciseBucketWidth,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -147,8 +178,8 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                         ),
                       ),
                       Container(
-                          height: 80,
-                          width: 140,
+                          height: workoutInformationBucketHeight,
+                          width: timeExerciseBucketWidth,
                           decoration: BoxDecoration(
                             color: ColorConstants.launchpadPrimaryBlack
                                 .withOpacity(
@@ -164,14 +195,16 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                               children: [
                                 Image.asset(
                                   'assets/images/timeVector.png',
-                                  height: 25,
+                                  height: SizeConfig.blockSizeVertical * 4,
                                 ),
                                 Container(
                                   padding: EdgeInsets.only(
-                                    left: 8,
+                                    left: timeExerciseIconTextSpacing,
                                   ),
                                   child: Text(
-                                    "50 min",
+                                    // TODO(jalen): REAL VALUE NEEDED
+
+                                    time.toInt().toString() + " min",
                                     style: TextStyle(
                                       fontSize: 26,
                                       color:
@@ -186,16 +219,16 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                   ),
                 ),
                 // ************
-                // Time Bucket
+                // Exercise Bucket
                 // ************
                 Container(
                   child: Column(
                     children: [
                       Container(
                         padding: EdgeInsets.only(
-                          bottom: 10,
+                          bottom: SizeConfig.blockSizeVertical,
                         ),
-                        width: 140,
+                        width: timeExerciseBucketWidth,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -210,8 +243,8 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                         ),
                       ),
                       Container(
-                          height: 80,
-                          width: 140,
+                          height: workoutInformationBucketHeight,
+                          width: timeExerciseBucketWidth,
                           decoration: BoxDecoration(
                             color: ColorConstants.launchpadPrimaryBlack
                                 .withOpacity(
@@ -226,15 +259,17 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
+                                  // TODO(jalen): REAL VALUE NEEDED
                                   'assets/images/exerciseCountVector.png',
-                                  height: 25,
+                                  height: SizeConfig.blockSizeVertical * 4,
                                 ),
                                 Container(
                                   padding: EdgeInsets.only(
-                                    left: 8,
+                                    left: timeExerciseIconTextSpacing,
                                   ),
                                   child: Text(
-                                    "12 exe",
+                                    // TODO(jalen): REAL VALUE NEEDED
+                                    exerciseCount.toInt().toString() + " exe",
                                     style: TextStyle(
                                       fontSize: 26,
                                       color:
@@ -257,7 +292,7 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
           // ************
 
           Container(
-            padding: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 1.5),
             child: Column(
               children: [
                 Row(
@@ -273,8 +308,12 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                   ],
                 ),
                 Container(
-                  height: 80,
-                  margin: EdgeInsets.only(top: 10, bottom: 15, right: 30),
+                  height: workoutInformationBucketHeight,
+                  margin: EdgeInsets.only(
+                    top: SizeConfig.blockSizeVertical,
+                    bottom: SizeConfig.blockSizeVertical * 4,
+                    right: horizontalOutsidePadding,
+                  ),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: ColorConstants.launchpadPrimaryBlack.withOpacity(
@@ -285,24 +324,8 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                     ),
                   ),
                   child: IntensityGraph(
-                    [
-                      1,
-                      2,
-                      3,
-                      4,
-                      5,
-                      3,
-                      4,
-                      2,
-                      4,
-                      5,
-                      4,
-                      3,
-                      2,
-                      3,
-                      4,
-                      1,
-                    ],
+                    // TODO(jalen): REAL VALUE NEEDED
+                    intensities,
                   ),
                 ),
               ],
@@ -312,21 +335,22 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
           // Start Workout Button
           // ************
           Container(
-            height: 75,
+            height: SizeConfig.blockSizeVertical * 10,
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.only(right: 30),
+            padding: EdgeInsets.only(right: horizontalOutsidePadding),
             child: RaisedButton.icon(
               color: ColorConstants.launchpadPlayButtonBlue,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(110),
               ),
               onPressed: () {
+                // TODO(jalen): REAL VALUE NEEDED
                 print("worked");
               },
               icon: Icon(
                 Icons.play_arrow,
                 color: ColorConstants.launchpadPrimaryWhite,
-                size: 45,
+                size: SizeConfig.blockSizeHorizontal * 5,
               ),
               label: Text(
                 "Start Workout",

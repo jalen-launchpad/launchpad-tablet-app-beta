@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
+import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/enums/mods_enum.dart';
 import 'package:tabletapp/routes/home_page_screen/workout_card/mods_indicator.dart';
 
@@ -14,12 +15,12 @@ class WorkoutCard extends StatelessWidget {
         children: [
           Image.asset(
             'assets/images/workoutCardImagePlaceholder.png',
-            height: 125,
-            width: 218.75,
+            height: SizeConfig.blockSizeVertical * 18,
+            width: SizeConfig.blockSizeHorizontal * 19.85,
           ),
           Container(
-            height: 125,
-            width: 218.75,
+            height: SizeConfig.blockSizeVertical * 18,
+            width: SizeConfig.blockSizeHorizontal * 19.85,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
                 4,
@@ -33,8 +34,8 @@ class WorkoutCard extends StatelessWidget {
           // Workout Mods
           // **************
           Positioned(
-            left: 10,
-            top: 10,
+            left: SizeConfig.blockSizeHorizontal,
+            top: SizeConfig.blockSizeVertical * 1.5,
             child: ModsInidcator(
               [
                 ModsEnum.plio,
@@ -47,11 +48,11 @@ class WorkoutCard extends StatelessWidget {
           // Workout Duration
           // **************
           Positioned(
-            right: 10,
-            top: 10,
+            right: SizeConfig.blockSizeHorizontal,
+            top: SizeConfig.blockSizeVertical * 1.5,
             child: Container(
-              height: 20,
-              width: 60,
+              height: SizeConfig.blockSizeVertical * 3,
+              width: SizeConfig.blockSizeHorizontal * 5,
               decoration: BoxDecoration(
                 color: ColorConstants.launchpadPrimaryBlue,
                 borderRadius: BorderRadius.circular(
@@ -62,7 +63,7 @@ class WorkoutCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(right: 5),
+                    padding: EdgeInsets.only(right: SizeConfig.blockSizeHorizontal * 0.5),
                     child: Text(
                       "20",
                       style: TextStyle(
@@ -72,8 +73,8 @@ class WorkoutCard extends StatelessWidget {
                   ),
                   Image.asset(
                     'assets/images/smallTimeVector.png',
-                    height: 13,
-                    width: 13,
+                    height: SizeConfig.blockSizeHorizontal,
+                    width: SizeConfig.blockSizeHorizontal,
                   ),
                 ],
               ),
@@ -83,9 +84,9 @@ class WorkoutCard extends StatelessWidget {
           // Workout Title
           // **************
           Positioned(
-            left: 10,
-            right: 10,
-            bottom: 10,
+            left: SizeConfig.blockSizeHorizontal,
+            right: SizeConfig.blockSizeHorizontal,
+            bottom: SizeConfig.blockSizeVertical,
             child: Container(
               child: Text(
                 "Lowerbody Cooldown",

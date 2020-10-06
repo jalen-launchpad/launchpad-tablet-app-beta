@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
+import 'package:tabletapp/constants/size_config.dart';
 
 class ClassPreview extends StatelessWidget {
   @override
@@ -14,36 +15,23 @@ class ClassPreview extends StatelessWidget {
           // Bakcground Photo
           // *************
           Positioned(
-              top: 0,
-              left: 0,
-              child: Image.asset("assets/images/backgroundPlaceholder.png",
-                  width: MediaQuery.of(context).size.width * 2 / 3)),
+            top: 0,
+            left: 0,
+            child: Image.asset(
+              "assets/images/backgroundPlaceholder.png",
+              width: SizeConfig.blockSizeHorizontal * 67,
+            ),
+          ),
 
           // *************
           // Launchpad Corner Logo
           // *************
           Positioned(
             child: Image.asset('assets/images/homePageLogo.png', height: 25),
-            left: 30,
-            top: 50,
+            left: SizeConfig.blockSizeHorizontal * 3,
+            top: SizeConfig.blockSizeVertical * 6,
           ),
 
-          // *************
-          // Class Preview Title
-          // *************
-          Positioned(
-            left: 30,
-            bottom: 60,
-            child: Text(
-              // TODO(jalen): Replace with real class preview value
-              "Shoulder Blast",
-              style: TextStyle(
-                color: ColorConstants.launchpadPrimaryWhite,
-                fontSize: 80,
-              ),
-            ),
-          ),
-          
           // *************
           // Black gradient effect from bottom of screen.
           // *************
@@ -52,9 +40,8 @@ class ClassPreview extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height / 9,
-                  width: MediaQuery.of(context).size.width -
-                      MediaQuery.of(context).size.width / 3,
+                  height: SizeConfig.blockSizeVertical * 20,
+                  width: SizeConfig.blockSizeHorizontal * 67,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.bottomLeft,
@@ -67,6 +54,28 @@ class ClassPreview extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+
+          // *************
+          // Class Preview Title
+          // *************
+          Positioned(
+            bottom: SizeConfig.blockSizeVertical * 5,
+            child: Container(
+              width: SizeConfig.blockSizeHorizontal * 67,
+              padding: EdgeInsets.only(
+                left: SizeConfig.blockSizeHorizontal * 3,
+                right: SizeConfig.blockSizeHorizontal * 3,
+              ),
+              child: Text(
+                // TODO(jalen): Replace with real class preview value
+                "Speed Kills Vol 3",
+                style: TextStyle(
+                  color: ColorConstants.launchpadPrimaryWhite,
+                  fontSize: 80,
+                ),
+              ),
             ),
           ),
         ],
