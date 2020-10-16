@@ -2,102 +2,125 @@ import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/enums/mods_enum.dart';
+import 'package:tabletapp/models/workout_details.dart';
+import 'package:tabletapp/routes/home_page_screen/home_page_screen_actions.dart';
+import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
 import 'package:tabletapp/routes/home_page_screen/workout_card/mods_indicator.dart';
+import 'package:redux/redux.dart';
 
 class WorkoutCard extends StatelessWidget {
+  final Store<HomePageScreenState> store;
+  final WorkoutDetails workoutDetails;
+  WorkoutCard(this.store, this.workoutDetails);
+
+  static double width = SizeConfig.blockSizeHorizontal * 19.85;
+  static double height = SizeConfig.blockSizeHorizontal * 18;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Stack(
-        // **************
-        // Background Image
-        // **************
-        children: [
-          Image.asset(
-            'assets/images/workoutCardImagePlaceholder.png',
-            height: SizeConfig.blockSizeVertical * 18,
-            width: SizeConfig.blockSizeHorizontal * 19.85,
-          ),
-          Container(
-            height: SizeConfig.blockSizeVertical * 18,
-            width: SizeConfig.blockSizeHorizontal * 19.85,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                4,
+      width: width,
+      height: height,
+      child: FlatButton(
+        // Flat Button automatically adds padding.
+        padding: EdgeInsets.all(0),
+        onPressed: () {
+          print("button pressed");
+          store.dispatch(
+              UpdateSidebarClassAction(workoutDetails: workoutDetails));
+        },
+        child: Container(
+          child: Stack(
+            // **************
+            // Background Image
+            // **************
+            children: [
+              Image.asset(
+                'assets/images/workoutCardImagePlaceholder.png',
+                height: SizeConfig.blockSizeVertical * 18,
+                width: SizeConfig.blockSizeHorizontal * 19.85,
               ),
-              color:
-                  ColorConstants.launchpadSecondaryDarkBlue.withOpacity(0.85),
-            ),
-          ),
-
-          // **************
-          // Workout Mods
-          // **************
-          Positioned(
-            left: SizeConfig.blockSizeHorizontal,
-            top: SizeConfig.blockSizeVertical * 1.5,
-            child: ModsInidcator(
-              [
-                ModsEnum.plio,
-                ModsEnum.physio,
-              ],
-            ),
-          ),
-
-          // **************
-          // Workout Duration
-          // **************
-          Positioned(
-            right: SizeConfig.blockSizeHorizontal,
-            top: SizeConfig.blockSizeVertical * 1.5,
-            child: Container(
-              height: SizeConfig.blockSizeVertical * 3,
-              width: SizeConfig.blockSizeHorizontal * 5,
-              decoration: BoxDecoration(
-                color: ColorConstants.launchpadPrimaryBlue,
-                borderRadius: BorderRadius.circular(
-                  20,
+              Container(
+                height: SizeConfig.blockSizeVertical * 18,
+                width: SizeConfig.blockSizeHorizontal * 19.85,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    4,
+                  ),
+                  color: ColorConstants.launchpadSecondaryDarkBlue
+                      .withOpacity(0.85),
                 ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(right: SizeConfig.blockSizeHorizontal * 0.5),
-                    child: Text(
-                      "20",
-                      style: TextStyle(
-                        color: ColorConstants.launchpadPrimaryWhite,
-                      ),
+
+              // **************
+              // Workout Mods
+              // **************
+              Positioned(
+                left: SizeConfig.blockSizeHorizontal,
+                top: SizeConfig.blockSizeVertical * 1.5,
+                child: ModsInidcator(
+                  workoutDetails.modsList,
+                ),
+              ),
+
+              // **************
+              // Workout Duration
+              // **************
+              Positioned(
+                right: SizeConfig.blockSizeHorizontal,
+                top: SizeConfig.blockSizeVertical * 1.5,
+                child: Container(
+                  height: SizeConfig.blockSizeVertical * 3,
+                  width: SizeConfig.blockSizeHorizontal * 5,
+                  decoration: BoxDecoration(
+                    color: ColorConstants.launchpadPrimaryBlue,
+                    borderRadius: BorderRadius.circular(
+                      20,
                     ),
                   ),
-                  Image.asset(
-                    'assets/images/smallTimeVector.png',
-                    height: SizeConfig.blockSizeHorizontal,
-                    width: SizeConfig.blockSizeHorizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(
+                            right: SizeConfig.blockSizeHorizontal * 0.5),
+                        child: Text(
+                          workoutDetails.duration.toInt().toString(),
+                          style: TextStyle(
+                            color: ColorConstants.launchpadPrimaryWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal * 1.2,
+                          ),
+                        ),
+                      ),
+                      Image.asset(
+                        'assets/images/smallTimeVector.png',
+                        height: SizeConfig.blockSizeHorizontal * 1.2,
+                        width: SizeConfig.blockSizeHorizontal * 1.2,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          ),
-          // **************
-          // Workout Title
-          // **************
-          Positioned(
-            left: SizeConfig.blockSizeHorizontal,
-            right: SizeConfig.blockSizeHorizontal,
-            bottom: SizeConfig.blockSizeVertical,
-            child: Container(
-              child: Text(
-                "Lowerbody Cooldown",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: ColorConstants.launchpadPrimaryWhite,
                 ),
               ),
-            ),
+              // **************
+              // Workout Title
+              // **************
+              Positioned(
+                left: SizeConfig.blockSizeHorizontal,
+                right: SizeConfig.blockSizeHorizontal,
+                bottom: SizeConfig.blockSizeVertical,
+                child: Container(
+                  child: Text(
+                    workoutDetails.title,
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeHorizontal * 1.4,
+                      color: ColorConstants.launchpadPrimaryWhite,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

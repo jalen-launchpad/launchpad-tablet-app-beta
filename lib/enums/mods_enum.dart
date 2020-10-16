@@ -1,19 +1,19 @@
 import 'dart:ui';
 
 enum ModsEnum {
-  kids,
   plio,
-  fit,
-  silver,
   physio,
+  fit,
+  kids,
+  silver,
 }
 
 const ModsEnumToStringMap = {
-  ModsEnum.kids: 'Kids',
   ModsEnum.plio: 'Plio',
+  ModsEnum.physio: 'Physio',
   ModsEnum.fit: 'Fit',
+  ModsEnum.kids: 'Kids',
   ModsEnum.silver: 'Silver',
-  ModsEnum.physio: 'Physio'
 };
 
 const ModsEnumToColorMap = {

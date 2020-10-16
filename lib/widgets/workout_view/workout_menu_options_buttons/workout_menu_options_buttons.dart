@@ -120,7 +120,7 @@ class _WorkoutMenuOptionsButtonsState extends State<WorkoutMenuOptionsButtons> {
                 ),
                 height: buttonSize + 20,
                 width: buttonSize + 20,
-                color: ColorConstants.launchpadMenuButtonBlue,
+                color: ColorConstants.launchpadMenuExerciseBlue,
                 onClick: toggleMenu,
               ),
             ),

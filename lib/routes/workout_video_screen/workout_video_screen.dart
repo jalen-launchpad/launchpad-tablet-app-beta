@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
+import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/placeholder_values.dart';
+import 'package:tabletapp/routes/workout_video_screen/progress_bar.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_bluetooth_handler.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 import 'package:redux/redux.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/rep_counter/rep_counter.dart';
 import 'package:video_player/video_player.dart';
+import 'constants.dart';
+import 'leaderboard/leaderboard.dart';
 import 'notification_bar/workout_notification.dart';
 import 'notification_bar/workout_notification_bar.dart';
+import 'rep_counter/rep_counter.dart';
 import 'workout_video_screen_reducers.dart';
 
 class WorkoutVideoScreen extends StatefulWidget {
@@ -36,8 +39,10 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
 
   _WorkoutVideoScreenState(this.workoutVideoScreenState, {this.bluetoothDevice})
       : store = Store(rootReducer, initialState: workoutVideoScreenState) {
-    bluetoothHandler = WorkoutVideoBluetoothHandler(bluetoothDevice, store);
-    bluetoothHandler.getBluetoothServices();
+    if (this.bluetoothDevice != null) {
+      bluetoothHandler = WorkoutVideoBluetoothHandler(bluetoothDevice, store);
+      bluetoothHandler.getBluetoothServices();
+    }
     print("getBluetoothServices done");
     model = WorkoutVideoScreenModel(store);
     print("model set");
@@ -60,9 +65,6 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
       });
   }
 
-  static const double repCounterLeftPosition = 30;
-  static const double repCounterBottomPosition = 75;
-
   @override
   Widget build(BuildContext context) {
     return StoreProvider<WorkoutVideoScreenState>(
@@ -79,7 +81,8 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: _controller.value.initialized
                         ? AspectRatio(
-                            aspectRatio: _controller.value.aspectRatio,
+                            aspectRatio: MediaQuery.of(context).size.width /
+                                MediaQuery.of(context).size.height,
                             child: VideoPlayer(_controller))
                         : Container()),
               ],
@@ -107,17 +110,22 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
               ],
             ),
           ),
+          ProgressBar(
+            store.state.workoutMetadata.workoutDetails.duration,
+          ),
           // Exercise Name.
           StoreConnector<WorkoutVideoScreenState, String>(
             builder: (context, string) => Align(
               alignment: Alignment.topLeft,
               child: Container(
-                padding: EdgeInsets.only(top: 50, left: 25),
+                padding: EdgeInsets.only(
+                    top: SizeConfig.blockSizeVertical * 9,
+                    left: WorkoutVideoScreenConstants.leftPaddingAlign),
                 child: Text(
                   string,
                   style: TextStyle(
                     color: ColorConstants.launchpadPrimaryWhite,
-                    fontSize: 50,
+                    fontSize: SizeConfig.blockSizeHorizontal * 4,
                   ),
                 ),
               ),
@@ -128,19 +136,20 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
           // Rep Counter.
           Positioned(
             child: RepCounter(),
-            left: repCounterLeftPosition,
-            bottom: repCounterBottomPosition,
+            left: WorkoutVideoScreenConstants.leftPaddingAlign,
+            bottom: WorkoutVideoScreenConstants.bottomPaddingAlign,
           ),
 
           // Leaderboard.
           Positioned(
-              child: Leaderboard(
-                currentLeaderboard: PlaceholderValues().leaderboard,
-              ),
-              bottom: repCounterBottomPosition +
-                  Leaderboard.workoutLeaderboardHeight +
-                  120,
-              left: repCounterLeftPosition),
+            child: Leaderboard(
+              currentLeaderboard: PlaceholderValues().leaderboard,
+            ),
+            bottom: WorkoutVideoScreenConstants.bottomPaddingAlign +
+                Leaderboard.workoutLeaderboardHeight +
+                SizeConfig.blockSizeVertical * 18,
+            left: WorkoutVideoScreenConstants.leftPaddingAlign,
+          ),
           StoreConnector<WorkoutVideoScreenState, WorkoutNotification>(
             builder: (context, workoutNotification) => store
                         .state.showNotification ==

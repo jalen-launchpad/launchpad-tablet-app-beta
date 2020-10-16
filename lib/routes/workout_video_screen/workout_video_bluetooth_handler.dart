@@ -6,7 +6,6 @@ import 'package:tabletapp/constants/bluetooth_uuid.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'notification_bar/workout_notification.dart';
 import 'workout_video_screen_actions.dart';
-import 'workout_video_screen_reducers.dart';
 import 'workout_video_screen_state.dart';
 
 class WorkoutVideoBluetoothHandler {

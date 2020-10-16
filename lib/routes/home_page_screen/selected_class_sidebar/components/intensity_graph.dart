@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
+
+import '../constants.dart';
 
 class IntensityGraph extends StatelessWidget {
   static double width = SizeConfig.blockSizeHorizontal;
   static double height = SizeConfig.blockSizeVertical;
   static double borderRadius = 100;
+  static double horizontalOutsidePadding =
+      SizeConfig.blockSizeHorizontal * 2.75;
 
   final intToIntensityMap = {
     1: Container(
@@ -62,8 +67,43 @@ class IntensityGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        children: convertInputToExpandedIntensities(),
+      padding: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 1.5),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "Intensity",
+                style: TextStyle(
+                  fontSize: SelectedClassSidebarConstants.subTextSize,
+                  color: ColorConstants.launchpadPrimaryWhite,
+                ),
+              ),
+            ],
+          ),
+          Container(
+            height: SelectedClassSidebarConstants.workoutInformationBucketHeight,
+            margin: EdgeInsets.only(
+              top: SizeConfig.blockSizeVertical,
+              bottom: SizeConfig.blockSizeVertical * 4,
+              right: horizontalOutsidePadding,
+            ),
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              color: ColorConstants.launchpadPrimaryBlack.withOpacity(
+                0.3,
+              ),
+              borderRadius: BorderRadius.circular(
+                SelectedClassSidebarConstants.bucketBorderRadius,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: convertInputToExpandedIntensities(),
+            ),
+          ),
+        ],
       ),
     );
   }

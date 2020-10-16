@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 import 'leaderboard_entry.dart';
 import 'leaderboard_model.dart';
@@ -16,8 +17,8 @@ class Leaderboard extends StatefulWidget {
     this.currentLeaderboard,
   });
 
-  static const double workoutLeaderboardHeight = 150;
-  static const double workoutLeaderboardWidth = 300;
+  static double workoutLeaderboardHeight = SizeConfig.blockSizeVertical * 22;
+  static double workoutLeaderboardWidth = SizeConfig.blockSizeHorizontal * 32;
 
   @override
   _LeaderboardState createState() => _LeaderboardState(
@@ -31,8 +32,8 @@ class _LeaderboardState extends State<Leaderboard> {
   // Every exercise user starts from 0, therefore the last position.
   _LeaderboardState({this.currentLeaderboard});
 
-  static const double workoutLeaderboardOpacity = 0.75;
-  static const double borderRadius = 30;
+  static double workoutLeaderboardOpacity = 0.75;
+  static double borderRadius = SizeConfig.blockSizeHorizontal;
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 import 'leaderboard_entry_model.dart';
 

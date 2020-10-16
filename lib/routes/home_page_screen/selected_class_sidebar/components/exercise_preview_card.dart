@@ -3,6 +3,9 @@ import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 
 class ExercisePreviewCard extends StatelessWidget {
+  final String exerciseName;
+  ExercisePreviewCard(this.exerciseName);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,10 +26,10 @@ class ExercisePreviewCard extends StatelessWidget {
                 alignment: Alignment.bottomLeft,
                 child: Container(
                   child: Text(
-                    "Shoulder Press",
+                    exerciseName,
                     style: TextStyle(
                         color: ColorConstants.launchpadPrimaryWhite,
-                        fontSize: 16,
+                        fontSize: SizeConfig.blockSizeHorizontal * 1.2,
                         fontFamily: 'Jost',
                         fontWeight: FontWeight.bold),
                   ),

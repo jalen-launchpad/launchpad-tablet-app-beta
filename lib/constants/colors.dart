@@ -22,4 +22,8 @@ class ColorConstants {
       Color.fromRGBO(181, 199, 231, 1);
   static const Color launchpadMenuExerciseBlue = Color.fromRGBO(5, 145, 234, 1);
   static const Color launchpadPlayButtonBlue = Color.fromRGBO(47, 128, 237, 1);
+  static const Color workoutVideoProgressBarBlue =
+      Color.fromRGBO(86, 204, 242, 1);
+  static const Color workoutVideoProgressBarGrey =
+      Color.fromRGBO(97, 95, 93, 1);
 }

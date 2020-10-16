@@ -1,16 +1,16 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:tabletapp/models/workout_details.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/models/workout_set_model.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_model.dart';
 
+
+import 'leaderboard/leaderboard_entry_model.dart';
+import 'leaderboard/leaderboard_model.dart';
 import 'notification_bar/workout_notification.dart';
 
-class WorkoutVideoScreenState extends ChangeNotifier {
+class WorkoutVideoScreenState {
   // All video metadata.
   final WorkoutMetadata workoutMetadata;
   // A list of WorkoutLeaderboardEntries pre-populated with previous users.
@@ -31,6 +31,10 @@ class WorkoutVideoScreenState extends ChangeNotifier {
       this.exerciseTimer,
       this.showNotification,
       this.workoutNotification});
+
+  static WorkoutVideoScreenState initializeClass() {
+    
+  }
 
   WorkoutVideoScreenState copyWith({
     WorkoutDetails workoutDetails,

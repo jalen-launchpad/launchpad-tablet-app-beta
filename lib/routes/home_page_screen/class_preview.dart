@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
+import 'package:tabletapp/models/workout_details.dart';
 
 class ClassPreview extends StatelessWidget {
+  final WorkoutDetails workoutDetails;
+  ClassPreview(this.workoutDetails);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
+  
       child: Stack(
         children: [
           // TODO(jalen): Add background image here
@@ -70,10 +74,10 @@ class ClassPreview extends StatelessWidget {
               ),
               child: Text(
                 // TODO(jalen): Replace with real class preview value
-                "Speed Kills Vol 3",
+                workoutDetails.title,
                 style: TextStyle(
                   color: ColorConstants.launchpadPrimaryWhite,
-                  fontSize: 80,
+                  fontSize: SizeConfig.blockSizeHorizontal * 5,
                 ),
               ),
             ),

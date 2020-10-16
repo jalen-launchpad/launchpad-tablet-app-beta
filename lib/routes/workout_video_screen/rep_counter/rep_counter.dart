@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
+import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/models/exercise_score_model.dart';
+import 'package:tabletapp/routes/workout_video_screen/leaderboard/leaderboard_entry_model.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
-import 'package:tabletapp/widgets/workout_view/metrics/leaderboard/leaderboard_entry_model.dart';
 
 class RepCounter extends StatefulWidget {
   final ExerciseScoreModel exerciseScore;
@@ -15,22 +16,21 @@ class RepCounter extends StatefulWidget {
 
 // Consumes -> LeaderboardEntryModel
 class _RepCounterState extends State<RepCounter> {
-  static const double widgetWidth = 250;
-  static const double widgetHeight = 220;
+  static double widgetWidth = SizeConfig.blockSizeHorizontal * 25;
+  static double widgetHeight = SizeConfig.blockSizeVertical * 35;
 
-  static const double mainCircleHeightWidth = 150;
-  static const double mainFontSize = 54;
-  static const double secondaryFontSize = 30;
+  static double mainCircleHeightWidth = SizeConfig.blockSizeHorizontal * 15;
+  static double mainFontSize = SizeConfig.blockSizeHorizontal * 7;
+  static double secondaryFontSize = SizeConfig.blockSizeHorizontal * 4;
 
   static const double secondaryFontOpacity = 0.6;
 
-  static const double goodRepLeftPosition = 155;
-  static const double goodRepTopPosition = 30;
-  static const double badRepBottomPosition = 15;
-  static const double badRepLeftPosition = 105;
+  static double goodRepLeftPosition = mainCircleHeightWidth + SizeConfig.blockSizeHorizontal;
+  static double goodRepTopPosition = SizeConfig.blockSizeVertical * 3;
+  static double badRepBottomPosition = SizeConfig.blockSizeHorizontal * 2;
+  static double badRepLeftPosition = mainCircleHeightWidth - SizeConfig.blockSizeHorizontal * 3;
 
-  static const double secondaryCircleHeightWidth = 70;
-  static const double secondaryCircleBorderRadius = 4;
+  static double secondaryCircleHeightWidth = SizeConfig.blockSizeHorizontal * 7;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class _RepCounterState extends State<RepCounter> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(top: 50),
+                    padding: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 7),
                     child: Text(entry.score.totalReps.toString(),
                         style: TextStyle(
                           color: ColorConstants.launchpadSecondaryLightBlue,

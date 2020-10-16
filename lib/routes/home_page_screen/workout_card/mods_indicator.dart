@@ -41,7 +41,7 @@ class ModsInidcator extends StatelessWidget {
                 color: ColorConstants.launchpadPrimaryWhite,
                 fontFamily: 'Jost',
                 fontWeight: FontWeight.bold,
-                fontSize: 14,
+                fontSize: SizeConfig.blockSizeHorizontal * 1.2,
               ),
             ),
           ),
