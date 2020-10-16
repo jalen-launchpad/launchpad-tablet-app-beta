@@ -104,7 +104,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     SizeConfig().init(context);
-/*
     return (!initialDataLoadDone
         // Splash Screen while fetching data from database
         ? Container(
@@ -119,7 +118,5 @@ class _MyHomePageState extends State<MyHomePage> {
               alternativeClasses: workouts,
             ),
           ));
-          */
-    return WorkoutVideoScreen(PlaceholderValues().getWorkoutState());
   }
 }

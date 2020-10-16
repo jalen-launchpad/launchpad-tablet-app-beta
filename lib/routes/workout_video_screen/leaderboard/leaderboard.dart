@@ -18,7 +18,7 @@ class Leaderboard extends StatefulWidget {
   });
 
   static double workoutLeaderboardHeight = SizeConfig.blockSizeVertical * 22;
-  static double workoutLeaderboardWidth = SizeConfig.blockSizeHorizontal * 32;
+  static double workoutLeaderboardWidth = SizeConfig.blockSizeHorizontal * 30;
 
   @override
   _LeaderboardState createState() => _LeaderboardState(

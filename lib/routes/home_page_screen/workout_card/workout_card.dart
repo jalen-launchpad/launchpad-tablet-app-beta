@@ -35,10 +35,15 @@ class WorkoutCard extends StatelessWidget {
             // Background Image
             // **************
             children: [
-              Image.asset(
-                'assets/images/workoutCardImagePlaceholder.png',
-                height: SizeConfig.blockSizeVertical * 18,
+              Container(
                 width: SizeConfig.blockSizeHorizontal * 19.85,
+                height: SizeConfig.blockSizeVertical * 18,
+                child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: Image.asset(
+                    'assets/images/workoutCardImagePlaceholder.png',
+                  ),
+                ),
               ),
               Container(
                 height: SizeConfig.blockSizeVertical * 18,

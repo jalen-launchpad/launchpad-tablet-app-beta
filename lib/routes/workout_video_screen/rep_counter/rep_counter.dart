@@ -27,8 +27,8 @@ class _RepCounterState extends State<RepCounter> {
 
   static double goodRepLeftPosition = mainCircleHeightWidth + SizeConfig.blockSizeHorizontal;
   static double goodRepTopPosition = SizeConfig.blockSizeVertical * 3;
-  static double badRepBottomPosition = SizeConfig.blockSizeVertical * 2;
-  static double badRepLeftPosition = mainCircleHeightWidth - SizeConfig.blockSizeHorizontal * 3;
+  static double badRepBottomPosition = SizeConfig.blockSizeVertical * 0.5;
+  static double badRepLeftPosition = mainCircleHeightWidth - SizeConfig.blockSizeHorizontal * 2.5;
 
   static double secondaryCircleHeightWidth = SizeConfig.blockSizeHorizontal * 7;
 

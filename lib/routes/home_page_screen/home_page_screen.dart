@@ -96,7 +96,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 child: ListView(children: [
                   StoreConnector<HomePageScreenState, WorkoutDetails>(
                     builder: (context, workoutDetails) => Container(
-                      child: ClassPreview(workoutDetails),
+                      child: ClassPreview(workoutDetails, store),
                       height: SizeConfig.blockSizeVertical * 80,
                     ),
                     converter: (store) => store.state.recommendedClass,

@@ -94,12 +94,13 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
             child: Row(
               children: [
                 Container(
+                  padding: EdgeInsets.only(right: 10),
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width / 2,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
+                      begin: Alignment(0, 0),
+                      end: Alignment(1, 0),
                       colors: [
                         ColorConstants.launchpadPrimaryBlue,
                         ColorConstants.launchpadPrimaryBlue.withOpacity(0)
@@ -115,19 +116,26 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
           ),
           // Exercise Name.
           StoreConnector<WorkoutVideoScreenState, String>(
-            builder: (context, string) => Align(
+            builder: (context, exerciseName) => Align(
               alignment: Alignment.topLeft,
-              child: Container(
-                padding: EdgeInsets.only(
-                    top: SizeConfig.blockSizeVertical * 9,
-                    left: WorkoutVideoScreenConstants.leftPaddingAlign),
-                child: Text(
-                  string,
-                  style: TextStyle(
-                    color: ColorConstants.launchpadPrimaryWhite,
-                    fontSize: SizeConfig.blockSizeHorizontal * 4,
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Container(
+                      width: SizeConfig.blockSizeHorizontal * 50,
+                      padding: EdgeInsets.only(
+                          top: SizeConfig.blockSizeVertical * 9,
+                          left: WorkoutVideoScreenConstants.leftPaddingAlign),
+                      child: Text(
+                        exerciseName,
+                        style: TextStyle(
+                          color: ColorConstants.launchpadPrimaryWhite,
+                          fontSize: SizeConfig.blockSizeHorizontal * 3.5,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             converter: (store) =>
@@ -150,6 +158,8 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
                 SizeConfig.blockSizeVertical * 18,
             left: WorkoutVideoScreenConstants.leftPaddingAlign,
           ),
+          // Notification Bar - NEEDS SIZECONFIG UPDATES
+          // TODO(jalen): Size Config Updates here.
           StoreConnector<WorkoutVideoScreenState, WorkoutNotification>(
             builder: (context, workoutNotification) => store
                         .state.showNotification ==

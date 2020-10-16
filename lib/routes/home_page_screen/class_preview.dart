@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:redux/redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/models/workout_details.dart';
+import 'package:tabletapp/routes/home_page_screen/home_page_screen_actions.dart';
+import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
 
 class ClassPreview extends StatelessWidget {
   final WorkoutDetails workoutDetails;
-  ClassPreview(this.workoutDetails);
+  final Store<HomePageScreenState> store;
+  ClassPreview(this.workoutDetails, this.store);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-  
       child: Stack(
         children: [
           // TODO(jalen): Add background image here
@@ -21,9 +24,15 @@ class ClassPreview extends StatelessWidget {
           Positioned(
             top: 0,
             left: 0,
-            child: Image.asset(
-              "assets/images/backgroundPlaceholder.png",
+            child: Container(
               width: SizeConfig.blockSizeHorizontal * 67,
+              height: SizeConfig.blockSizeVertical * 85,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: Image.asset(
+                  "assets/images/backgroundPlaceholder.png",
+                ),
+              ),
             ),
           ),
 
@@ -31,7 +40,13 @@ class ClassPreview extends StatelessWidget {
           // Launchpad Corner Logo
           // *************
           Positioned(
-            child: Image.asset('assets/images/homePageLogo.png', height: 25),
+            child: Container(
+              height: SizeConfig.blockSizeHorizontal * 2,
+              width: SizeConfig.blockSizeVertical * 18,
+              child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: Image.asset('assets/images/homePageLogo.png')),
+            ),
             left: SizeConfig.blockSizeHorizontal * 3,
             top: SizeConfig.blockSizeVertical * 6,
           ),
@@ -72,12 +87,18 @@ class ClassPreview extends StatelessWidget {
                 left: SizeConfig.blockSizeHorizontal * 3,
                 right: SizeConfig.blockSizeHorizontal * 3,
               ),
-              child: Text(
-                // TODO(jalen): Replace with real class preview value
-                workoutDetails.title,
-                style: TextStyle(
-                  color: ColorConstants.launchpadPrimaryWhite,
-                  fontSize: SizeConfig.blockSizeHorizontal * 5,
+              child: GestureDetector(
+                onTap: () {
+                  store.dispatch(
+                      UpdateSidebarClassAction(workoutDetails: workoutDetails));
+                },
+                child: Text(
+                  // TODO(jalen): Replace with real class preview value
+                  workoutDetails.title,
+                  style: TextStyle(
+                    color: ColorConstants.launchpadPrimaryWhite,
+                    fontSize: SizeConfig.blockSizeHorizontal * 5,
+                  ),
                 ),
               ),
             ),
