@@ -3,13 +3,14 @@ import 'package:redux/redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/models/workout_details.dart';
+import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_actions.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
 
 class ClassPreview extends StatelessWidget {
-  final WorkoutDetails workoutDetails;
+  final WorkoutMetadata workoutMetadata;
   final Store<HomePageScreenState> store;
-  ClassPreview(this.workoutDetails, this.store);
+  ClassPreview(this.workoutMetadata, this.store);
 
   @override
   Widget build(BuildContext context) {
@@ -89,12 +90,12 @@ class ClassPreview extends StatelessWidget {
               ),
               child: GestureDetector(
                 onTap: () {
-                  store.dispatch(
-                      UpdateSidebarClassAction(workoutDetails: workoutDetails));
+                  store.dispatch(UpdateSidebarClassAction(
+                      workoutMetadata: workoutMetadata));
                 },
                 child: Text(
                   // TODO(jalen): Replace with real class preview value
-                  workoutDetails.title,
+                  workoutMetadata.workoutDetails.title,
                   style: TextStyle(
                     color: ColorConstants.launchpadPrimaryWhite,
                     fontSize: SizeConfig.blockSizeHorizontal * 5,

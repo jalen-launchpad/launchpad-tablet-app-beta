@@ -7,6 +7,7 @@ import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen.dart';
 import 'package:tabletapp/routes/workout_video_screen/progress_bar.dart';
 import 'models/workout_details.dart';
+import 'models/workout_metadata.dart';
 import 'placeholder_values.dart';
 import 'routes/home_page_screen/home_page_screen_state.dart';
 import 'package:http/http.dart' as http;
@@ -64,7 +65,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<WorkoutDetails> workouts;
+  List<WorkoutMetadata> workouts;
   // Has data been loaded from DB yet?
   bool initialDataLoadDone = false;
 
@@ -74,15 +75,17 @@ class _MyHomePageState extends State<MyHomePage> {
     var url = 'https://launchpad-demo.herokuapp.com/getAllWorkouts';
     var response = await http.get(url);
     // Parse result into a List of JSON in Map<string, dynamic> form.
+    print(response.body);
     List<dynamic> allWorkoutsAsString = jsonDecode(response.body);
-    List<WorkoutDetails> list = [];
+    List<WorkoutMetadata> list = [];
     allWorkoutsAsString.forEach((json) {
       // Convert Map<string, dynamic> to WorkoutDetails class
-      WorkoutDetails workoutDetails = WorkoutDetails.fromJson(json);
+      WorkoutMetadata workoutDetails = WorkoutMetadata.fromJson(json);
       list.add(workoutDetails);
     });
     // Save workouts to class variable.
     workouts = list;
+    print(workouts[0].streamUri);
     setState(() {
       // Let Flutter know DB is done loading to show homepage.
       initialDataLoadDone = true;

@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/models/workout_details.dart';
+import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_reducers.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
 import 'package:tabletapp/routes/home_page_screen/selected_class_sidebar/selected_class_sidebar.dart';
@@ -27,12 +28,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
       : store = Store(rootReducer, initialState: homePageScreenState);
 
   List<Widget> buildAlternativeClassesGrid(
-      List<WorkoutDetails> workoutDetails) {
-    // print(workoutDetails.length);
+      List<WorkoutMetadata> workoutMetadata) {
+    // print(workoutMetadata.length);
     // Get how many rows we need.
     // If there's 5 workouts, 2 rows (3 -> 2)
     // If there's 11 workouts, 4 rows (3 -> 3 -> 3 -> 2)
-    int numRows = (workoutDetails.length / 3).ceil();
+    int numRows = (workoutMetadata.length / 3).ceil();
     // print(numRows);
     List<Widget> grid = [];
     for (int x = 0; x < numRows; x++) {
@@ -40,24 +41,24 @@ class _HomePageScreenState extends State<HomePageScreen> {
       List<Widget> row;
       if (x == numRows - 1) {
         row = [
-          WorkoutCard(store, workoutDetails[(x * 3)]),
+          WorkoutCard(store, workoutMetadata[(x * 3)]),
         ];
         //print("x * 3 + 1");
         //print((x * 3) + 1);
-        //print(workoutDetails.length);
+        //print(workoutMetadata.length);
         // If there's 2 cards on this row, add it.
-        if ((x * 3) + 1 != workoutDetails.length) {
-          row.add(WorkoutCard(store, workoutDetails[(x * 3) + 1]));
+        if ((x * 3) + 1 != workoutMetadata.length) {
+          row.add(WorkoutCard(store, workoutMetadata[(x * 3) + 1]));
           // If there's 3 cards on this row, add it.
-          if ((x * 3) + 2 != workoutDetails.length) {
-            row.add(WorkoutCard(store, workoutDetails[(x * 3) + 2]));
+          if ((x * 3) + 2 != workoutMetadata.length) {
+            row.add(WorkoutCard(store, workoutMetadata[(x * 3) + 2]));
           }
         }
       } else {
         row = [
-          WorkoutCard(store, workoutDetails[(x * 3)]),
-          WorkoutCard(store, workoutDetails[(x * 3) + 1]),
-          WorkoutCard(store, workoutDetails[(x * 3) + 2]),
+          WorkoutCard(store, workoutMetadata[(x * 3)]),
+          WorkoutCard(store, workoutMetadata[(x * 3) + 1]),
+          WorkoutCard(store, workoutMetadata[(x * 3) + 2]),
         ];
       }
       while (row.length != 3) {
@@ -94,9 +95,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
               Container(
                 width: SizeConfig.blockSizeHorizontal * 67,
                 child: ListView(children: [
-                  StoreConnector<HomePageScreenState, WorkoutDetails>(
-                    builder: (context, workoutDetails) => Container(
-                      child: ClassPreview(workoutDetails, store),
+                  StoreConnector<HomePageScreenState, WorkoutMetadata>(
+                    builder: (context, workoutMetadata) => Container(
+                      child:
+                          ClassPreview(workoutMetadata, store),
                       height: SizeConfig.blockSizeVertical * 80,
                     ),
                     converter: (store) => store.state.recommendedClass,

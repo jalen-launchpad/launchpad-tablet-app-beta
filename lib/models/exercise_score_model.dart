@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import 'exercise_set_model.dart';
 
+part 'exercise_score_model.g.dart';
+
+
+@JsonSerializable()
 class ExerciseScoreModel extends ChangeNotifier {
   ExerciseSetModel exerciseSetDefinition;
   int goodReps;

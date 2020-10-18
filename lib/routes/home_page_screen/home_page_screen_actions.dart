@@ -1,6 +1,7 @@
-import 'package:tabletapp/models/workout_details.dart';
+
+import 'package:tabletapp/models/workout_metadata.dart';
 
 class UpdateSidebarClassAction {
-  final WorkoutDetails workoutDetails;
-  UpdateSidebarClassAction({this.workoutDetails});
+  final WorkoutMetadata workoutMetadata;
+  UpdateSidebarClassAction({this.workoutMetadata});
 }

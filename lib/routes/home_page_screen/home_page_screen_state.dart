@@ -1,9 +1,10 @@
 import 'package:tabletapp/models/workout_details.dart';
+import 'package:tabletapp/models/workout_metadata.dart';
 
 class HomePageScreenState {
-  final WorkoutDetails sidebarClass;
-  final WorkoutDetails recommendedClass;
-  final List<WorkoutDetails> alternativeClasses;
+  final WorkoutMetadata sidebarClass;
+  final WorkoutMetadata recommendedClass;
+  final List<WorkoutMetadata> alternativeClasses;
 
   HomePageScreenState({
     this.recommendedClass,
@@ -12,8 +13,8 @@ class HomePageScreenState {
   });
 
   HomePageScreenState copyWith({
-    WorkoutDetails recommendedClass,
-    WorkoutDetails sidebarClass,
+    WorkoutMetadata recommendedClass,
+    WorkoutMetadata sidebarClass,
     List<WorkoutDetails> alternativeClasses,
   }) {
     return HomePageScreenState(

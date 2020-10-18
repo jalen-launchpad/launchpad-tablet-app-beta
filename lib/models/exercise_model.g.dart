@@ -8,13 +8,13 @@ part of 'exercise_model.dart';
 
 ExerciseModel _$ExerciseModelFromJson(Map<String, dynamic> json) {
   return ExerciseModel(
-    name: json['name'] as String,
+    exerciseName: json['exerciseName'] as String,
     intensity: json['intensity'] as int,
   );
 }
 
 Map<String, dynamic> _$ExerciseModelToJson(ExerciseModel instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'exerciseName': instance.exerciseName,
       'intensity': instance.intensity,
     };

@@ -24,7 +24,7 @@ class WorkoutDetailsScrollView extends StatelessWidget {
         ),
         itemCount: distinctExerciseList.length,
         itemBuilder: (BuildContext context, int index) =>
-            ExercisePreviewCard(distinctExerciseList[index].name),
+            ExercisePreviewCard(distinctExerciseList[index].exerciseName),
         separatorBuilder: (BuildContext context, int index) => Divider(
           indent: 0,
           endIndent: SizeConfig.blockSizeHorizontal * 2,

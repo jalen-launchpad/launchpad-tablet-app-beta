@@ -5,7 +5,6 @@ import 'package:tabletapp/models/workout_details.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/models/workout_set_model.dart';
 
-
 import 'leaderboard/leaderboard_entry_model.dart';
 import 'leaderboard/leaderboard_model.dart';
 import 'notification_bar/workout_notification.dart';
@@ -29,11 +28,18 @@ class WorkoutVideoScreenState {
       this.leaderboards,
       this.currentWorkoutSetIndex = 0,
       this.exerciseTimer,
-      this.showNotification,
+      this.showNotification = false,
       this.workoutNotification});
 
-  static WorkoutVideoScreenState initializeClass() {
-    
+  static WorkoutVideoScreenState initializeWorkout(
+      WorkoutMetadata workoutMetadata,
+      {BluetoothDevice bluetoothDevice}) {
+    return WorkoutVideoScreenState(
+      workoutMetadata: workoutMetadata,
+      // Retrieve leaderboards!!
+      // TODO(jalen): retrieve leaderboards
+      bluetoothDevice: bluetoothDevice != null ? bluetoothDevice : null,
+    );
   }
 
   WorkoutVideoScreenState copyWith({

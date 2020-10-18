@@ -3,6 +3,7 @@ import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/enums/mods_enum.dart';
 import 'package:tabletapp/models/workout_details.dart';
+import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_actions.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
 import 'package:tabletapp/routes/home_page_screen/workout_card/mods_indicator.dart';
@@ -10,8 +11,8 @@ import 'package:redux/redux.dart';
 
 class WorkoutCard extends StatelessWidget {
   final Store<HomePageScreenState> store;
-  final WorkoutDetails workoutDetails;
-  WorkoutCard(this.store, this.workoutDetails);
+  final WorkoutMetadata workoutMetadata;
+  WorkoutCard(this.store, this.workoutMetadata);
 
   static double width = SizeConfig.blockSizeHorizontal * 19.85;
   static double height = SizeConfig.blockSizeHorizontal * 18;
@@ -27,7 +28,7 @@ class WorkoutCard extends StatelessWidget {
         onPressed: () {
           print("button pressed");
           store.dispatch(
-              UpdateSidebarClassAction(workoutDetails: workoutDetails));
+              UpdateSidebarClassAction(workoutMetadata: workoutMetadata));
         },
         child: Container(
           child: Stack(
@@ -64,7 +65,7 @@ class WorkoutCard extends StatelessWidget {
                 left: SizeConfig.blockSizeHorizontal,
                 top: SizeConfig.blockSizeVertical * 1.5,
                 child: ModsInidcator(
-                  workoutDetails.modsList,
+                  workoutMetadata.workoutDetails.modsList,
                 ),
               ),
 
@@ -90,7 +91,7 @@ class WorkoutCard extends StatelessWidget {
                         padding: EdgeInsets.only(
                             right: SizeConfig.blockSizeHorizontal * 0.5),
                         child: Text(
-                          workoutDetails.duration.toInt().toString(),
+                          workoutMetadata.workoutDetails.duration.toInt().toString(),
                           style: TextStyle(
                             color: ColorConstants.launchpadPrimaryWhite,
                             fontSize: SizeConfig.blockSizeHorizontal * 1.2,
@@ -115,7 +116,7 @@ class WorkoutCard extends StatelessWidget {
                 bottom: SizeConfig.blockSizeVertical,
                 child: Container(
                   child: Text(
-                    workoutDetails.title,
+                    workoutMetadata.workoutDetails.title,
                     style: TextStyle(
                       fontSize: SizeConfig.blockSizeHorizontal * 1.4,
                       color: ColorConstants.launchpadPrimaryWhite,

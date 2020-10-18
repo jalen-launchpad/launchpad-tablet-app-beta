@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/models/exercise_model.dart';
-import 'package:tabletapp/models/workout_details.dart';
+import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/placeholder_values.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:tabletapp/routes/home_page_screen/selected_class_sidebar/components/workout_details_scrollview.dart';
 import 'package:tabletapp/routes/home_page_screen/selected_class_sidebar/constants.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 import 'components/exercise_bucket.dart';
 import 'components/intensity_graph.dart';
 import 'components/time_bucket.dart';
+import 'components/workout_details_scrollview.dart';
 
 class SelectedClassSidebar extends StatefulWidget {
   @override
@@ -27,7 +27,7 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
   List<ExerciseModel> removeDuplicateExercises(List<ExerciseModel> exercises) {
     Map<String, ExerciseModel> map = {};
     for (var exercise in exercises) {
-      map[exercise.name] = exercise;
+      map[exercise.exerciseName] = exercise;
     }
     List<ExerciseModel> filteredList = map.values.toList();
 
@@ -37,10 +37,10 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<HomePageScreenState, WorkoutDetails>(
-      builder: (context, details) {
-        var distinctExerciseList =
-            removeDuplicateExercises(details.exerciseList);
+    return StoreConnector<HomePageScreenState, WorkoutMetadata>(
+      builder: (context, workoutMetadata) {
+        var distinctExerciseList = removeDuplicateExercises(
+            workoutMetadata.workoutDetails.exerciseList);
         return Container(
           color: ColorConstants.launchpadPrimaryBlue,
           padding: EdgeInsets.only(
@@ -94,7 +94,7 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                       height: SizeConfig.blockSizeVertical * 9,
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
-                        child: Text(details.title,
+                        child: Text(workoutMetadata.workoutDetails.title,
                             style: TextStyle(
                               fontFamily: 'SF Pro Display',
                               fontSize: SizeConfig.blockSizeHorizontal * 3,
@@ -139,14 +139,15 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                 child: Row(
                   children: [
                     // Time Bucket
-                    TimeBucket(details),
+                    TimeBucket(workoutMetadata.workoutDetails),
                     // Exercise Bucket
                     ExerciseBucket(distinctExerciseList)
                   ],
                 ),
               ),
 
-              IntensityGraph(details.exerciseIntensities),
+              IntensityGraph(
+                  workoutMetadata.workoutDetails.exerciseIntensities),
 
               Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -162,8 +163,12 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                         context,
                         CupertinoPageRoute(
                             builder: (BuildContext context) =>
-                                WorkoutVideoScreen(
-                                    PlaceholderValues().getWorkoutState())));
+                                WorkoutVideoScreen(WorkoutVideoScreenState(
+                                  workoutMetadata: workoutMetadata,
+                                  currentWorkoutSetIndex: 0,
+                                  leaderboards:
+                                      PlaceholderValues().getleaderboards(),
+                                ))));
                   },
                   icon: Icon(
                     Icons.play_arrow,

@@ -38,7 +38,8 @@ class TimeBucket extends StatelessWidget {
           ),
           // Box
           Container(
-            height: SelectedClassSidebarConstants.workoutInformationBucketHeight,
+            height:
+                SelectedClassSidebarConstants.workoutInformationBucketHeight,
             width: SelectedClassSidebarConstants.timeExerciseBucketWidth,
             decoration: BoxDecoration(
               color: ColorConstants.launchpadPrimaryBlack.withOpacity(
@@ -69,9 +70,7 @@ class TimeBucket extends StatelessWidget {
                       right: SizeConfig.blockSizeHorizontal,
                     ),
                     child: Text(
-                      // TODO(jalen): REAL VALUE NEEDED
-
-                      details.duration.toInt().toString() + " min",
+                      (details.duration ~/ 60).toString() + " min",
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeHorizontal * 2,
                         color: ColorConstants.launchpadPrimaryWhite,

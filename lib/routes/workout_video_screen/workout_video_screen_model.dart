@@ -39,13 +39,14 @@ class WorkoutVideoScreenModel {
     _recursiveTimer();
   }
 
-  // Set a timer that changes to the next exercise after the current exercise
-  // is done.
+  // Set a timer that checks the video controller to see if
+  // a change to the next exercise after the current exercise
+  // should be done.
   void _recursiveTimer() {
     // Set a timer for the length of the current exercise's video.
     store.state.exerciseTimer = Timer(
         Duration(
-          milliseconds: store.state.currentExercise.videoDuration,
+          seconds: store.state.currentExercise.videoDuration,
         ), () {
       // If it was the last set, don't do anything and return.
       if (store.state.isLastSet) return;

@@ -12,6 +12,6 @@ final Function(HomePageScreenState, UpdateSidebarClassAction)
     updateSidebarClassReducer =
     (HomePageScreenState state, UpdateSidebarClassAction action) {
   return state.copyWith(
-    sidebarClass: action.workoutDetails,
+    sidebarClass: action.workoutMetadata,
   );
 };
