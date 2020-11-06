@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:tabletapp/constants/bluetooth_uuid.dart';
 
 class BluetoothSetupScreenModel {
   static const String launchpadCompanionAppAbbreviation = "LCA";
@@ -19,13 +20,17 @@ class BluetoothSetupScreenModel {
   BluetoothConnectionStatusEnum _bluetoothStatus =
       BluetoothConnectionStatusEnum.notConnected;
   BluetoothConnectionStatusEnum get bluetoothStatus => _bluetoothStatus;
-  bool get isConnectionFound =>
+  bool get isConnected =>
       _bluetoothStatus == BluetoothConnectionStatusEnum.isConnected;
   bool get isMultipleConnectionsFound =>
       _bluetoothStatus ==
       BluetoothConnectionStatusEnum.multipleConnectionsFound;
   bool get isNotConnected =>
       _bluetoothStatus == BluetoothConnectionStatusEnum.notConnected;
+
+  void cancelListeners() {
+    scanResultListener.cancel();
+  }
 
   // Set up bluetooth on instantiation.
   BluetoothSetupScreenModel() {
@@ -55,38 +60,37 @@ class BluetoothSetupScreenModel {
     }
   }
 
-  void _setBluetoothStatus() {
-    // If there's too many LCA found.
-    if (this._devicesList.length > 1) {
-      _bluetoothStatus = BluetoothConnectionStatusEnum.multipleConnectionsFound;
-    } else if (this._devicesList.length == 0) {
-      // If no LCA was found.
-      _bluetoothStatus = BluetoothConnectionStatusEnum.notConnected;
-    } else {
-      _bluetoothStatus = BluetoothConnectionStatusEnum.isConnected;
-      // If only one LCA was found..
-    }
-  }
-
-  Future<void> connectBluetoothDevice() async {
+  Future<bool> connectBluetoothDevice(BluetoothDevice device) async {
     try {
       // Canel the scan if not already cancelled by now.
       this.scanResultListener.cancel();
       // Get the device we're going to connect to.
-      connectedDevice = this._devicesList.first;
       // Connect to device.
-      await connectedDevice.connect(
+      if (await device.state.first == BluetoothDeviceState.connected) {
+        await device.disconnect();
+      }
+      await device.connect(
         timeout: Duration(seconds: 15),
         // This takes up to 30 seconds or more when set true.
-        //
         autoConnect: false,
       );
+      var services = await device.discoverServices();
+      print("\n\n\n\n\n");
+      print("service count: " + services.length.toString());
+      print(services.indexWhere(
+          (element) => element.uuid.toString() == BluetoothUUID.service));
+      if (services.indexWhere((element) =>
+              element.uuid.toString() == BluetoothUUID.service) ==
+          -1) {
+        await device.disconnect();
+        return false;
+      }
       //
       _bluetoothStatus = BluetoothConnectionStatusEnum.isConnected;
     } catch (e) {
       throw e;
     }
-    return;
+    return true;
   }
 
   // Empty _devicesList and disconnect to any connected Companion Apps.
@@ -97,6 +101,7 @@ class BluetoothSetupScreenModel {
       await device.disconnect();
     }
     this._devicesList = [];
+    await this.flutterBlue.stopScan();
   }
 
   Future<void> scanBluetooth() async {
@@ -108,8 +113,6 @@ class BluetoothSetupScreenModel {
     // Scan for local BLE devices.
     print("Scanning for bluetooth in progress");
     await this.flutterBlue.startScan(timeout: Duration(seconds: 3));
-    _setBluetoothStatus();
-    print("Scanning complete with status: " + _bluetoothStatus.toString());
   }
 }
 

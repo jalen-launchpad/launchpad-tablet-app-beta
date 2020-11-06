@@ -21,6 +21,7 @@ class WorkoutVideoScreenState {
   final WorkoutNotification workoutNotification;
   Timer exerciseTimer;
   int currentWorkoutSetIndex;
+  final int secondsElapsed;
 
   WorkoutVideoScreenState(
       {this.workoutMetadata,
@@ -29,7 +30,8 @@ class WorkoutVideoScreenState {
       this.currentWorkoutSetIndex = 0,
       this.exerciseTimer,
       this.showNotification = false,
-      this.workoutNotification});
+      this.workoutNotification,
+      this.secondsElapsed = 0});
 
   static WorkoutVideoScreenState initializeWorkout(
       WorkoutMetadata workoutMetadata,
@@ -52,17 +54,18 @@ class WorkoutVideoScreenState {
     List<LeaderboardEntryModel> userLeaderboardEntries,
     bool showNotification,
     WorkoutNotification workoutNotification,
+    int secondsElapsed,
   }) {
     return WorkoutVideoScreenState(
-      workoutMetadata: workoutMetadata ?? this.workoutMetadata,
-      bluetoothDevice: bluetoothDevice ?? this.bluetoothDevice,
-      leaderboards: leaderboards ?? this.leaderboards,
-      currentWorkoutSetIndex:
-          currentWorkoutSetIndex ?? this.currentWorkoutSetIndex,
-      exerciseTimer: exerciseTimer ?? this.exerciseTimer,
-      workoutNotification: workoutNotification ?? this.workoutNotification,
-      showNotification: showNotification ?? this.showNotification,
-    );
+        workoutMetadata: workoutMetadata ?? this.workoutMetadata,
+        bluetoothDevice: bluetoothDevice ?? this.bluetoothDevice,
+        leaderboards: leaderboards ?? this.leaderboards,
+        currentWorkoutSetIndex:
+            currentWorkoutSetIndex ?? this.currentWorkoutSetIndex,
+        exerciseTimer: exerciseTimer ?? this.exerciseTimer,
+        workoutNotification: workoutNotification ?? this.workoutNotification,
+        showNotification: showNotification ?? this.showNotification,
+        secondsElapsed: secondsElapsed ?? this.secondsElapsed);
   }
 
   void changeToNextExercise() {
@@ -70,7 +73,15 @@ class WorkoutVideoScreenState {
   }
 
   WorkoutSetModel get currentExercise => workoutSets[currentWorkoutSetIndex];
+  WorkoutSetModel get nextExercise =>
+      !isLastSet ? workoutSets[currentWorkoutSetIndex + 1] : null;
   bool get isLastSet => currentWorkoutSetIndex == (workoutSets.length - 1);
   int get currentExerciseIndex => currentWorkoutSetIndex;
+  int get currentUserScore =>
+      leaderboards[currentExerciseIndex].userEntry.score.value;
+  set currentUserScore(int score) {
+    leaderboards[currentExerciseIndex].userEntry.score.value = score;
+  }
+
   List<WorkoutSetModel> get workoutSets => workoutMetadata.workoutSets;
 }

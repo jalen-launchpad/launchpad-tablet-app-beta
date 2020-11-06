@@ -5,14 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen.dart';
-import 'package:tabletapp/routes/workout_video_screen/progress_bar.dart';
-import 'models/workout_details.dart';
 import 'models/workout_metadata.dart';
-import 'placeholder_values.dart';
 import 'routes/home_page_screen/home_page_screen_state.dart';
 import 'package:http/http.dart' as http;
-
-import 'routes/workout_video_screen/workout_video_screen.dart';
 
 void main() {
   runApp(MyApp());

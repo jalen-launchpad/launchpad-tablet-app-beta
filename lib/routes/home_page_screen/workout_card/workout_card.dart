@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
-import 'package:tabletapp/enums/mods_enum.dart';
-import 'package:tabletapp/models/workout_details.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_actions.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
@@ -91,7 +89,9 @@ class WorkoutCard extends StatelessWidget {
                         padding: EdgeInsets.only(
                             right: SizeConfig.blockSizeHorizontal * 0.5),
                         child: Text(
-                          workoutMetadata.workoutDetails.duration.toInt().toString(),
+                          (workoutMetadata.workoutDetails.duration / 60)
+                              .floor()
+                              .toString(),
                           style: TextStyle(
                             color: ColorConstants.launchpadPrimaryWhite,
                             fontSize: SizeConfig.blockSizeHorizontal * 1.2,

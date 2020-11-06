@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
-import 'package:tabletapp/models/workout_details.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_actions.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
@@ -17,8 +16,6 @@ class ClassPreview extends StatelessWidget {
     return Container(
       child: Stack(
         children: [
-          // TODO(jalen): Add background image here
-
           // *************
           // Bakcground Photo
           // *************
@@ -94,7 +91,6 @@ class ClassPreview extends StatelessWidget {
                       workoutMetadata: workoutMetadata));
                 },
                 child: Text(
-                  // TODO(jalen): Replace with real class preview value
                   workoutMetadata.workoutDetails.title,
                   style: TextStyle(
                     color: ColorConstants.launchpadPrimaryWhite,

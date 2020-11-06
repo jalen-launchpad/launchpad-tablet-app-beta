@@ -12,6 +12,9 @@ ExerciseSetModel _$ExerciseSetModelFromJson(Map<String, dynamic> json) {
     targetReps: json['targetReps'] as int,
     perSide: json['perSide'] as bool,
     isTime: json['isTime'] as bool,
+    scoreMultiplier: json['scoreMultiplier'] as double,
+    maxScore: json['maxScore'] as int,
+    scoreTag: json['scoreTag'] as String,
   );
 }
 
@@ -21,4 +24,7 @@ Map<String, dynamic> _$ExerciseSetModelToJson(ExerciseSetModel instance) =>
       'targetReps': instance.targetReps,
       'perSide': instance.perSide,
       'isTime': instance.isTime,
+      'scoreMultiplier': instance.scoreMultiplier,
+      'maxScore': instance.maxScore,
+      'scoreTag': instance.scoreTag,
     };

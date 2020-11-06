@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:redux/redux.dart';
 import 'workout_video_screen_actions.dart';
 import 'workout_video_screen_state.dart';
@@ -11,8 +9,8 @@ WorkoutVideoScreenState Function(WorkoutVideoScreenState, dynamic) rootReducer =
       changeToNextExerciseReducer),
   TypedReducer<WorkoutVideoScreenState, UpdateUserPositionAction>(
       updateUserPositionReducer),
-  TypedReducer<WorkoutVideoScreenState, ChangeScoreValueAction>(
-      changeScoreValueReducer),
+  TypedReducer<WorkoutVideoScreenState, AddScoreValueAction>(
+      addScoreValueAction),
   TypedReducer<WorkoutVideoScreenState, AddGoodRepAction>(addGoodRepReducer),
   TypedReducer<WorkoutVideoScreenState, AddBadRepAction>(addBadRepReducer),
   TypedReducer<WorkoutVideoScreenState, ClearScoreAction>(clearScoreReducer),
@@ -20,7 +18,17 @@ WorkoutVideoScreenState Function(WorkoutVideoScreenState, dynamic) rootReducer =
       updateNotificationBarReducer),
   TypedReducer<WorkoutVideoScreenState, ClearNotificationBarAction>(
       clearNotificationBarReducer),
+  TypedReducer<WorkoutVideoScreenState, UpdateSecondsElapsedAction>(
+      updateSecondsElapsedReducer),
 ]);
+
+final Function(WorkoutVideoScreenState, UpdateSecondsElapsedAction)
+    updateSecondsElapsedReducer =
+    (WorkoutVideoScreenState state, UpdateSecondsElapsedAction action) {
+  return state.copyWith(
+    secondsElapsed: action.secondsElapsed,
+  );
+};
 
 final Function(WorkoutVideoScreenState, ClearNotificationBarAction)
     clearNotificationBarReducer =
@@ -73,12 +81,23 @@ final Function(WorkoutVideoScreenState, AddBadRepAction) addBadRepReducer =
 };
 
 // Change Score Value Reducer
-final Function(WorkoutVideoScreenState, ChangeScoreValueAction)
-    changeScoreValueReducer =
-    (WorkoutVideoScreenState state, ChangeScoreValueAction action) {
+final Function(WorkoutVideoScreenState, AddScoreValueAction)
+    addScoreValueAction =
+    (WorkoutVideoScreenState state, AddScoreValueAction action) {
   var newState = state.copyWith();
-  newState.leaderboards[newState.currentExerciseIndex].userEntry.score.value =
-      action.newScoreValue;
+  if (newState.currentExercise.isRest == true) {
+    return newState;
+  }
+  newState.leaderboards[newState.currentExerciseIndex].userEntry.score.value +=
+      (state.currentExercise.exerciseSetDefinition.scoreMultiplier *
+              action.newScoreValue)
+          .floor();
+  if (newState.currentExercise.exerciseSetDefinition.maxScore != null &&
+      newState.currentUserScore >
+          newState.currentExercise.exerciseSetDefinition.maxScore) {
+    newState.currentUserScore =
+        newState.currentExercise.exerciseSetDefinition.maxScore;
+  }
   return newState;
 };
 

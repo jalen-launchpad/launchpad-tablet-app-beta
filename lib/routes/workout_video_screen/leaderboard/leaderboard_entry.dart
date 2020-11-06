@@ -45,7 +45,6 @@ class _LeaderboardEntryState extends State<LeaderboardEntry> {
       this.isAbove,
       this.isBelow});
 
-  static double textPadding = SizeConfig.blockSizeHorizontal;
   static double fontSize = SizeConfig.blockSizeVertical * 2.5;
 
   // Consumes -> LeaderboardModel (from Leaderboard)

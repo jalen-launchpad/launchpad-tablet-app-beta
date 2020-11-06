@@ -1,15 +1,8 @@
-import 'package:tabletapp/enums/mods_enum.dart';
-import 'package:tabletapp/models/exercise_model.dart';
-import 'package:tabletapp/models/workout_metadata.dart';
-import 'package:tabletapp/models/workout_details.dart';
-
 import 'models/exercise_score_model.dart';
 import 'models/exercise_set_model.dart';
 import 'models/user_model.dart';
-import 'models/workout_set_model.dart';
 import 'routes/workout_video_screen/leaderboard/leaderboard_entry_model.dart';
 import 'routes/workout_video_screen/leaderboard/leaderboard_model.dart';
-import 'routes/workout_video_screen/workout_video_screen_state.dart';
 
 class PlaceholderValues {
   LeaderboardModel bandedTricepKickbacksLeaderboard = LeaderboardModel(
@@ -570,6 +563,7 @@ class PlaceholderValues {
       bandedTricepKickbacksLeaderboard,
       frontElevatedMountainClimbersLeaderboard,
       plioPushupBurnoutsLeaderboard,
+      spiderPushupsLeaderboard,
       spiderPushupsLeaderboard
     ];
   }

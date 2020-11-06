@@ -3,7 +3,6 @@ import 'package:redux/redux.dart';
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_actions.dart';
-import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_reducers.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 
 import 'workout_notification.dart';

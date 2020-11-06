@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/models/exercise_model.dart';
-import 'package:tabletapp/models/workout_details.dart';
 
 import 'exercise_preview_card.dart';
 

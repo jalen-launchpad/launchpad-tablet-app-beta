@@ -32,7 +32,6 @@ class _LeaderboardState extends State<Leaderboard> {
   // Every exercise user starts from 0, therefore the last position.
   _LeaderboardState({this.currentLeaderboard});
 
-  static double workoutLeaderboardOpacity = 0.75;
   static double borderRadius = SizeConfig.blockSizeHorizontal;
 
   @override
@@ -62,12 +61,11 @@ class _LeaderboardState extends State<Leaderboard> {
                           exerciseLeaderboardEntryModel:
                               currentLeaderboard.getAbove(),
                           isAbove: true,
-                          // TODO - fill with LeaderboardEntryModel
+                          // 
                         ),
                   LeaderboardEntry(
                     exerciseLeaderboardEntryModel: state.userEntry,
                     isUser: true,
-                    // TODO - fill with LeaderboardEntryModel
                   ),
                   // Get user one position behind you.
                   currentLeaderboard.getBelow() == null
@@ -78,7 +76,6 @@ class _LeaderboardState extends State<Leaderboard> {
                           exerciseLeaderboardEntryModel:
                               currentLeaderboard.getBelow(),
                           isBelow: true,
-                          // TODO - fill with LeaderboardEntryModel
                         ),
                 ],
               ),

@@ -2,33 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
-import 'package:tabletapp/models/exercise_score_model.dart';
 import 'package:tabletapp/routes/workout_video_screen/leaderboard/leaderboard_entry_model.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 
-class RepCounter extends StatefulWidget {
-  final ExerciseScoreModel exerciseScore;
-
-  RepCounter({this.exerciseScore});
-  @override
-  _RepCounterState createState() => _RepCounterState();
-}
-
-// Consumes -> LeaderboardEntryModel
-class _RepCounterState extends State<RepCounter> {
-  static double widgetWidth = SizeConfig.blockSizeHorizontal * 25;
+class StandardRepCounter extends StatelessWidget {
+  static double widgetWidth = SizeConfig.blockSizeHorizontal * 30;
   static double widgetHeight = SizeConfig.blockSizeVertical * 35;
 
-  static double mainCircleHeightWidth = SizeConfig.blockSizeHorizontal * 15;
-  static double mainFontSize = SizeConfig.blockSizeHorizontal * 7;
-  static double secondaryFontSize = SizeConfig.blockSizeHorizontal * 4;
+  static double mainCircleHeightWidth = SizeConfig.blockSizeHorizontal * 25;
+  static double mainFontSize = SizeConfig.blockSizeHorizontal * 8;
+  static double secondaryFontSize = SizeConfig.blockSizeHorizontal * 5;
 
   static const double secondaryFontOpacity = 0.6;
 
-  static double goodRepLeftPosition = mainCircleHeightWidth + SizeConfig.blockSizeHorizontal;
+  static double goodRepLeftPosition =
+      mainCircleHeightWidth + SizeConfig.blockSizeHorizontal;
   static double goodRepTopPosition = SizeConfig.blockSizeVertical * 3;
   static double badRepBottomPosition = SizeConfig.blockSizeVertical * 0.5;
-  static double badRepLeftPosition = mainCircleHeightWidth - SizeConfig.blockSizeHorizontal * 2.5;
+  static double badRepLeftPosition =
+      mainCircleHeightWidth - SizeConfig.blockSizeHorizontal * 2.5;
 
   static double secondaryCircleHeightWidth = SizeConfig.blockSizeHorizontal * 7;
 
@@ -37,10 +29,11 @@ class _RepCounterState extends State<RepCounter> {
     return Container(
       width: widgetWidth,
       height: widgetHeight,
-      child: StoreConnector<WorkoutVideoScreenState, LeaderboardEntryModel>(
-        converter: (store) => store
-            .state.leaderboards[store.state.currentExerciseIndex].userEntry,
-        builder: (context, entry) => Stack(
+      child: StoreBuilder<WorkoutVideoScreenState>(builder: (context, store) {
+        var userEntry = store
+            .state.leaderboards[store.state.currentExerciseIndex].getUserEntry;
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Main Rep Counter
             Container(
@@ -54,15 +47,25 @@ class _RepCounterState extends State<RepCounter> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 7),
-                    child: Text(entry.score.totalReps.toString(),
+                    padding:
+                        EdgeInsets.only(top: SizeConfig.blockSizeVertical * 7),
+                    child: Text(userEntry.score.totalReps.toString(),
                         style: TextStyle(
                           color: ColorConstants.launchpadSecondaryLightBlue,
                           fontSize: mainFontSize,
                           height: 0.3,
                         )),
                   ),
-                  Text(entry.exerciseSetDefinition.targetReps.toString(),
+                  Text(
+                      store.state.currentExercise.isRest
+                          ? "Rest"
+                          : store.state.currentExercise.exerciseSetDefinition
+                                  .targetReps
+                                  .toString() +
+                              (store.state.currentExercise.exerciseSetDefinition
+                                      .isTime
+                                  ? "s"
+                                  : ""),
                       style: TextStyle(
                           color: ColorConstants.launchpadPrimaryWhite
                               .withOpacity(secondaryFontOpacity),
@@ -70,14 +73,14 @@ class _RepCounterState extends State<RepCounter> {
                 ],
               ),
             ),
-
+/*
             // Good Rep Counter
             Positioned(
               left: goodRepLeftPosition,
               top: goodRepTopPosition,
               child: Container(
                 child: Center(
-                    child: Text(entry.score.goodReps.toString(),
+                    child: Text(userEntry.score.goodReps.toString(),
                         style: TextStyle(
                             color: ColorConstants.launchpadPrimaryWhite,
                             fontSize: secondaryFontSize))),
@@ -95,7 +98,7 @@ class _RepCounterState extends State<RepCounter> {
               bottom: badRepBottomPosition,
               child: Container(
                 child: Center(
-                    child: Text(entry.score.badReps.toString(),
+                    child: Text(userEntry.score.badReps.toString(),
                         style: TextStyle(
                             color: ColorConstants.launchpadPrimaryWhite,
                             fontSize: secondaryFontSize))),
@@ -107,9 +110,10 @@ class _RepCounterState extends State<RepCounter> {
                 ),
               ),
             )
+            */
           ],
-        ),
-      ),
+        );
+      }),
     );
   }
 }

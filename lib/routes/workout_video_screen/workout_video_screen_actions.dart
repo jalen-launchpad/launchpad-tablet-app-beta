@@ -4,9 +4,10 @@ class ChangeToNextExerciseAction {}
 
 class UpdateUserPositionAction {}
 
-class ChangeScoreValueAction {
+class AddScoreValueAction {
   final int newScoreValue;
-  ChangeScoreValueAction({this.newScoreValue});
+  final String scoreTag;
+  AddScoreValueAction({this.newScoreValue, this.scoreTag});
 }
 
 class AddGoodRepAction {}
@@ -16,8 +17,13 @@ class AddBadRepAction {}
 class ClearScoreAction {}
 
 class UpdateNotificationBarAction {
-  WorkoutNotification workoutNotification;
+  final WorkoutNotification workoutNotification;
   UpdateNotificationBarAction({this.workoutNotification});
+}
+
+class UpdateSecondsElapsedAction {
+  final int secondsElapsed;
+  UpdateSecondsElapsedAction(this.secondsElapsed);
 }
 
 class ClearNotificationBarAction {}

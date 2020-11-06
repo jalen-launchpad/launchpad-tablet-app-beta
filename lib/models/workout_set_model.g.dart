@@ -12,9 +12,9 @@ WorkoutSetModel _$WorkoutSetModelFromJson(Map<String, dynamic> json) {
         ? null
         : ExerciseSetModel.fromJson(
             json['exerciseSetDefinition'] as Map<String, dynamic>),
-    videoTimeStamp: json['videoTimeStamp'] as int,
+    videoTimestamp: json['videoTimestamp'] as int,
     isRest: json['isRest'] as bool,
-    videoDuration: json['videoDuration'] as int,
+    videoEndTimestamp: json['videoDuration'] as int,
   );
 }
 
@@ -22,6 +22,6 @@ Map<String, dynamic> _$WorkoutSetModelToJson(WorkoutSetModel instance) =>
     <String, dynamic>{
       'exerciseSetDefinition': instance.exerciseSetDefinition,
       'isRest': instance.isRest,
-      'videoTimeStamp': instance.videoTimeStamp,
-      'videoDuration': instance.videoDuration,
+      'videoTimestamp': instance.videoTimestamp,
+      'videoDuration': instance.videoEndTimestamp,
     };

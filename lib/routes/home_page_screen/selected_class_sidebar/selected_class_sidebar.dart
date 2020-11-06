@@ -5,6 +5,7 @@ import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/models/exercise_model.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/placeholder_values.dart';
+import 'package:tabletapp/routes/bluetooth_setup_screen/bluetooth_setup_screen.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/routes/home_page_screen/selected_class_sidebar/constants.dart';
@@ -163,12 +164,8 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                         context,
                         CupertinoPageRoute(
                             builder: (BuildContext context) =>
-                                WorkoutVideoScreen(WorkoutVideoScreenState(
-                                  workoutMetadata: workoutMetadata,
-                                  currentWorkoutSetIndex: 0,
-                                  leaderboards:
-                                      PlaceholderValues().getleaderboards(),
-                                ))));
+                            BluetoothSetupScreen(workoutMetadata: workoutMetadata)));
+                                
                   },
                   icon: Icon(
                     Icons.play_arrow,

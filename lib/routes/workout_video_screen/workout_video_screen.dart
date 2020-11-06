@@ -14,7 +14,7 @@ import 'constants.dart';
 import 'leaderboard/leaderboard.dart';
 import 'notification_bar/workout_notification.dart';
 import 'notification_bar/workout_notification_bar.dart';
-import 'rep_counter/rep_counter.dart';
+import 'rep_counter/standard_rep_counter.dart';
 import 'workout_video_screen_reducers.dart';
 
 class WorkoutVideoScreen extends StatefulWidget {
@@ -30,7 +30,7 @@ class WorkoutVideoScreen extends StatefulWidget {
 
 class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
   // The controller for the streaming video.
-  VideoPlayerController _controller;
+  VideoPlayerController controller;
   final WorkoutVideoScreenState workoutVideoScreenState;
   final BluetoothDevice bluetoothDevice;
   WorkoutVideoBluetoothHandler bluetoothHandler;
@@ -40,13 +40,10 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
   _WorkoutVideoScreenState(this.workoutVideoScreenState, {this.bluetoothDevice})
       : store = Store(rootReducer, initialState: workoutVideoScreenState) {
     if (this.bluetoothDevice != null) {
+      print("\n\n\n\n\n bluetoothHandler instantiated");
       bluetoothHandler = WorkoutVideoBluetoothHandler(bluetoothDevice, store);
       bluetoothHandler.getBluetoothServices();
     }
-    print("getBluetoothServices done");
-    model = WorkoutVideoScreenModel(store);
-    print("model set");
-    print("lololol\n\n\n\n");
   }
 
   @override
@@ -54,15 +51,15 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
     super.initState();
 
     // Load video.
-    _controller =
+    controller =
         VideoPlayerController.network(store.state.workoutMetadata.streamUri);
     // Initialize the controller.
-    print("hahaha\n\n\n\n");
-    _controller
+    controller
       ..initialize().then((_) {
         // Play video.
-        _controller.play();
+        controller.play();
         initialized = true;
+        model = WorkoutVideoScreenModel(store, controller);
         // Start timer on workout to auto-rotate through exercises.
         model.startWorkout();
         setState(() {});
@@ -85,12 +82,12 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
                     children: [
                       Container(
                           width: MediaQuery.of(context).size.width,
-                          child: _controller.value.initialized
+                          child: controller.value.initialized
                               ? AspectRatio(
                                   aspectRatio:
                                       MediaQuery.of(context).size.width /
                                           MediaQuery.of(context).size.height,
-                                  child: VideoPlayer(_controller))
+                                  child: VideoPlayer(controller))
                               : Container()),
                     ],
                   ),
@@ -118,9 +115,7 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
                     ],
                   ),
                 ),
-                ProgressBar(
-                  store.state.workoutMetadata.workoutDetails.duration,
-                ),
+                ProgressBar(),
                 // Exercise Name.
                 StoreConnector<WorkoutVideoScreenState, String>(
                   builder: (context, exerciseName) => Align(
@@ -146,12 +141,14 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
                       ],
                     ),
                   ),
-                  converter: (store) => store
-                      .state.currentExercise.exerciseSetDefinition.exerciseName,
+                  converter: (store) => store.state.currentExercise.isRest
+                      ? "Rest"
+                      : store.state.currentExercise.exerciseSetDefinition
+                          .exerciseName,
                 ),
                 // Rep Counter.
                 Positioned(
-                  child: RepCounter(),
+                  child: StandardRepCounter(),
                   left: WorkoutVideoScreenConstants.leftPaddingAlign,
                   bottom: WorkoutVideoScreenConstants.bottomPaddingAlign,
                 ),
@@ -193,6 +190,6 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+    controller.dispose();
   }
 }

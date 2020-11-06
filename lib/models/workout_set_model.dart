@@ -11,19 +11,20 @@ class WorkoutSetModel {
   final bool isRest;
 
   // Timestamp of the beginning of the set in
-  // milliseconds since start of video.
-  final int videoTimeStamp;
+  // seconds since start of video.
+  final int videoTimestamp;
 
   // Length the set takes to complete in the video.
-  final int videoDuration;
+  final int videoEndTimestamp;
 
-  factory WorkoutSetModel.fromJson(Map<String, dynamic> json) => _$WorkoutSetModelFromJson(json);
+  factory WorkoutSetModel.fromJson(Map<String, dynamic> json) =>
+      _$WorkoutSetModelFromJson(json);
   Map<String, dynamic> toJson() => _$WorkoutSetModelToJson(this);
 
   WorkoutSetModel({
     this.exerciseSetDefinition,
-    this.videoTimeStamp,
+    this.videoTimestamp,
     this.isRest,
-    this.videoDuration,
+    this.videoEndTimestamp,
   });
 }
