@@ -81,11 +81,13 @@ class ScanResultTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: SizeConfig.screenWidth,
+      width: SizeConfig.blockSizeHorizontal * 40,
       height: SizeConfig.blockSizeVertical * 5,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(result.advertisementData.localName),
+          Container(width: SizeConfig.blockSizeHorizontal * 5),
           RaisedButton(
             child: Text('CONNECT'),
             color: Colors.black,

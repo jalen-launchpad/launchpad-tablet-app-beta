@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:tabletapp/constants/colors.dart';
+import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/placeholder_values.dart';
 import 'package:tabletapp/routes/bluetooth_setup_screen/bluetooth_setup_screen_model.dart';
@@ -26,6 +27,7 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
       BluetoothSetupScreenModel();
 
   WorkoutMetadata workoutMetadata;
+  bool errorOccurred = false;
 
   _BluetoothSetupScreenState(WorkoutMetadata workoutMetadata) {
     this.workoutMetadata = workoutMetadata;
@@ -62,36 +64,63 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                 ),
               ),
             ),
+            errorOccurred
+                ? Container(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Text(
+                      "Error connecting to device, please make sure LCA is open.",
+                      style: TextStyle(
+                        color: ColorConstants.launchpadRed,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ))
+                : Container(),
             StreamBuilder<List<ScanResult>>(
               stream: FlutterBlue.instance.scanResults,
               initialData: [],
-              builder: (context, snapshot) => Column(
-                children: snapshot.data
-                    .map((result) => result.device.name.contains('LCA')
-                        ? ScanResultTile(
-                            result: result,
-                            onTap: () async {
-                              var isConnected = await bluetoothSetupScreenModel
-                                  .connectBluetoothDevice(
-                                result.device,
-                              );
-                              bluetoothSetupScreenModel.cancelListeners();
-                              if (isConnected) {
-                                Navigator.of(context).push(
-                                    CupertinoPageRoute(builder: (context) {
-                                  return WorkoutVideoScreen(
-                                      WorkoutVideoScreenState(
-                                        workoutMetadata: workoutMetadata,
-                                        currentWorkoutSetIndex: 0,
-                                        leaderboards: PlaceholderValues()
-                                            .getleaderboards(),
-                                      ),
-                                      bluetoothDevice: result.device);
-                                }));
-                              }
-                            })
-                        : Container())
-                    .toList(),
+              builder: (context, snapshot) => Container(
+                padding: EdgeInsets.only(
+                  top: SizeConfig.blockSizeVertical * 10,
+                  bottom: SizeConfig.blockSizeVertical * 7,
+                ),
+                child: Column(
+                  children: snapshot.data
+                      .map((result) => result.device.name.contains('LCA')
+                          ? Container(
+                              padding: EdgeInsets.only(
+                                  bottom: SizeConfig.blockSizeVertical * 3),
+                              child: ScanResultTile(
+                                  result: result,
+                                  onTap: () async {
+                                    var isConnected =
+                                        await bluetoothSetupScreenModel
+                                            .connectBluetoothDevice(
+                                      result.device,
+                                    );
+                                    bluetoothSetupScreenModel.cancelListeners();
+                                    if (isConnected) {
+                                      Navigator.of(context).push(
+                                          CupertinoPageRoute(
+                                              builder: (context) {
+                                        return WorkoutVideoScreen(
+                                            WorkoutVideoScreenState(
+                                              workoutMetadata: workoutMetadata,
+                                              currentWorkoutSetIndex: 0,
+                                              leaderboards: PlaceholderValues()
+                                                  .getleaderboards(),
+                                            ),
+                                            bluetoothDevice: result.device);
+                                      }));
+                                    }
+                                    setState(() {
+                                      this.errorOccurred = true;
+                                    });
+                                  }),
+                            )
+                          : Container())
+                      .toList(),
+                ),
               ),
             ),
             FlatButton(

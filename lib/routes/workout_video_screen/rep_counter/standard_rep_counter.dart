@@ -9,9 +9,9 @@ class StandardRepCounter extends StatelessWidget {
   static double widgetWidth = SizeConfig.blockSizeHorizontal * 30;
   static double widgetHeight = SizeConfig.blockSizeVertical * 35;
 
-  static double mainCircleHeightWidth = SizeConfig.blockSizeHorizontal * 25;
+  static double mainCircleHeightWidth = SizeConfig.blockSizeHorizontal * 18;
   static double mainFontSize = SizeConfig.blockSizeHorizontal * 8;
-  static double secondaryFontSize = SizeConfig.blockSizeHorizontal * 5;
+  static double secondaryFontSize = SizeConfig.blockSizeHorizontal * 3;
 
   static const double secondaryFontOpacity = 0.6;
 
@@ -33,7 +33,7 @@ class StandardRepCounter extends StatelessWidget {
         var userEntry = store
             .state.leaderboards[store.state.currentExerciseIndex].getUserEntry;
         return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             // Main Rep Counter
             Container(
