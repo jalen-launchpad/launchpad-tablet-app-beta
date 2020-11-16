@@ -31,6 +31,7 @@ class TimeBucket extends StatelessWidget {
                   style: TextStyle(
                     fontSize: SelectedClassSidebarConstants.subTextSize,
                     color: ColorConstants.launchpadPrimaryWhite,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
@@ -73,6 +74,7 @@ class TimeBucket extends StatelessWidget {
                       (details.duration ~/ 60).toString() + " min",
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeHorizontal * 2,
+                        fontWeight: FontWeight.bold,
                         color: ColorConstants.launchpadPrimaryWhite,
                       ),
                     ),

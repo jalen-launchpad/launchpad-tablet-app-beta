@@ -88,6 +88,15 @@ final Function(WorkoutVideoScreenState, AddScoreValueAction)
   if (newState.currentExercise.isRest == true) {
     return newState;
   }
+  // If this exercise's scoring tag doesn't match the scoring tag of the incoming action...
+  if (newState.currentExercise.exerciseSetDefinition.scoreTag !=
+      action.scoreTag) {
+    // Don't change the state.
+    return newState;
+  }
+
+  print("\n\n\n" + action.scoreTag + "\n\n\n");
+
   newState.leaderboards[newState.currentExerciseIndex].userEntry.score.value +=
       (state.currentExercise.exerciseSetDefinition.scoreMultiplier *
               action.newScoreValue)

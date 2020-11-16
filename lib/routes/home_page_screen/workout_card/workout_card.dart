@@ -94,6 +94,7 @@ class WorkoutCard extends StatelessWidget {
                               .toString(),
                           style: TextStyle(
                             color: ColorConstants.launchpadPrimaryWhite,
+                            fontWeight: FontWeight.bold,
                             fontSize: SizeConfig.blockSizeHorizontal * 1.2,
                           ),
                         ),
@@ -120,6 +121,7 @@ class WorkoutCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: SizeConfig.blockSizeHorizontal * 1.4,
                       color: ColorConstants.launchpadPrimaryWhite,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

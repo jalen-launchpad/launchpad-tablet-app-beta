@@ -99,6 +99,7 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                             style: TextStyle(
                               fontFamily: 'SF Pro Display',
                               fontSize: SizeConfig.blockSizeHorizontal * 3,
+                              fontWeight: FontWeight.bold,
                               color: ColorConstants.launchpadPrimaryWhite,
                             )),
                       ),
@@ -122,6 +123,7 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                         fontFamily: 'SF Pro Display',
                         fontSize: SelectedClassSidebarConstants.subTextSize,
                         color: ColorConstants.launchpadPrimaryWhite,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -164,8 +166,8 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                         context,
                         CupertinoPageRoute(
                             builder: (BuildContext context) =>
-                            BluetoothSetupScreen(workoutMetadata: workoutMetadata)));
-                                
+                                BluetoothSetupScreen(
+                                    workoutMetadata: workoutMetadata)));
                   },
                   icon: Icon(
                     Icons.play_arrow,

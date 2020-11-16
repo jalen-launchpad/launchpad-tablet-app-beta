@@ -5,6 +5,7 @@ import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/placeholder_values.dart';
 import 'package:tabletapp/routes/workout_video_screen/progress_bar.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_set_statistics/workout_set_statistics.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_bluetooth_handler.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
@@ -134,6 +135,7 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
                               style: TextStyle(
                                 color: ColorConstants.launchpadPrimaryWhite,
                                 fontSize: SizeConfig.blockSizeHorizontal * 3.5,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
@@ -153,18 +155,33 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
                   bottom: WorkoutVideoScreenConstants.bottomPaddingAlign,
                 ),
 
-                // Leaderboard.
-                Positioned(
-                  child: Leaderboard(
-                    currentLeaderboard: PlaceholderValues().leaderboard,
-                  ),
-                  bottom: WorkoutVideoScreenConstants.bottomPaddingAlign +
-                      Leaderboard.workoutLeaderboardHeight +
-                      SizeConfig.blockSizeVertical * 18,
-                  left: WorkoutVideoScreenConstants.leftPaddingAlign,
+                // Leaderboard or Workout Set Statistics
+                StoreBuilder<WorkoutVideoScreenState>(
+                  builder: (context, store) => !store
+                          .state.currentExercise.isRest
+                      // Show exercise leaderboard if it is not a rest period.
+                      ? Positioned(
+                          child: Leaderboard(
+                            currentLeaderboard: PlaceholderValues().leaderboard,
+                          ),
+                          bottom:
+                              WorkoutVideoScreenConstants.bottomPaddingAlign +
+                                  Leaderboard.workoutLeaderboardHeight +
+                                  SizeConfig.blockSizeVertical * 18,
+                          left: WorkoutVideoScreenConstants.leftPaddingAlign,
+                        )
+                      // If this is a rest period, show the last set's statistics.
+                      : Positioned(
+                          child: WorkoutSetStatistics(
+                            store.state.previousExercise.exerciseSetDefinition
+                                .exerciseName,
+                          ),
+                          bottom:
+                              WorkoutVideoScreenConstants.bottomPaddingAlign +
+                                  WorkoutSetStatistics.height,
+                          left: WorkoutVideoScreenConstants.leftPaddingAlign),
                 ),
-                // Notification Bar - NEEDS SIZECONFIG UPDATES
-                // TODO(jalen): Size Config Updates here.
+
                 StoreConnector<WorkoutVideoScreenState, WorkoutNotification>(
                   builder: (context, workoutNotification) =>
                       store.state.showNotification == false

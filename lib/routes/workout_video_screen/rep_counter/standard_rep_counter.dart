@@ -53,6 +53,7 @@ class StandardRepCounter extends StatelessWidget {
                         style: TextStyle(
                           color: ColorConstants.launchpadSecondaryLightBlue,
                           fontSize: mainFontSize,
+                          fontWeight: FontWeight.bold,
                           height: 0.3,
                         )),
                   ),
@@ -67,6 +68,7 @@ class StandardRepCounter extends StatelessWidget {
                                   ? "s"
                                   : ""),
                       style: TextStyle(
+                          fontWeight: FontWeight.bold,
                           color: ColorConstants.launchpadPrimaryWhite
                               .withOpacity(secondaryFontOpacity),
                           fontSize: secondaryFontSize)),

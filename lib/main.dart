@@ -9,6 +9,8 @@ import 'models/workout_metadata.dart';
 import 'routes/home_page_screen/home_page_screen_state.dart';
 import 'package:http/http.dart' as http;
 
+import 'routes/workout_video_screen/workout_set_statistics/workout_set_statistics.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
@@ -102,6 +104,15 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     SizeConfig().init(context);
+    /*return Scaffold(
+      body: Container(
+        child: WorkoutSetStatistics(
+          "Bulgarian Split Squat",
+        ),
+      ),
+    );
+    */
+
     return (!initialDataLoadDone
         // Splash Screen while fetching data from database
         ? Container(

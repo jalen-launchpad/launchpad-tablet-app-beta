@@ -27,13 +27,15 @@ class ExerciseBucket extends StatelessWidget {
                   style: TextStyle(
                     fontSize: SelectedClassSidebarConstants.subTextSize,
                     color: ColorConstants.launchpadPrimaryWhite,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            height: SelectedClassSidebarConstants.workoutInformationBucketHeight,
+            height:
+                SelectedClassSidebarConstants.workoutInformationBucketHeight,
             width: SelectedClassSidebarConstants.timeExerciseBucketWidth,
             decoration: BoxDecoration(
               color: ColorConstants.launchpadPrimaryBlack.withOpacity(
@@ -67,6 +69,7 @@ class ExerciseBucket extends StatelessWidget {
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeHorizontal * 2,
                         color: ColorConstants.launchpadPrimaryWhite,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),

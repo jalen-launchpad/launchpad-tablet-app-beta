@@ -26,4 +26,5 @@ class ColorConstants {
       Color.fromRGBO(86, 204, 242, 1);
   static const Color workoutVideoProgressBarGrey =
       Color.fromRGBO(97, 95, 93, 1);
+  static const Color workoutStatisticsBarGreen = Color.fromRGBO(61, 177, 94, 1);
 }

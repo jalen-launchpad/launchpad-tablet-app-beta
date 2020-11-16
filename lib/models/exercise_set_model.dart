@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tabletapp/constants/bluetooth_uuid.dart';
 
 part 'exercise_set_model.g.dart';
 
@@ -19,7 +20,7 @@ class ExerciseSetModel {
     this.isTime = false,
     this.scoreMultiplier = 1.0,
     this.maxScore,
-    this.scoreTag,
+    this.scoreTag = BluetoothUUID.totalScoreTag,
   });
   factory ExerciseSetModel.fromJson(Map<String, dynamic> json) =>
       _$ExerciseSetModelFromJson(json);

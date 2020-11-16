@@ -51,7 +51,6 @@ class WorkoutVideoScreenState {
     BluetoothDevice bluetoothDevice,
     Timer exerciseTimer,
     int currentWorkoutSetIndex,
-    List<LeaderboardEntryModel> userLeaderboardEntries,
     bool showNotification,
     WorkoutNotification workoutNotification,
     int secondsElapsed,
@@ -73,6 +72,8 @@ class WorkoutVideoScreenState {
   }
 
   WorkoutSetModel get currentExercise => workoutSets[currentWorkoutSetIndex];
+  WorkoutSetModel get previousExercise =>
+      workoutSets[currentWorkoutSetIndex > 0 ? currentWorkoutSetIndex - 1 : 0];
   WorkoutSetModel get nextExercise =>
       !isLastSet ? workoutSets[currentWorkoutSetIndex + 1] : null;
   bool get isLastSet => currentWorkoutSetIndex == (workoutSets.length - 1);
@@ -82,6 +83,12 @@ class WorkoutVideoScreenState {
   set currentUserScore(int score) {
     leaderboards[currentExerciseIndex].userEntry.score.value = score;
   }
+
+  LeaderboardEntryModel get previousUserLeaderboardEntry =>
+      leaderboards[currentWorkoutSetIndex > 0 ? currentWorkoutSetIndex - 1 : 0]
+          .userEntry;
+  LeaderboardModel get previousLeaderboard =>
+      leaderboards[currentWorkoutSetIndex > 0 ? currentWorkoutSetIndex - 1 : 0];
 
   List<WorkoutSetModel> get workoutSets => workoutMetadata.workoutSets;
 }

@@ -33,47 +33,43 @@ class WorkoutVideoBluetoothHandler {
       List<BluetoothCharacteristic> characteristics) async {
     for (int x = 0; x < characteristics.length; x++) {
       await characteristics[x].setNotifyValue(true);
-      // If user has done a good rep...
       characteristics.forEach((element) {
         print(element.uuid.toString());
       });
+      // When receive a total score update...
       if (characteristics[x].uuid.toString() ==
           BluetoothUUID.totalScoreUpdate) {
-        print("\n\n\n\n score update was found");
         characteristics[x].value.listen((event) {
+        print("total score update was found");
           if (event.isEmpty) return;
           // Reflect this in the store.
-          print("\n\n\n\n newScoreValue: " +
-              convertByteArrayToInt64(event).toString());
           store.dispatch(AddScoreValueAction(
               newScoreValue: convertByteArrayToInt64(event),
               scoreTag: BluetoothUUID.totalScoreTag));
           store.dispatch(UpdateUserPositionAction());
         });
-        // If user has done a bad rep...
+        // When receive an y score update...
       } else if (characteristics[x].uuid.toString() ==
           BluetoothUUID.xScoreUpdate) {
         characteristics[x].value.listen((event) {
           if (event.isEmpty) return;
+        print("x score update was found");
           // Reflect this in the store.
-          print("\n\n\n\n newScoreValue: " +
-              convertByteArrayToInt64(event).toString());
           store.dispatch(AddScoreValueAction(
               newScoreValue: convertByteArrayToInt64(event),
-              scoreTag: BluetoothUUID.totalScoreTag));
+              scoreTag: BluetoothUUID.xScoreTag));
           store.dispatch(UpdateUserPositionAction());
         });
-        // If there is a positive tip to show...
+        // When receive a x score update...
       } else if (characteristics[x].uuid.toString() ==
           BluetoothUUID.yScoreUpdate) {
         characteristics[x].value.listen((event) async {
+        print("y score update was found");
           if (event.isEmpty) return;
           // Reflect this in the store.
-          print("\n\n\n\n newScoreValue: " +
-              convertByteArrayToInt64(event).toString());
           store.dispatch(AddScoreValueAction(
               newScoreValue: convertByteArrayToInt64(event),
-              scoreTag: BluetoothUUID.totalScoreTag));
+              scoreTag: BluetoothUUID.yScoreTag));
           store.dispatch(UpdateUserPositionAction());
         });
         // If there is a negative bar update here.

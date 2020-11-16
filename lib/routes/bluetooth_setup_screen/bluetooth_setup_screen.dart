@@ -58,6 +58,7 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                 style: TextStyle(
                   color: ColorConstants.launchpadPrimaryBlue,
                   fontSize: 25,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -94,9 +95,37 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
               ),
             ),
             FlatButton(
-                child: Text("Scan for Devices"),
+                color: ColorConstants.launchpadPrimaryBlue,
+                child: Text(
+                  "Scan for Devices",
+                  style: TextStyle(
+                    color: ColorConstants.launchpadPrimaryWhite,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 onPressed: () {
                   scanBluetooth();
+                }),
+            FlatButton(
+                color: ColorConstants.launchpadPrimaryBlue,
+                child: Text(
+                  "Skip",
+                  style: TextStyle(
+                    color: ColorConstants.launchpadPrimaryWhite,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(CupertinoPageRoute(builder: (context) {
+                    return WorkoutVideoScreen(
+                      WorkoutVideoScreenState(
+                        workoutMetadata: workoutMetadata,
+                        currentWorkoutSetIndex: 0,
+                        leaderboards: PlaceholderValues().getleaderboards(),
+                      ),
+                    );
+                  }));
                 })
           ],
         ),

@@ -95,6 +95,7 @@ class ClassPreview extends StatelessWidget {
                   style: TextStyle(
                     color: ColorConstants.launchpadPrimaryWhite,
                     fontSize: SizeConfig.blockSizeHorizontal * 5,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

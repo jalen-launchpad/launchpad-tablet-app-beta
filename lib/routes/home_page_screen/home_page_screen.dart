@@ -96,8 +96,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 child: ListView(children: [
                   StoreConnector<HomePageScreenState, WorkoutMetadata>(
                     builder: (context, workoutMetadata) => Container(
-                      child:
-                          ClassPreview(workoutMetadata, store),
+                      child: ClassPreview(workoutMetadata, store),
                       height: SizeConfig.blockSizeVertical * 80,
                     ),
                     converter: (store) => store.state.recommendedClass,
@@ -111,6 +110,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     child: Text("Other Workout Options",
                         style: TextStyle(
                             color: ColorConstants.launchpadPrimaryWhite,
+                            fontWeight: FontWeight.bold,
                             fontSize: SizeConfig.blockSizeHorizontal * 1.2)),
                   ),
                   ...buildAlternativeClassesGrid(

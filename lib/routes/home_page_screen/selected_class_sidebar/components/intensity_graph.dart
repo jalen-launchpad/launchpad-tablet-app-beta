@@ -78,12 +78,14 @@ class IntensityGraph extends StatelessWidget {
                 style: TextStyle(
                   fontSize: SelectedClassSidebarConstants.subTextSize,
                   color: ColorConstants.launchpadPrimaryWhite,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
           ),
           Container(
-            height: SelectedClassSidebarConstants.workoutInformationBucketHeight,
+            height:
+                SelectedClassSidebarConstants.workoutInformationBucketHeight,
             margin: EdgeInsets.only(
               top: SizeConfig.blockSizeVertical,
               bottom: SizeConfig.blockSizeVertical * 4,

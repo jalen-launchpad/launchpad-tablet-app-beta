@@ -40,11 +40,14 @@ class _ProgressBarState extends State<ProgressBar> {
                       top: SizeConfig.blockSizeVertical * 2.5,
                       right: WorkoutVideoScreenConstants.leftPaddingAlign),
                   child: Text(
-                      "${_printDuration(state.workoutMetadata.workoutDetails.duration - state.secondsElapsed)}",
-                      textAlign: TextAlign.end,
-                      style: TextStyle(
-                          color: ColorConstants.launchpadPrimaryWhite,
-                          fontSize: SizeConfig.blockSizeHorizontal * 3)),
+                    "${_printDuration(state.workoutMetadata.workoutDetails.duration - state.secondsElapsed)}",
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      color: ColorConstants.launchpadPrimaryWhite,
+                      fontSize: SizeConfig.blockSizeHorizontal * 3,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 )),
             Container(
               margin: EdgeInsets.only(

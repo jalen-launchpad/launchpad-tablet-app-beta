@@ -70,20 +70,22 @@ class _LeaderboardEntryState extends State<LeaderboardEntry> {
                           left: SizeConfig.blockSizeHorizontal * 4),
                       child: Text(
                         (this.isUser
-                            ? (leaderboard.leaderboardEntries.length -
-                                    leaderboard.userPosition)
-                                .toString()
-                            : this.isAbove
                                 ? (leaderboard.leaderboardEntries.length -
-                                        leaderboard.userPosition -
-                                        1)
+                                        leaderboard.userPosition)
                                     .toString()
-                                : (leaderboard.leaderboardEntries.length -
-                                        leaderboard.userPosition +
-                                        1)
-                                    .toString()) + ".",
+                                : this.isAbove
+                                    ? (leaderboard.leaderboardEntries.length -
+                                            leaderboard.userPosition -
+                                            1)
+                                        .toString()
+                                    : (leaderboard.leaderboardEntries.length -
+                                            leaderboard.userPosition +
+                                            1)
+                                        .toString()) +
+                            ".",
                         textAlign: TextAlign.end,
                         style: TextStyle(
+                            fontWeight: FontWeight.bold,
                             color: ColorConstants.launchpadPrimaryWhite,
                             fontSize: fontSize),
                       ),
@@ -99,6 +101,7 @@ class _LeaderboardEntryState extends State<LeaderboardEntry> {
                                 : leaderboard.getBelow()?.user?.username,
                         style: TextStyle(
                             color: ColorConstants.launchpadPrimaryWhite,
+                            fontWeight: FontWeight.bold,
                             fontSize: fontSize),
                       ),
                     ),
@@ -123,6 +126,7 @@ class _LeaderboardEntryState extends State<LeaderboardEntry> {
                     textAlign: TextAlign.end,
                     style: TextStyle(
                         color: ColorConstants.launchpadPrimaryWhite,
+                        fontWeight: FontWeight.bold,
                         fontSize: fontSize),
                   ),
                 ),
