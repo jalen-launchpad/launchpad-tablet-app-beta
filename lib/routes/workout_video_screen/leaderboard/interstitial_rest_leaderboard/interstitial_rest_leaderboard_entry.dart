@@ -4,11 +4,8 @@ import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 
-import 'leaderboard.dart';
-import 'leaderboard_entry_model.dart';
-import 'leaderboard_model.dart';
 
-class LeaderboardEntry extends StatefulWidget {
+class InterstitialRestLeaderboardEntry extends StatefulWidget {
   // Is this the user or a launchpad leaderboard entry?
   final bool topThree;
   final int position;
@@ -16,23 +13,23 @@ class LeaderboardEntry extends StatefulWidget {
 
   static double height = SizeConfig.blockSizeHorizontal * 3;
 
-  LeaderboardEntry({
+  InterstitialRestLeaderboardEntry({
     this.topThree,
     this.position,
     this.nearestFive,
   });
   @override
-  _LeaderboardEntryState createState() => _LeaderboardEntryState(
+  _InterstitialRestLeaderboardEntryState createState() => _InterstitialRestLeaderboardEntryState(
       topThree: this.topThree,
       nearestFive: this.nearestFive,
       position: this.position);
 }
 
-class _LeaderboardEntryState extends State<LeaderboardEntry> {
+class _InterstitialRestLeaderboardEntryState extends State<InterstitialRestLeaderboardEntry> {
   final bool topThree;
   final int position;
   final bool nearestFive;
-  _LeaderboardEntryState({this.topThree, this.nearestFive, this.position});
+  _InterstitialRestLeaderboardEntryState({this.topThree, this.nearestFive, this.position});
 
   static double fontSize = SizeConfig.blockSizeVertical * 2.5;
 

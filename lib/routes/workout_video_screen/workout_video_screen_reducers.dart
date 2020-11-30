@@ -107,14 +107,17 @@ final Function(WorkoutVideoScreenState, AddScoreValueAction)
     newState.currentUserScore =
         newState.currentExercise.exerciseSetDefinition.maxScore;
   }
+
   return newState;
 };
 
-// Change To Next Exercise Reducer
+// Change To Next Exercise Reducer.
+// This moves the leaderboard as well as the metadata displayed on screen.
 final Function(WorkoutVideoScreenState, ChangeToNextExerciseAction)
     changeToNextExerciseReducer =
     (WorkoutVideoScreenState state, ChangeToNextExerciseAction action) {
   var newState = state.copyWith();
+  newState.updateCuumulativeLeaderboard();
   newState.changeToNextExercise();
   return newState;
 };
@@ -125,20 +128,25 @@ final Function(WorkoutVideoScreenState, UpdateUserPositionAction)
     (WorkoutVideoScreenState state, UpdateUserPositionAction action) {
   var newState = state.copyWith();
   var currentLeaderboard = newState.leaderboards[newState.currentExerciseIndex];
-
   for (int index = currentLeaderboard.userPosition;
       index < currentLeaderboard.maxPosition;
       index++) {
     // If the user is now the leader, exit.
     if (currentLeaderboard.userIsLeader) {
-      return newState;
+      print("User is the leader of the leaderboard.");
+      break;
     }
 
     // If the user score is less than the nextToBeat,
     // no change in position.
     if (currentLeaderboard.getUserEntry.score.getValue <
         currentLeaderboard.nextScoreToBeat) {
-      return newState;
+      print("Current Score is: " +
+          currentLeaderboard.getUserEntry.score.getValue.toString() +
+          ". Next score to beat is: " +
+          currentLeaderboard.nextScoreToBeat.toString());
+
+      break;
     } else {
       // If the user score is larger than next to beat,
       // there is a change in position.
@@ -155,14 +163,15 @@ final Function(WorkoutVideoScreenState, UpdateUserPositionAction)
       // Replace old user entry position with overtaken entry.
       currentLeaderboard.leaderboardEntries[currentLeaderboard.userPosition] =
           overtakenEntry;
+      // Update user position.
       currentLeaderboard.userPosition++;
-      currentLeaderboard.nextScoreToBeat = currentLeaderboard.userIsLeader
-          ? -1
-          : currentLeaderboard
-              .leaderboardEntries[currentLeaderboard.userPosition + 1]
-              .score
-              .getValue;
     }
   }
+  newState.currentLeaderboard.nearestFiveEntries =
+      newState.currentLeaderboard.getNearestFiveEntries();
+  newState.currentLeaderboard.topThreeEntries =
+      newState.currentLeaderboard.getTopThreeEntries();
+  newState.currentLeaderboard.nearestFiveEntriesPositions =
+      newState.currentLeaderboard.getNearestFiveEntriesPositions();
   return newState;
 };

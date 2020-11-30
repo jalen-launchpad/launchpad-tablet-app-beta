@@ -162,7 +162,7 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                     borderRadius: BorderRadius.circular(110),
                   ),
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context,
                         CupertinoPageRoute(
                             builder: (BuildContext context) =>

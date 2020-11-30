@@ -22,7 +22,6 @@ class PlaceholderValues {
             badReps: 0,
             value: 0)),
     userPosition: 0,
-    nextScoreToBeat: 1,
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -129,7 +128,6 @@ class PlaceholderValues {
             badReps: 0,
             value: 0)),
     userPosition: 0,
-    nextScoreToBeat: 1,
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -212,6 +210,1161 @@ class PlaceholderValues {
             goodReps: 10,
             badReps: 3,
             value: 13,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "jungle_julian",
+              firstName: "Ann",
+              lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 20,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "shaunyyyyyG", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 26,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "oh_renee", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 29,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "Jinnnnni", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 38,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "mama_BBBBBB", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 50,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "papaB", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 67,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "ollieeevarr", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 80,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "y_guy", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 81,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "boo_bear", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 83,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+    ],
+  );
+
+  LeaderboardModel bandedYRotationLeaderboard2 = LeaderboardModel(
+    userEntry: LeaderboardEntryModel(
+        user: UserModel(
+            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
+        exerciseSetDefinition: ExerciseSetModel(
+          exerciseName: "180 Squat Jumps",
+          targetReps: 10,
+        ),
+        score: ExerciseScoreModel(
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+            goodReps: 0,
+            badReps: 0,
+            value: 0)),
+    userPosition: 0,
+    leaderboardEntries: [
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "jason?", firstName: "Jason", lastName: "Abromaitis"),
+          score: ExerciseScoreModel(
+            goodReps: 0,
+            badReps: 1,
+            value: 1,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "Leeeeeee", firstName: "Lee", lastName: "Goldstein"),
+          score: ExerciseScoreModel(
+            goodReps: 3,
+            badReps: 0,
+            value: 3,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "no_knuckles",
+              firstName: "Ellie",
+              lastName: "Abromaitis"),
+          score: ExerciseScoreModel(
+            goodReps: 3,
+            badReps: 3,
+            value: 6,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "beybladessss",
+              firstName: "Jack",
+              lastName: "Abromaitis"),
+          score: ExerciseScoreModel(
+            goodReps: 4,
+            badReps: 5,
+            value: 7,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "killa_strotha",
+              firstName: "Ann",
+              lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 13,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "jungle_julian",
+              firstName: "Ann",
+              lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 20,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "shaunyyyyyG", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 26,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "oh_renee", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 29,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "Jinnnnni", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 38,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "mama_BBBBBB", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 50,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "papaB", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 67,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "ollieeevarr", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 80,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "y_guy", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 81,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "boo_bear", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 83,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+    ],
+  );
+  LeaderboardModel bandedYRotationLeaderboard3 = LeaderboardModel(
+    userEntry: LeaderboardEntryModel(
+        user: UserModel(
+            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
+        exerciseSetDefinition: ExerciseSetModel(
+          exerciseName: "180 Squat Jumps",
+          targetReps: 10,
+        ),
+        score: ExerciseScoreModel(
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+            goodReps: 0,
+            badReps: 0,
+            value: 0)),
+    userPosition: 0,
+    leaderboardEntries: [
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "jason?", firstName: "Jason", lastName: "Abromaitis"),
+          score: ExerciseScoreModel(
+            goodReps: 0,
+            badReps: 1,
+            value: 1,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "Leeeeeee", firstName: "Lee", lastName: "Goldstein"),
+          score: ExerciseScoreModel(
+            goodReps: 3,
+            badReps: 0,
+            value: 3,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "no_knuckles",
+              firstName: "Ellie",
+              lastName: "Abromaitis"),
+          score: ExerciseScoreModel(
+            goodReps: 3,
+            badReps: 3,
+            value: 6,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "beybladessss",
+              firstName: "Jack",
+              lastName: "Abromaitis"),
+          score: ExerciseScoreModel(
+            goodReps: 4,
+            badReps: 5,
+            value: 7,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "killa_strotha",
+              firstName: "Ann",
+              lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 13,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "jungle_julian",
+              firstName: "Ann",
+              lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 20,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "shaunyyyyyG", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 26,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "oh_renee", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 29,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "Jinnnnni", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 38,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "mama_BBBBBB", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 50,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "papaB", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 67,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "ollieeevarr", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 80,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "y_guy", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 81,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "boo_bear", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 83,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+    ],
+  );
+  LeaderboardModel bandedYRotationLeaderboard4 = LeaderboardModel(
+    userEntry: LeaderboardEntryModel(
+        user: UserModel(
+            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
+        exerciseSetDefinition: ExerciseSetModel(
+          exerciseName: "180 Squat Jumps",
+          targetReps: 10,
+        ),
+        score: ExerciseScoreModel(
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+            goodReps: 0,
+            badReps: 0,
+            value: 0)),
+    userPosition: 0,
+    leaderboardEntries: [
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "jason?", firstName: "Jason", lastName: "Abromaitis"),
+          score: ExerciseScoreModel(
+            goodReps: 0,
+            badReps: 1,
+            value: 1,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "Leeeeeee", firstName: "Lee", lastName: "Goldstein"),
+          score: ExerciseScoreModel(
+            goodReps: 3,
+            badReps: 0,
+            value: 3,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "no_knuckles",
+              firstName: "Ellie",
+              lastName: "Abromaitis"),
+          score: ExerciseScoreModel(
+            goodReps: 3,
+            badReps: 3,
+            value: 6,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "beybladessss",
+              firstName: "Jack",
+              lastName: "Abromaitis"),
+          score: ExerciseScoreModel(
+            goodReps: 4,
+            badReps: 5,
+            value: 7,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "killa_strotha",
+              firstName: "Ann",
+              lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 13,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "jungle_julian",
+              firstName: "Ann",
+              lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 20,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "shaunyyyyyG", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 26,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "oh_renee", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 29,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "Jinnnnni", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 38,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "mama_BBBBBB", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 50,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "papaB", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 67,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "ollieeevarr", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 80,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "y_guy", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 81,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "boo_bear", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 83,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+    ],
+  );
+  LeaderboardModel bandedYRotationLeaderboard5 = LeaderboardModel(
+    userEntry: LeaderboardEntryModel(
+        user: UserModel(
+            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
+        exerciseSetDefinition: ExerciseSetModel(
+          exerciseName: "180 Squat Jumps",
+          targetReps: 10,
+        ),
+        score: ExerciseScoreModel(
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+            goodReps: 0,
+            badReps: 0,
+            value: 0)),
+    userPosition: 0,
+    leaderboardEntries: [
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "jason?", firstName: "Jason", lastName: "Abromaitis"),
+          score: ExerciseScoreModel(
+            goodReps: 0,
+            badReps: 1,
+            value: 1,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "Leeeeeee", firstName: "Lee", lastName: "Goldstein"),
+          score: ExerciseScoreModel(
+            goodReps: 3,
+            badReps: 0,
+            value: 3,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "no_knuckles",
+              firstName: "Ellie",
+              lastName: "Abromaitis"),
+          score: ExerciseScoreModel(
+            goodReps: 3,
+            badReps: 3,
+            value: 6,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "beybladessss",
+              firstName: "Jack",
+              lastName: "Abromaitis"),
+          score: ExerciseScoreModel(
+            goodReps: 4,
+            badReps: 5,
+            value: 7,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "killa_strotha",
+              firstName: "Ann",
+              lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 13,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "jungle_julian",
+              firstName: "Ann",
+              lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 20,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "shaunyyyyyG", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 26,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "oh_renee", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 29,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "Jinnnnni", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 38,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "mama_BBBBBB", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 50,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "papaB", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 67,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "ollieeevarr", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 80,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "y_guy", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 81,
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: "180 Squat Jumps",
+              targetReps: 10,
+            ),
+          )),
+      LeaderboardEntryModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: "180 Squat Jumps",
+            targetReps: 10,
+          ),
+          user: UserModel(
+              username: "boo_bear", firstName: "Ann", lastName: "Strother"),
+          score: ExerciseScoreModel(
+            goodReps: 10,
+            badReps: 3,
+            value: 83,
             exerciseSetDefinition: ExerciseSetModel(
               exerciseName: "180 Squat Jumps",
               targetReps: 10,
@@ -236,7 +1389,6 @@ class PlaceholderValues {
             badReps: 0,
             value: 0)),
     userPosition: 0,
-    nextScoreToBeat: 1,
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -326,6 +1478,7 @@ class PlaceholderValues {
           )),
     ],
   );
+  
 
   LeaderboardModel plioPushupBurnoutsLeaderboard = LeaderboardModel(
     userEntry: LeaderboardEntryModel(
@@ -344,7 +1497,6 @@ class PlaceholderValues {
             badReps: 0,
             value: 0)),
     userPosition: 0,
-    nextScoreToBeat: 1,
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -451,7 +1603,6 @@ class PlaceholderValues {
             badReps: 0,
             value: 0)),
     userPosition: 0,
-    nextScoreToBeat: 1,
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -545,32 +1696,34 @@ class PlaceholderValues {
   List<LeaderboardModel> getleaderboards() {
     return [
       bandedYRotationLeaderboard,
-      bandedTricepKickbacksLeaderboard,
-      frontElevatedMountainClimbersLeaderboard,
-      plioPushupBurnoutsLeaderboard,
-      spiderPushupsLeaderboard,
+      bandedYRotationLeaderboard2,
+      bandedYRotationLeaderboard3,
+      bandedYRotationLeaderboard4,
+      bandedYRotationLeaderboard5,
       bandedYRotationLeaderboard,
-      bandedTricepKickbacksLeaderboard,
-      frontElevatedMountainClimbersLeaderboard,
-      plioPushupBurnoutsLeaderboard,
-      spiderPushupsLeaderboard,
       bandedYRotationLeaderboard,
-      bandedTricepKickbacksLeaderboard,
-      frontElevatedMountainClimbersLeaderboard,
-      plioPushupBurnoutsLeaderboard,
-      spiderPushupsLeaderboard,
       bandedYRotationLeaderboard,
-      bandedTricepKickbacksLeaderboard,
-      frontElevatedMountainClimbersLeaderboard,
-      plioPushupBurnoutsLeaderboard,
-      spiderPushupsLeaderboard,
-      spiderPushupsLeaderboard
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
+      bandedYRotationLeaderboard,
     ];
   }
 
   var leaderboard = LeaderboardModel(
       userPosition: 0,
-      nextScoreToBeat: 5,
       userEntry: LeaderboardEntryModel(
           user: UserModel(username: 'gabbyyyy'),
           score: ExerciseScoreModel(goodReps: 0, badReps: 0)),

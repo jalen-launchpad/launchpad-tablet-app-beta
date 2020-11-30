@@ -70,7 +70,7 @@ class BluetoothSetupScreenModel {
         await device.disconnect();
       }
       await device.connect(
-        timeout: Duration(seconds: 15),
+        timeout: Duration(seconds: 5),
         // This takes up to 30 seconds or more when set true.
         autoConnect: false,
       );

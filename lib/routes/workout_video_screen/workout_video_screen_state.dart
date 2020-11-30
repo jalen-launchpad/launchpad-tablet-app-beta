@@ -1,10 +1,15 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:tabletapp/models/exercise_score_model.dart';
+import 'package:tabletapp/models/user_model.dart';
 import 'package:tabletapp/models/workout_details.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/models/workout_set_model.dart';
+import 'package:tabletapp/routes/workout_video_screen/leaderboard/interstitial_rest_leaderboard/interstitial_rest_leaderboard.dart';
 
+import 'leaderboard/interstitial_rest_leaderboard/interstitial_rest_leaderboard_model.dart';
 import 'leaderboard/leaderboard_entry_model.dart';
 import 'leaderboard/leaderboard_model.dart';
 import 'notification_bar/workout_notification.dart';
@@ -14,6 +19,7 @@ class WorkoutVideoScreenState {
   final WorkoutMetadata workoutMetadata;
   // A list of WorkoutLeaderboardEntries pre-populated with previous users.
   final List<LeaderboardModel> leaderboards;
+  final HashMap<UserModel, int> cumulativeLeaderboards;
   // The bluetooth connected Launchpad Companion App
   final BluetoothDevice bluetoothDevice;
   final bool showNotification;
@@ -31,7 +37,8 @@ class WorkoutVideoScreenState {
       this.exerciseTimer,
       this.showNotification = false,
       this.workoutNotification,
-      this.secondsElapsed = 0});
+      this.secondsElapsed = 0,
+      this.cumulativeLeaderboards});
 
   static WorkoutVideoScreenState initializeWorkout(
       WorkoutMetadata workoutMetadata,
@@ -54,29 +61,61 @@ class WorkoutVideoScreenState {
     bool showNotification,
     WorkoutNotification workoutNotification,
     int secondsElapsed,
+    HashMap<UserModel, int> cuumulativeLeaderboards,
   }) {
     return WorkoutVideoScreenState(
-        workoutMetadata: workoutMetadata ?? this.workoutMetadata,
-        bluetoothDevice: bluetoothDevice ?? this.bluetoothDevice,
-        leaderboards: leaderboards ?? this.leaderboards,
-        currentWorkoutSetIndex:
-            currentWorkoutSetIndex ?? this.currentWorkoutSetIndex,
-        exerciseTimer: exerciseTimer ?? this.exerciseTimer,
-        workoutNotification: workoutNotification ?? this.workoutNotification,
-        showNotification: showNotification ?? this.showNotification,
-        secondsElapsed: secondsElapsed ?? this.secondsElapsed);
+      workoutMetadata: workoutMetadata ?? this.workoutMetadata,
+      bluetoothDevice: bluetoothDevice ?? this.bluetoothDevice,
+      leaderboards: leaderboards ?? this.leaderboards,
+      currentWorkoutSetIndex:
+          currentWorkoutSetIndex ?? this.currentWorkoutSetIndex,
+      exerciseTimer: exerciseTimer ?? this.exerciseTimer,
+      workoutNotification: workoutNotification ?? this.workoutNotification,
+      showNotification: showNotification ?? this.showNotification,
+      secondsElapsed: secondsElapsed ?? this.secondsElapsed,
+      cumulativeLeaderboards:
+          cuumulativeLeaderboards ?? this.cumulativeLeaderboards,
+    );
   }
 
   void changeToNextExercise() {
     currentWorkoutSetIndex++;
   }
 
+  void initializeCuumulativeLeaderboard() {
+    leaderboards[currentExerciseIndex].leaderboardEntries.forEach((element) {
+      cumulativeLeaderboards[element.user] = 0;
+    });
+  }
+
+  void updateCuumulativeLeaderboard() {
+    leaderboards[currentExerciseIndex].leaderboardEntries.forEach((element) {
+      cumulativeLeaderboards[element.user] =
+          cumulativeLeaderboards[element.user] + element.score.value;
+    });
+  }
+
+  List<LeaderboardEntryModel> getCuumulativeLeaderboardAsSortedList() {
+    List<LeaderboardEntryModel> list = [];
+    // For every entry in the cuumulative leaderboards.
+    cumulativeLeaderboards.forEach((key, value) {
+      LeaderboardEntryModel model = LeaderboardEntryModel(
+          score: ExerciseScoreModel(value: value), user: key);
+      list.add(model);
+    });
+    // Sort list in descending order.
+    list.sort((a, b) => b.score.value.compareTo(a.score.value));
+    return list;
+  }
+
+  LeaderboardModel get currentLeaderboard => leaderboards[currentExerciseIndex];
   WorkoutSetModel get currentExercise => workoutSets[currentWorkoutSetIndex];
   WorkoutSetModel get previousExercise =>
       workoutSets[currentWorkoutSetIndex > 0 ? currentWorkoutSetIndex - 1 : 0];
   WorkoutSetModel get nextExercise =>
       !isLastSet ? workoutSets[currentWorkoutSetIndex + 1] : null;
   bool get isLastSet => currentWorkoutSetIndex == (workoutSets.length - 1);
+  bool get classIsOver => currentWorkoutSetIndex >= workoutSets.length;
   int get currentExerciseIndex => currentWorkoutSetIndex;
   int get currentUserScore =>
       leaderboards[currentExerciseIndex].userEntry.score.value;

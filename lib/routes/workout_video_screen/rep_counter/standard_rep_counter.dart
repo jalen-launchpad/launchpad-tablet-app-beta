@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
-import 'package:tabletapp/routes/workout_video_screen/leaderboard/leaderboard_entry_model.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 
 class StandardRepCounter extends StatelessWidget {
@@ -10,7 +9,7 @@ class StandardRepCounter extends StatelessWidget {
   static double widgetHeight = SizeConfig.blockSizeVertical * 35;
 
   static double mainCircleHeightWidth = SizeConfig.blockSizeHorizontal * 18;
-  static double mainFontSize = SizeConfig.blockSizeHorizontal * 8;
+  static double mainFontSize = SizeConfig.blockSizeHorizontal * 6;
   static double secondaryFontSize = SizeConfig.blockSizeHorizontal * 3;
 
   static const double secondaryFontOpacity = 0.6;

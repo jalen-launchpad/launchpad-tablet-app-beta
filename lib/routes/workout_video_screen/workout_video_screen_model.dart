@@ -31,11 +31,14 @@ class WorkoutVideoScreenModel {
           milliseconds: 500,
         ), (Timer timer) async {
       // If it was the last set, don't do anything and return.
-      if (store.state.isLastSet) return;
-      // If the timestamp of the video controller has past the timestamp of the next exercise...
       int secondsElapsed = (await getSecondsElapsed());
       store.dispatch(UpdateSecondsElapsedAction(secondsElapsed));
-      if (secondsElapsed >= store.state.nextExercise.videoTimestamp) {
+      if (store.state.classIsOver) {
+        print("Class is over");
+        return;
+      }
+      // If the timestamp of the video controller has past the timestamp of the next exercise...
+      if (secondsElapsed >= store.state.currentExercise.videoEndTimestamp) {
         // Change state to next exercise.
         changeToNextExercise();
       }

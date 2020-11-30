@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
+import 'package:tabletapp/placeholder_values.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen.dart';
 import 'models/workout_metadata.dart';
 import 'routes/home_page_screen/home_page_screen_state.dart';
 import 'package:http/http.dart' as http;
-
-import 'routes/workout_video_screen/workout_set_statistics/workout_set_statistics.dart';
 
 void main() {
   runApp(MyApp());
@@ -78,11 +77,13 @@ class _MyHomePageState extends State<MyHomePage> {
     allWorkoutsAsString.forEach((json) {
       // Convert Map<string, dynamic> to WorkoutDetails class
       WorkoutMetadata workoutDetails = WorkoutMetadata.fromJson(json);
+      print(workoutDetails.workoutDetails.title);
+      print(workoutDetails.workoutSets[0].videoTimestamp);
+      print(workoutDetails.workoutSets[0].videoEndTimestamp);
       list.add(workoutDetails);
     });
     // Save workouts to class variable.
     workouts = list;
-    print(workouts[0].streamUri);
     setState(() {
       // Let Flutter know DB is done loading to show homepage.
       initialDataLoadDone = true;
@@ -104,15 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     SizeConfig().init(context);
-    /*return Scaffold(
-      body: Container(
-        child: WorkoutSetStatistics(
-          "Bulgarian Split Squat",
-        ),
-      ),
-    );
-    */
-
     return (!initialDataLoadDone
         // Splash Screen while fetching data from database
         ? Container(

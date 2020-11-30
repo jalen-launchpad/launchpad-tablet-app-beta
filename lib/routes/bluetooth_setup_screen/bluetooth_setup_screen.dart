@@ -1,9 +1,12 @@
+import 'dart:collection';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
+import 'package:tabletapp/models/user_model.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/placeholder_values.dart';
 import 'package:tabletapp/routes/bluetooth_setup_screen/bluetooth_setup_screen_model.dart';
@@ -51,6 +54,7 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Connecting to bluetooth message.
             Container(
               padding: EdgeInsets.only(top: 10),
               child: Text(
@@ -64,6 +68,7 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                 ),
               ),
             ),
+            // If an error occurred, show an error message to users.
             errorOccurred
                 ? Container(
                     padding: EdgeInsets.only(top: 10),
@@ -76,6 +81,7 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                       ),
                     ))
                 : Container(),
+            // Based on bluetooth scan results...
             StreamBuilder<List<ScanResult>>(
               stream: FlutterBlue.instance.scanResults,
               initialData: [],
@@ -84,6 +90,7 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                   top: SizeConfig.blockSizeVertical * 10,
                   bottom: SizeConfig.blockSizeVertical * 7,
                 ),
+                // Build a list of devices that contain LCA in advertisement name.
                 child: Column(
                   children: snapshot.data
                       .map((result) => result.device.name.contains('LCA')
@@ -149,10 +156,10 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                       .push(CupertinoPageRoute(builder: (context) {
                     return WorkoutVideoScreen(
                       WorkoutVideoScreenState(
-                        workoutMetadata: workoutMetadata,
-                        currentWorkoutSetIndex: 0,
-                        leaderboards: PlaceholderValues().getleaderboards(),
-                      ),
+                          workoutMetadata: workoutMetadata,
+                          currentWorkoutSetIndex: 0,
+                          leaderboards: PlaceholderValues().getleaderboards(),
+                          cumulativeLeaderboards: HashMap()),
                     );
                   }));
                 })

@@ -8,7 +8,11 @@ class UserModel {
   final String lastName;
   final String username;
 
+  bool operator ==(o) => o.username == username;
+  int get hashCode => username.hashCode ^ firstName.hashCode;
+
   UserModel({this.username, this.firstName, this.lastName});
-  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }
