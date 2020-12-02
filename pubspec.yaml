@@ -23,7 +23,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  json_annotation: ^3.0.0
+  flutter_blue: 0.7.1
+  video_player: '>=0.10.12+2 <2.0.0'
+  charts_flutter: 0.9.0
+  flutter_redux: 0.6.0
+  animated_splash: ^1.0.0    
+  http: 0.12.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -32,11 +38,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_blue: 0.7.1
-  video_player: '>=0.10.12+2 <2.0.0'
-  charts_flutter: 0.9.0
-  flutter_redux: 0.6.0
-    
+  build_runner: ^1.0.0
+  json_serializable: ^3.2.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -61,6 +64,9 @@ flutter:
     - assets/images/backgroundPlaceholder.png
     - assets/images/workoutCardImagePlaceholder.png
     - assets/images/smallTimeVector.png
+    - assets/images/logo.png
+    - assets/test1.mov
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -86,6 +92,7 @@ flutter:
     - family: SF Pro Display
       fonts:
         - asset: assets/fonts/SF-Pro-Display-Bold.otf
+        - asset: assets/fonts/SF-Pro-Display-Regular.otf
 
   # fonts:
   #   - family: Schyler
