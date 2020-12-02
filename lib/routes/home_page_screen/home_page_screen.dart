@@ -11,6 +11,7 @@ import 'class_preview.dart';
 import 'workout_card/workout_card.dart';
 
 class HomePageScreen extends StatefulWidget {
+  static const routeName = "HomePageScreen";
   final HomePageScreenState homePageScreenState;
 
   HomePageScreen(this.homePageScreenState);

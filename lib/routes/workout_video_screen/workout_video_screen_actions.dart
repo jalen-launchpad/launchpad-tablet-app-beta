@@ -10,6 +10,12 @@ class AddScoreValueAction {
   AddScoreValueAction({this.newScoreValue, this.scoreTag});
 }
 
+class UpdatePostWorkoutSurveyInputAction {
+  final String field;
+  final int value;
+  UpdatePostWorkoutSurveyInputAction({this.field, this.value});
+}
+
 class AddGoodRepAction {}
 
 class AddBadRepAction {}

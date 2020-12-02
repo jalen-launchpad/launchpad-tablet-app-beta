@@ -1,5 +1,5 @@
-
 import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter/foundation.dart';
 
 part 'exercise_model.g.dart';
 
@@ -7,11 +7,10 @@ part 'exercise_model.g.dart';
 class ExerciseModel {
   final String exerciseName;
   final int intensity;
-  
 
-  ExerciseModel({this.exerciseName, this.intensity});
+  ExerciseModel({@required this.exerciseName, @required this.intensity});
 
-  factory ExerciseModel.fromJson(Map<String, dynamic> json) => _$ExerciseModelFromJson(json);
+  factory ExerciseModel.fromJson(Map<String, dynamic> json) =>
+      _$ExerciseModelFromJson(json);
   Map<String, dynamic> toJson() => _$ExerciseModelToJson(this);
-
 }

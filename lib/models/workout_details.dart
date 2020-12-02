@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tabletapp/enums/mods_enum.dart';
 
@@ -20,15 +21,16 @@ class WorkoutDetails {
   final String workoutId;
 
   WorkoutDetails(this.exerciseList,
-      {this.title,
-      this.trainer,
-      this.athlete,
-      this.modsList,
-      this.workoutId,
-      this.duration})
+      {@required this.title,
+      @required this.trainer,
+      @required this.athlete,
+      @required this.modsList,
+      @required this.workoutId,
+      @required this.duration})
       : this.exerciseIntensities = createExerciseIntensitiesList(exerciseList);
 
-  factory WorkoutDetails.fromJson(Map<String, dynamic> json) => _$WorkoutDetailsFromJson(json);
+  factory WorkoutDetails.fromJson(Map<String, dynamic> json) =>
+      _$WorkoutDetailsFromJson(json);
   Map<String, dynamic> toJson() => _$WorkoutDetailsToJson(this);
 
   static List<int> createExerciseIntensitiesList(

@@ -1,9 +1,12 @@
+import 'package:tabletapp/models/exercise_score_model.dart';
+import 'package:tabletapp/models/user_model.dart';
+
 import 'leaderboard_entry_model.dart';
 
 class LeaderboardModel {
   // Launchpad's leaderboard for a given exercise. Sorted from low score -> high score.
   final List<LeaderboardEntryModel> leaderboardEntries;
-
+  final UserModel user;
   // The user entry, which also appears in
   // leaderboardEntries at index userPosition.
   LeaderboardEntryModel userEntry;
@@ -102,14 +105,23 @@ class LeaderboardModel {
   LeaderboardModel copy() {
     return LeaderboardModel(
       leaderboardEntries: this.leaderboardEntries,
-      userPosition: this.userPosition,
-      userEntry: this.userEntry,
+      user: this.user,
     );
   }
 
-  LeaderboardModel(
-      {this.leaderboardEntries, this.userPosition, this.userEntry}) {
-    this.leaderboardEntries.insert(0, this.userEntry);
+  LeaderboardModel({this.leaderboardEntries, this.user}) {
+    userEntry = LeaderboardEntryModel(
+      exerciseSetDefinition: this.leaderboardEntries[0]?.exerciseSetDefinition,
+      user: user,
+      score: ExerciseScoreModel(
+        exerciseSetDefinition:
+            this.leaderboardEntries[0]?.exerciseSetDefinition,
+        value: 0,
+      ),
+    );
+    userPosition = 0;
+    this.leaderboardEntries.insert(userPosition, userEntry);
+    // Initialize the user leaderboard entries with default values.
     this.topThreeEntries = getTopThreeEntries();
     this.nearestFiveEntries = getNearestFiveEntries();
     this.nearestFiveEntriesPositions = getNearestFiveEntriesPositions();

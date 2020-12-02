@@ -1,4 +1,5 @@
 import 'package:redux/redux.dart';
+import 'package:tabletapp/routes/workout_video_screen/post_workout_survey/post_workout_survey_response_box_model.dart';
 import 'workout_video_screen_actions.dart';
 import 'workout_video_screen_state.dart';
 
@@ -20,6 +21,8 @@ WorkoutVideoScreenState Function(WorkoutVideoScreenState, dynamic) rootReducer =
       clearNotificationBarReducer),
   TypedReducer<WorkoutVideoScreenState, UpdateSecondsElapsedAction>(
       updateSecondsElapsedReducer),
+  TypedReducer<WorkoutVideoScreenState, UpdatePostWorkoutSurveyInputAction>(
+      updatePostWorkoutSurveyInputReducer),
 ]);
 
 final Function(WorkoutVideoScreenState, UpdateSecondsElapsedAction)
@@ -95,8 +98,6 @@ final Function(WorkoutVideoScreenState, AddScoreValueAction)
     return newState;
   }
 
-  print("\n\n\n" + action.scoreTag + "\n\n\n");
-
   newState.leaderboards[newState.currentExerciseIndex].userEntry.score.value +=
       (state.currentExercise.exerciseSetDefinition.scoreMultiplier *
               action.newScoreValue)
@@ -113,12 +114,42 @@ final Function(WorkoutVideoScreenState, AddScoreValueAction)
 
 // Change To Next Exercise Reducer.
 // This moves the leaderboard as well as the metadata displayed on screen.
-final Function(WorkoutVideoScreenState, ChangeToNextExerciseAction)
+Function(WorkoutVideoScreenState, ChangeToNextExerciseAction)
     changeToNextExerciseReducer =
     (WorkoutVideoScreenState state, ChangeToNextExerciseAction action) {
   var newState = state.copyWith();
   newState.updateCuumulativeLeaderboard();
   newState.changeToNextExercise();
+  return newState;
+};
+
+// Update
+Function(WorkoutVideoScreenState, UpdatePostWorkoutSurveyInputAction)
+    updatePostWorkoutSurveyInputReducer =
+    (WorkoutVideoScreenState state, UpdatePostWorkoutSurveyInputAction action) {
+  var newState = state.copyWith(
+      postWorkoutSurveyResponseBoxModel: PostWorkoutSurveyResponseBoxModel(
+    action.field == "Overall"
+        ? action.value
+        : state.postWorkoutSurveyResponseBoxModel.overall,
+    action.field == "Instructor"
+        ? action.value
+        : state.postWorkoutSurveyResponseBoxModel.instructor,
+    action.field == "Fun"
+        ? action.value
+        : state.postWorkoutSurveyResponseBoxModel.fun,
+    action.field == "Difficulty"
+        ? action.value
+        : state.postWorkoutSurveyResponseBoxModel.difficulty,
+  ));
+
+  print("Overall: " +
+      newState.postWorkoutSurveyResponseBoxModel.overall.toString());
+  print("Instructor: " +
+      newState.postWorkoutSurveyResponseBoxModel.instructor.toString());
+  print("Fun: " + newState.postWorkoutSurveyResponseBoxModel.fun.toString());
+  print("Difficulty: " +
+      newState.postWorkoutSurveyResponseBoxModel.difficulty.toString());
   return newState;
 };
 

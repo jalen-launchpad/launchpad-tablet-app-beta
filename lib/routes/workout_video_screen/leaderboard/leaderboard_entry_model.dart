@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tabletapp/models/exercise_set_model.dart';
 import 'package:tabletapp/models/exercise_score_model.dart';
@@ -13,7 +14,10 @@ class LeaderboardEntryModel {
   final ExerciseSetModel exerciseSetDefinition;
   ExerciseScoreModel score;
 
-  LeaderboardEntryModel({this.user, this.exerciseSetDefinition, this.score});
+  LeaderboardEntryModel(
+      {@required this.user,
+      @required this.exerciseSetDefinition,
+      @required this.score});
   factory LeaderboardEntryModel.fromJson(Map<String, dynamic> json) =>
       _$LeaderboardEntryModelFromJson(json);
   Map<String, dynamic> toJson() => _$LeaderboardEntryModelToJson(this);

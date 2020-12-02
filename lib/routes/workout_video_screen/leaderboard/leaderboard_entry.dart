@@ -17,9 +17,9 @@ class LeaderboardEntry extends StatefulWidget {
   static double height = SizeConfig.blockSizeHorizontal * 3;
 
   LeaderboardEntry({
-    this.topThree,
-    this.position,
-    this.nearestFive,
+    @required this.topThree,
+    @required this.position,
+    @required this.nearestFive,
   });
   @override
   _LeaderboardEntryState createState() => _LeaderboardEntryState(

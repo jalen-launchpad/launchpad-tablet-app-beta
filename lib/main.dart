@@ -1,14 +1,23 @@
 import 'dart:convert';
 
+import 'package:redux/redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
-import 'package:tabletapp/placeholder_values.dart';
+import 'package:tabletapp/routes/bluetooth_setup_screen/bluetooth_setup_screen_arguments.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_arguments.dart';
 import 'models/workout_metadata.dart';
+import 'routes/bluetooth_setup_screen/bluetooth_setup_screen.dart';
 import 'routes/home_page_screen/home_page_screen_state.dart';
 import 'package:http/http.dart' as http;
+import 'routes/workout_video_screen/post_workout_survey/post_workout_survey.dart';
+import 'routes/workout_video_screen/post_workout_survey/post_workout_survey_response_box_model.dart';
+import 'routes/workout_video_screen/workout_video_screen.dart';
+import 'routes/workout_video_screen/workout_video_screen_reducers.dart';
+import 'routes/workout_video_screen/workout_video_screen_state.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,6 +28,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      onGenerateRoute: (settings) {
+        if (settings.name == HomePageScreen.routeName) {
+          final HomePageScreenState state = settings.arguments;
+          return MaterialPageRoute(builder: (context) {
+            return HomePageScreen(state);
+          });
+        } else if (settings.name == BluetoothSetupScreen.routeName) {
+          final BluetoothSetupScreenArguments arguments = settings.arguments;
+          return MaterialPageRoute(builder: (context) {
+            return BluetoothSetupScreen(arguments);
+          });
+        } else if (settings.name == WorkoutVideoScreen.routeName) {
+          final WorkoutVideoScreenArguments arguments = settings.arguments;
+          return MaterialPageRoute(builder: (context) {
+            return WorkoutVideoScreen(arguments);
+          });
+        }
+        assert(false, "Need to implement ${settings.name}!");
+        return null;
+      },
       title: 'Launchpad Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -77,9 +106,6 @@ class _MyHomePageState extends State<MyHomePage> {
     allWorkoutsAsString.forEach((json) {
       // Convert Map<string, dynamic> to WorkoutDetails class
       WorkoutMetadata workoutDetails = WorkoutMetadata.fromJson(json);
-      print(workoutDetails.workoutDetails.title);
-      print(workoutDetails.workoutSets[0].videoTimestamp);
-      print(workoutDetails.workoutSets[0].videoEndTimestamp);
       list.add(workoutDetails);
     });
     // Save workouts to class variable.
@@ -105,6 +131,18 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     SizeConfig().init(context);
+    /*
+    return Scaffold(
+        body: StoreProvider<WorkoutVideoScreenState>(
+            child: PostWorkoutSurvey(WorkoutVideoScreenState()),
+            store: Store<WorkoutVideoScreenState>(
+              rootReducer,
+              initialState: WorkoutVideoScreenState(
+                  postWorkoutSurveyResponseBoxModel:
+                      PostWorkoutSurveyResponseBoxModel.initialize()),
+            )));
+            */
+
     return (!initialDataLoadDone
         // Splash Screen while fetching data from database
         ? Container(

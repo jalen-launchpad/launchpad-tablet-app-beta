@@ -6,22 +6,7 @@ import 'routes/workout_video_screen/leaderboard/leaderboard_model.dart';
 
 class PlaceholderValues {
   LeaderboardModel bandedTricepKickbacksLeaderboard = LeaderboardModel(
-    userEntry: LeaderboardEntryModel(
-        user: UserModel(
-            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
-        exerciseSetDefinition: ExerciseSetModel(
-          exerciseName: "Bulgarian Split Squats",
-          targetReps: 10,
-        ),
-        score: ExerciseScoreModel(
-            exerciseSetDefinition: ExerciseSetModel(
-              exerciseName: "Bulgarian Split Squats",
-              targetReps: 10,
-            ),
-            goodReps: 0,
-            badReps: 0,
-            value: 0)),
-    userPosition: 0,
+    user: UserModel(username: "jalen"),
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -112,22 +97,7 @@ class PlaceholderValues {
     ],
   );
   LeaderboardModel bandedYRotationLeaderboard = LeaderboardModel(
-    userEntry: LeaderboardEntryModel(
-        user: UserModel(
-            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
-        exerciseSetDefinition: ExerciseSetModel(
-          exerciseName: "180 Squat Jumps",
-          targetReps: 10,
-        ),
-        score: ExerciseScoreModel(
-            exerciseSetDefinition: ExerciseSetModel(
-              exerciseName: "180 Squat Jumps",
-              targetReps: 10,
-            ),
-            goodReps: 0,
-            badReps: 0,
-            value: 0)),
-    userPosition: 0,
+    user: UserModel(username: "jalen"),
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -365,22 +335,7 @@ class PlaceholderValues {
   );
 
   LeaderboardModel bandedYRotationLeaderboard2 = LeaderboardModel(
-    userEntry: LeaderboardEntryModel(
-        user: UserModel(
-            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
-        exerciseSetDefinition: ExerciseSetModel(
-          exerciseName: "180 Squat Jumps",
-          targetReps: 10,
-        ),
-        score: ExerciseScoreModel(
-            exerciseSetDefinition: ExerciseSetModel(
-              exerciseName: "180 Squat Jumps",
-              targetReps: 10,
-            ),
-            goodReps: 0,
-            badReps: 0,
-            value: 0)),
-    userPosition: 0,
+    user: UserModel(username: "jalen"),
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -617,22 +572,7 @@ class PlaceholderValues {
     ],
   );
   LeaderboardModel bandedYRotationLeaderboard3 = LeaderboardModel(
-    userEntry: LeaderboardEntryModel(
-        user: UserModel(
-            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
-        exerciseSetDefinition: ExerciseSetModel(
-          exerciseName: "180 Squat Jumps",
-          targetReps: 10,
-        ),
-        score: ExerciseScoreModel(
-            exerciseSetDefinition: ExerciseSetModel(
-              exerciseName: "180 Squat Jumps",
-              targetReps: 10,
-            ),
-            goodReps: 0,
-            badReps: 0,
-            value: 0)),
-    userPosition: 0,
+    user: UserModel(username: "jalen"),
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -869,22 +809,7 @@ class PlaceholderValues {
     ],
   );
   LeaderboardModel bandedYRotationLeaderboard4 = LeaderboardModel(
-    userEntry: LeaderboardEntryModel(
-        user: UserModel(
-            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
-        exerciseSetDefinition: ExerciseSetModel(
-          exerciseName: "180 Squat Jumps",
-          targetReps: 10,
-        ),
-        score: ExerciseScoreModel(
-            exerciseSetDefinition: ExerciseSetModel(
-              exerciseName: "180 Squat Jumps",
-              targetReps: 10,
-            ),
-            goodReps: 0,
-            badReps: 0,
-            value: 0)),
-    userPosition: 0,
+    user: UserModel(username: "jalen"),
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -1121,22 +1046,7 @@ class PlaceholderValues {
     ],
   );
   LeaderboardModel bandedYRotationLeaderboard5 = LeaderboardModel(
-    userEntry: LeaderboardEntryModel(
-        user: UserModel(
-            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
-        exerciseSetDefinition: ExerciseSetModel(
-          exerciseName: "180 Squat Jumps",
-          targetReps: 10,
-        ),
-        score: ExerciseScoreModel(
-            exerciseSetDefinition: ExerciseSetModel(
-              exerciseName: "180 Squat Jumps",
-              targetReps: 10,
-            ),
-            goodReps: 0,
-            badReps: 0,
-            value: 0)),
-    userPosition: 0,
+    user: UserModel(username: "jalen"),
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -1373,22 +1283,7 @@ class PlaceholderValues {
     ],
   );
   LeaderboardModel frontElevatedMountainClimbersLeaderboard = LeaderboardModel(
-    userEntry: LeaderboardEntryModel(
-        user: UserModel(
-            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
-        exerciseSetDefinition: ExerciseSetModel(
-          exerciseName: "180 Squat Jumps",
-          targetReps: 10,
-        ),
-        score: ExerciseScoreModel(
-            exerciseSetDefinition: ExerciseSetModel(
-              exerciseName: "180 Squat Jumps",
-              targetReps: 10,
-            ),
-            goodReps: 0,
-            badReps: 0,
-            value: 0)),
-    userPosition: 0,
+    user: UserModel(username: "jalen"),
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -1478,25 +1373,9 @@ class PlaceholderValues {
           )),
     ],
   );
-  
 
   LeaderboardModel plioPushupBurnoutsLeaderboard = LeaderboardModel(
-    userEntry: LeaderboardEntryModel(
-        user: UserModel(
-            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
-        exerciseSetDefinition: ExerciseSetModel(
-          exerciseName: "180 Squat Jumps",
-          targetReps: 10,
-        ),
-        score: ExerciseScoreModel(
-            exerciseSetDefinition: ExerciseSetModel(
-              exerciseName: "180 Squat Jumps",
-              targetReps: 10,
-            ),
-            goodReps: 0,
-            badReps: 0,
-            value: 0)),
-    userPosition: 0,
+    user: UserModel(username: "jalen"),
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -1587,22 +1466,7 @@ class PlaceholderValues {
     ],
   );
   LeaderboardModel spiderPushupsLeaderboard = LeaderboardModel(
-    userEntry: LeaderboardEntryModel(
-        user: UserModel(
-            firstName: "Brooks", lastName: "Goldstein", username: "so_cute"),
-        exerciseSetDefinition: ExerciseSetModel(
-          exerciseName: "Barbell Back Squat",
-          targetReps: 10,
-        ),
-        score: ExerciseScoreModel(
-            exerciseSetDefinition: ExerciseSetModel(
-              exerciseName: "Barbell Back Squat",
-              targetReps: 10,
-            ),
-            goodReps: 0,
-            badReps: 0,
-            value: 0)),
-    userPosition: 0,
+    user: UserModel(username: "jalen"),
     leaderboardEntries: [
       LeaderboardEntryModel(
           exerciseSetDefinition: ExerciseSetModel(
@@ -1722,103 +1586,91 @@ class PlaceholderValues {
     ];
   }
 
-  var leaderboard = LeaderboardModel(
-      userPosition: 0,
-      userEntry: LeaderboardEntryModel(
-          user: UserModel(username: 'gabbyyyy'),
-          score: ExerciseScoreModel(goodReps: 0, badReps: 0)),
-      leaderboardEntries: [
-        LeaderboardEntryModel(
-            user: UserModel(
-                firstName: 'Ellie',
-                lastName: 'Abromaitis',
-                username: 'no_knucks'),
-            score: ExerciseScoreModel(
-              exerciseSetDefinition: ExerciseSetModel(
-                exerciseName: 'Split Squat',
-                targetReps: 10,
-              ),
-              value: 5,
-              goodReps: 0,
-              badReps: 5,
-            )),
-        LeaderboardEntryModel(
-            user: UserModel(
-                firstName: 'Jack',
-                lastName: 'Abromaitis',
-                username: 'beyblades!!'),
-            score: ExerciseScoreModel(
-                exerciseSetDefinition: ExerciseSetModel(
-                  exerciseName: 'Split Squat',
-                  targetReps: 10,
-                ),
-                value: 7,
-                goodReps: 2,
-                badReps: 5)),
-        LeaderboardEntryModel(
-            user: UserModel(
-                firstName: 'Doug', lastName: 'Goldstein', username: 'dougie'),
-            score: ExerciseScoreModel(
-              exerciseSetDefinition: ExerciseSetModel(
-                exerciseName: 'Split Squat',
-                targetReps: 10,
-              ),
-              value: 20,
-              goodReps: 10,
-              badReps: 0,
-            )),
-        LeaderboardEntryModel(
-            user: UserModel(
-                firstName: 'Ann',
-                lastName: 'Abromaitis',
-                username: 'killa_strotha'),
-            score: ExerciseScoreModel(
-                exerciseSetDefinition: ExerciseSetModel(
-                  exerciseName: 'Split Squat',
-                  targetReps: 10,
-                ),
-                value: 30,
-                goodReps: 2,
-                badReps: 10)),
-        LeaderboardEntryModel(
-            user: UserModel(
-                firstName: 'Lee',
-                lastName: 'Goldstein',
-                username: 'lee_loves_me'),
-            score: ExerciseScoreModel(
-                exerciseSetDefinition: ExerciseSetModel(
-                  exerciseName: 'Split Squat',
-                  targetReps: 10,
-                ),
-                value: 66,
-                goodReps: 10,
-                badReps: 3)),
-        LeaderboardEntryModel(
-            user: UserModel(
-                firstName: 'Candice',
-                lastName: 'Goldstein',
-                username: 'masta_chef'),
-            score: ExerciseScoreModel(
-                exerciseSetDefinition: ExerciseSetModel(
-                  exerciseName: 'Split Squat',
-                  targetReps: 10,
-                ),
-                value: 130,
-                goodReps: 7,
-                badReps: 10)),
-        LeaderboardEntryModel(
-            user: UserModel(
-                firstName: 'Brooks',
-                lastName: 'Goldstein',
-                username: 'so_cute'),
-            score: ExerciseScoreModel(
-              exerciseSetDefinition: ExerciseSetModel(
-                exerciseName: 'Split Squat',
-                targetReps: 10,
-              ),
-              value: 1000,
-              goodReps: 5,
-              badReps: 15,
-            )),
-      ]);
+  var leaderboard =
+      LeaderboardModel(user: UserModel(username: "jalen"), leaderboardEntries: [
+    LeaderboardEntryModel(
+        user: UserModel(
+            firstName: 'Ellie', lastName: 'Abromaitis', username: 'no_knucks'),
+        score: ExerciseScoreModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: 'Split Squat',
+            targetReps: 10,
+          ),
+          value: 5,
+          goodReps: 0,
+          badReps: 5,
+        )),
+    LeaderboardEntryModel(
+        user: UserModel(
+            firstName: 'Jack', lastName: 'Abromaitis', username: 'beyblades!!'),
+        score: ExerciseScoreModel(
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: 'Split Squat',
+              targetReps: 10,
+            ),
+            value: 7,
+            goodReps: 2,
+            badReps: 5)),
+    LeaderboardEntryModel(
+        user: UserModel(
+            firstName: 'Doug', lastName: 'Goldstein', username: 'dougie'),
+        score: ExerciseScoreModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: 'Split Squat',
+            targetReps: 10,
+          ),
+          value: 20,
+          goodReps: 10,
+          badReps: 0,
+        )),
+    LeaderboardEntryModel(
+        user: UserModel(
+            firstName: 'Ann',
+            lastName: 'Abromaitis',
+            username: 'killa_strotha'),
+        score: ExerciseScoreModel(
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: 'Split Squat',
+              targetReps: 10,
+            ),
+            value: 30,
+            goodReps: 2,
+            badReps: 10)),
+    LeaderboardEntryModel(
+        user: UserModel(
+            firstName: 'Lee', lastName: 'Goldstein', username: 'lee_loves_me'),
+        score: ExerciseScoreModel(
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: 'Split Squat',
+              targetReps: 10,
+            ),
+            value: 66,
+            goodReps: 10,
+            badReps: 3)),
+    LeaderboardEntryModel(
+        user: UserModel(
+            firstName: 'Candice',
+            lastName: 'Goldstein',
+            username: 'masta_chef'),
+        score: ExerciseScoreModel(
+            exerciseSetDefinition: ExerciseSetModel(
+              exerciseName: 'Split Squat',
+              targetReps: 10,
+            ),
+            value: 130,
+            goodReps: 7,
+            badReps: 10)),
+    LeaderboardEntryModel(
+        user: UserModel(
+            firstName: 'Brooks', lastName: 'Goldstein', username: 'so_cute'),
+        score: ExerciseScoreModel(
+          exerciseSetDefinition: ExerciseSetModel(
+            exerciseName: 'Split Squat',
+            targetReps: 10,
+          ),
+          value: 1000,
+          goodReps: 5,
+          badReps: 15,
+        )),
+  ]);
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tabletapp/constants/bluetooth_uuid.dart';
 
@@ -14,13 +15,13 @@ class ExerciseSetModel {
   final String scoreTag;
 
   ExerciseSetModel({
-    this.exerciseName,
-    this.targetReps,
+    @required this.exerciseName,
+    @required this.targetReps,
     this.perSide = false,
     this.isTime = false,
-    this.scoreMultiplier = 1.0,
-    this.maxScore,
-    this.scoreTag = BluetoothUUID.totalScoreTag,
+    @required this.scoreMultiplier,
+    @required this.maxScore,
+    @required this.scoreTag,
   });
   factory ExerciseSetModel.fromJson(Map<String, dynamic> json) =>
       _$ExerciseSetModelFromJson(json);

@@ -51,14 +51,17 @@ class _LeaderboardState extends State<Leaderboard> {
                     children: [
                       LeaderboardEntry(
                         topThree: true,
+                        nearestFive: false,
                         position: 0,
                       ),
                       LeaderboardEntry(
                         topThree: true,
+                        nearestFive: false,
                         position: 1,
                       ),
                       LeaderboardEntry(
                         topThree: true,
+                        nearestFive: false,
                         position: 2,
                       ),
                     ]),
@@ -76,22 +79,27 @@ class _LeaderboardState extends State<Leaderboard> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     LeaderboardEntry(
+                      topThree: false,
                       nearestFive: true,
                       position: 0,
                     ),
                     LeaderboardEntry(
+                      topThree: false,
                       nearestFive: true,
                       position: 1,
                     ),
                     LeaderboardEntry(
+                      topThree: false,
                       nearestFive: true,
                       position: 2,
                     ),
                     LeaderboardEntry(
+                      topThree: false,
                       nearestFive: true,
                       position: 3,
                     ),
                     LeaderboardEntry(
+                      topThree: false,
                       nearestFive: true,
                       position: 4,
                     ),

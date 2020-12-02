@@ -1,18 +1,16 @@
 import 'dart:async';
 import 'dart:collection';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:tabletapp/models/exercise_score_model.dart';
 import 'package:tabletapp/models/user_model.dart';
 import 'package:tabletapp/models/workout_details.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/models/workout_set_model.dart';
-import 'package:tabletapp/routes/workout_video_screen/leaderboard/interstitial_rest_leaderboard/interstitial_rest_leaderboard.dart';
-
-import 'leaderboard/interstitial_rest_leaderboard/interstitial_rest_leaderboard_model.dart';
 import 'leaderboard/leaderboard_entry_model.dart';
 import 'leaderboard/leaderboard_model.dart';
 import 'notification_bar/workout_notification.dart';
+import 'post_workout_survey/post_workout_survey_response_box_model.dart';
 
 class WorkoutVideoScreenState {
   // All video metadata.
@@ -28,28 +26,22 @@ class WorkoutVideoScreenState {
   Timer exerciseTimer;
   int currentWorkoutSetIndex;
   final int secondsElapsed;
+  final PostWorkoutSurveyResponseBoxModel postWorkoutSurveyResponseBoxModel;
+  final UserModel user;
 
-  WorkoutVideoScreenState(
-      {this.workoutMetadata,
-      this.bluetoothDevice,
-      this.leaderboards,
-      this.currentWorkoutSetIndex = 0,
-      this.exerciseTimer,
-      this.showNotification = false,
-      this.workoutNotification,
-      this.secondsElapsed = 0,
-      this.cumulativeLeaderboards});
-
-  static WorkoutVideoScreenState initializeWorkout(
-      WorkoutMetadata workoutMetadata,
-      {BluetoothDevice bluetoothDevice}) {
-    return WorkoutVideoScreenState(
-      workoutMetadata: workoutMetadata,
-      // Retrieve leaderboards!!
-      // TODO(jalen): retrieve leaderboards
-      bluetoothDevice: bluetoothDevice != null ? bluetoothDevice : null,
-    );
-  }
+  WorkoutVideoScreenState({
+    @required this.workoutMetadata,
+    @required this.bluetoothDevice,
+    @required this.leaderboards,
+    @required this.cumulativeLeaderboards,
+    @required this.postWorkoutSurveyResponseBoxModel,
+    @required this.user,
+    this.currentWorkoutSetIndex = 0,
+    this.exerciseTimer,
+    this.showNotification = false,
+    this.workoutNotification,
+    this.secondsElapsed = 0,
+  });
 
   WorkoutVideoScreenState copyWith({
     WorkoutDetails workoutDetails,
@@ -62,6 +54,8 @@ class WorkoutVideoScreenState {
     WorkoutNotification workoutNotification,
     int secondsElapsed,
     HashMap<UserModel, int> cuumulativeLeaderboards,
+    PostWorkoutSurveyResponseBoxModel postWorkoutSurveyResponseBoxModel,
+    UserModel user,
   }) {
     return WorkoutVideoScreenState(
       workoutMetadata: workoutMetadata ?? this.workoutMetadata,
@@ -75,6 +69,9 @@ class WorkoutVideoScreenState {
       secondsElapsed: secondsElapsed ?? this.secondsElapsed,
       cumulativeLeaderboards:
           cuumulativeLeaderboards ?? this.cumulativeLeaderboards,
+      postWorkoutSurveyResponseBoxModel: postWorkoutSurveyResponseBoxModel ??
+          this.postWorkoutSurveyResponseBoxModel,
+      user: user ?? this.user,
     );
   }
 
@@ -96,16 +93,7 @@ class WorkoutVideoScreenState {
   }
 
   List<LeaderboardEntryModel> getCuumulativeLeaderboardAsSortedList() {
-    List<LeaderboardEntryModel> list = [];
-    // For every entry in the cuumulative leaderboards.
-    cumulativeLeaderboards.forEach((key, value) {
-      LeaderboardEntryModel model = LeaderboardEntryModel(
-          score: ExerciseScoreModel(value: value), user: key);
-      list.add(model);
-    });
-    // Sort list in descending order.
-    list.sort((a, b) => b.score.value.compareTo(a.score.value));
-    return list;
+    return [];
   }
 
   LeaderboardModel get currentLeaderboard => leaderboards[currentExerciseIndex];

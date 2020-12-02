@@ -13,7 +13,7 @@ class ExerciseScoreModel extends ChangeNotifier {
   int value;
 
   ExerciseScoreModel(
-      {this.exerciseSetDefinition,
+      {@required this.exerciseSetDefinition,
       this.value = 0,
       this.goodReps = 0,
       this.badReps = 0});

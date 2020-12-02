@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tabletapp/models/exercise_set_model.dart';
 
@@ -22,9 +23,9 @@ class WorkoutSetModel {
   Map<String, dynamic> toJson() => _$WorkoutSetModelToJson(this);
 
   WorkoutSetModel({
-    this.exerciseSetDefinition,
-    this.videoTimestamp,
-    this.isRest,
-    this.videoEndTimestamp,
+    @required this.exerciseSetDefinition,
+    @required this.videoTimestamp,
+    @required this.isRest,
+    @required this.videoEndTimestamp,
   });
 }

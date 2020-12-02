@@ -16,12 +16,16 @@ import 'leaderboard/leaderboard.dart';
 import 'notification_bar/workout_notification.dart';
 import 'notification_bar/workout_notification_bar.dart';
 import 'post_workout_survey/post_workout_survey.dart';
+import 'workout_video_screen_arguments.dart';
 import 'workout_video_screen_reducers.dart';
 
 class WorkoutVideoScreen extends StatefulWidget {
   final WorkoutVideoScreenState workoutVideoScreenState;
   final BluetoothDevice bluetoothDevice;
-  WorkoutVideoScreen(this.workoutVideoScreenState, {this.bluetoothDevice});
+  static const routeName = "WorkoutVideoScreen";
+  WorkoutVideoScreen(WorkoutVideoScreenArguments arguments)
+      : workoutVideoScreenState = arguments.workoutVideoScreenState,
+        bluetoothDevice = arguments.bluetoothDevice;
 
   @override
   _WorkoutVideoScreenState createState() =>
@@ -185,12 +189,13 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
                     // Disconnect the bluetooth device
                     if (store.state.bluetoothDevice != null)
                       store.state.bluetoothDevice.disconnect();
-                    // Dispose of the video controller resources
-                    controller.dispose();
+                    // Pause the video controller.
+                    controller.pause();
                     // Display post workout survey
                     return Align(
                         alignment: Alignment.center,
-                        child: PostWorkoutSurvey(this.store.state));
+                        child: PostWorkoutSurvey(
+                            this.store.state, this.controller));
                   }
                   // Otherwise just ignore.
                   return Container();

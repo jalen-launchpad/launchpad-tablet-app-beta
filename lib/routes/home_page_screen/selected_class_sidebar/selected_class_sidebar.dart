@@ -6,6 +6,7 @@ import 'package:tabletapp/models/exercise_model.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/placeholder_values.dart';
 import 'package:tabletapp/routes/bluetooth_setup_screen/bluetooth_setup_screen.dart';
+import 'package:tabletapp/routes/bluetooth_setup_screen/bluetooth_setup_screen_arguments.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/routes/home_page_screen/selected_class_sidebar/constants.dart';
@@ -38,8 +39,9 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<HomePageScreenState, WorkoutMetadata>(
-      builder: (context, workoutMetadata) {
+    return StoreBuilder<HomePageScreenState>(
+      builder: (context, store) {
+        var workoutMetadata = store.state.sidebarClass;
         var distinctExerciseList = removeDuplicateExercises(
             workoutMetadata.workoutDetails.exerciseList);
         return Container(
@@ -162,12 +164,11 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                     borderRadius: BorderRadius.circular(110),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (BuildContext context) =>
-                                BluetoothSetupScreen(
-                                    workoutMetadata: workoutMetadata)));
+                    Navigator.pushReplacementNamed(
+                        context, BluetoothSetupScreen.routeName,
+                        arguments: BluetoothSetupScreenArguments(
+                            workoutMetadata: workoutMetadata,
+                            homePageScreenState: store.state));
                   },
                   icon: Icon(
                     Icons.play_arrow,
@@ -189,7 +190,6 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
           ),
         );
       },
-      converter: (store) => store.state.sidebarClass,
     );
   }
 }
