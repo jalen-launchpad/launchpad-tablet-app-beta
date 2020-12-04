@@ -86,14 +86,32 @@ class WorkoutVideoScreenState {
   }
 
   void updateCuumulativeLeaderboard() {
+    if (currentExercise.isRest) return;
     leaderboards[currentExerciseIndex].leaderboardEntries.forEach((element) {
       cumulativeLeaderboards[element.user] =
           cumulativeLeaderboards[element.user] + element.score.value;
     });
   }
 
-  List<LeaderboardEntryModel> getCuumulativeLeaderboardAsSortedList() {
-    return [];
+  LeaderboardModel getCumulativeLeaderboard(UserModel user) {
+    var list = cumulativeLeaderboards.entries.toList();
+    list.sort((a, b) => a.value.compareTo(b.value));
+    var listLeaderboardEntries = list
+        .map(
+          (e) => LeaderboardEntryModel(
+            user: e.key,
+            score: ExerciseScoreModel(
+              value: e.value,
+              exerciseSetDefinition: null,
+            ),
+            exerciseSetDefinition: null,
+          ),
+        )
+        .toList();
+    return LeaderboardModel.userEntryAlreadyExists(
+      leaderboardEntries: listLeaderboardEntries,
+      user: user,
+    );
   }
 
   LeaderboardModel get currentLeaderboard => leaderboards[currentExerciseIndex];

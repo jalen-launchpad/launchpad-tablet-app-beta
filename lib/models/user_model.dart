@@ -11,6 +11,11 @@ class UserModel {
 
   bool operator ==(o) => o.username == username;
   int get hashCode => username.hashCode ^ firstName.hashCode;
+  
+  @override
+  String toString() {
+    return username;
+  }
 
   UserModel({@required this.username, this.firstName, this.lastName});
   factory UserModel.fromJson(Map<String, dynamic> json) =>

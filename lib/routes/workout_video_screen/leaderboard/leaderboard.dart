@@ -22,7 +22,7 @@ class Leaderboard extends StatefulWidget {
 }
 
 class _LeaderboardState extends State<Leaderboard> {
-  static double borderRadius = SizeConfig.blockSizeHorizontal * 3;
+  static double borderRadius = SizeConfig.blockSizeHorizontal;
 
   @override
   Widget build(BuildContext context) {

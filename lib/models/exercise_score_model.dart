@@ -23,6 +23,11 @@ class ExerciseScoreModel extends ChangeNotifier {
   // Replace with real information from a scoring heuristic.
   int get getValue => value;
 
+  @override
+  String toString() {
+    return ("score value: " + value.toString());
+  }
+
   factory ExerciseScoreModel.fromJson(Map<String, dynamic> json) =>
       _$ExerciseScoreModelFromJson(json);
   Map<String, dynamic> toJson() => _$ExerciseScoreModelToJson(this);

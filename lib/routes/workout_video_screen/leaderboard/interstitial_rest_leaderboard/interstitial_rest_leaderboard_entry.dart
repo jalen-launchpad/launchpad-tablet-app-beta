@@ -39,12 +39,11 @@ class _InterstitialRestLeaderboardEntryState
   @override
   Widget build(BuildContext context) {
     return StoreBuilder<WorkoutVideoScreenState>(builder: (context, store) {
+      var cumulativeLeaderboard =
+          store.state.getCumulativeLeaderboard(store.state.user);
       if (topThree == true) {
-        bool isUser =
-            store.state.currentLeaderboard.getUserEntry.user.username ==
-                store.state.currentLeaderboard.topThreeEntries[position].user
-                    .username;
-
+        bool isUser = store.state.user ==
+            cumulativeLeaderboard.topThreeEntries[position].user;
         return Container(
             height: SizeConfig.blockSizeVertical * 3,
             child: Stack(
@@ -70,8 +69,8 @@ class _InterstitialRestLeaderboardEntryState
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    store.state.currentLeaderboard.topThreeEntries[position]
-                        .user.username,
+                    cumulativeLeaderboard
+                        .topThreeEntries[position].user.username,
                     style: TextStyle(
                       color: isUser
                           ? ColorConstants.launchpadGreen
@@ -87,8 +86,8 @@ class _InterstitialRestLeaderboardEntryState
                     padding: EdgeInsets.only(
                         right: SizeConfig.blockSizeHorizontal * 2),
                     child: Text(
-                      store.state.currentLeaderboard.topThreeEntries[position]
-                          .score.value
+                      cumulativeLeaderboard
+                          .topThreeEntries[position].score.value
                           .toString(),
                       style: TextStyle(
                         color: isUser
@@ -103,10 +102,9 @@ class _InterstitialRestLeaderboardEntryState
               ],
             ));
       } else if (nearestFive == true) {
-        bool isUser =
-            store.state.currentLeaderboard.getUserEntry.user.username ==
-                store.state.currentLeaderboard.nearestFiveEntries[position].user
-                    .username;
+        print(cumulativeLeaderboard.nearestFiveEntries[position]);
+        bool isUser = cumulativeLeaderboard.getUserEntry.user.username ==
+            cumulativeLeaderboard.nearestFiveEntries[position].user.username;
         return Container(
             height: SizeConfig.blockSizeVertical * 3,
             child: Stack(
@@ -118,7 +116,7 @@ class _InterstitialRestLeaderboardEntryState
                       left: SizeConfig.blockSizeHorizontal * 2,
                     ),
                     child: Text(
-                      store.state.currentLeaderboard
+                      cumulativeLeaderboard
                               .nearestFiveEntriesPositions[position]
                               .toString() +
                           ".",
@@ -135,8 +133,8 @@ class _InterstitialRestLeaderboardEntryState
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    store.state.currentLeaderboard.nearestFiveEntries[position]
-                        .user.username,
+                    cumulativeLeaderboard
+                        .nearestFiveEntries[position].user.username,
                     style: TextStyle(
                       color: isUser
                           ? ColorConstants.launchpadGreen
@@ -152,7 +150,7 @@ class _InterstitialRestLeaderboardEntryState
                     padding: EdgeInsets.only(
                         right: SizeConfig.blockSizeHorizontal * 2),
                     child: Text(
-                      store.state.currentLeaderboard
+                      cumulativeLeaderboard
                           .nearestFiveEntries[position].score.value
                           .toString(),
                       style: TextStyle(

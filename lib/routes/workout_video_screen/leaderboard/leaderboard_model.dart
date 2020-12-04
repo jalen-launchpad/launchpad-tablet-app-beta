@@ -69,21 +69,18 @@ class LeaderboardModel {
   List<int> getNearestFiveEntriesPositions() {
     List<int> list = [];
     if (userIsLeader || userIsSecondPlace) {
-      print("userIsLeader");
       list.add(1);
       list.add(2);
       list.add(3);
       list.add(4);
       list.add(5);
     } else if (userIsLast || userIsSecondToLast) {
-      print("userIsLast");
       list.add(leaderboardEntries.length - 4);
       list.add(leaderboardEntries.length - 3);
       list.add(leaderboardEntries.length - 2);
       list.add(leaderboardEntries.length - 1);
       list.add(leaderboardEntries.length);
     } else {
-      print("user is in between");
       list.add((leaderboardEntries.length - userPosition) + 1 - 2);
       list.add((leaderboardEntries.length - userPosition) + 1 - 1);
       list.add((leaderboardEntries.length - userPosition) + 1);
@@ -107,6 +104,20 @@ class LeaderboardModel {
       leaderboardEntries: this.leaderboardEntries,
       user: this.user,
     );
+  }
+
+  LeaderboardModel.userEntryAlreadyExists(
+      {this.leaderboardEntries, this.user}) {
+    userPosition = this
+        .leaderboardEntries
+        .indexWhere((element) => element.user == this.user);
+    this.leaderboardEntries.forEach((element) {
+      print(element.score);
+    });
+    userEntry = this.leaderboardEntries[userPosition];
+    this.topThreeEntries = getTopThreeEntries();
+    this.nearestFiveEntries = getNearestFiveEntries();
+    this.nearestFiveEntriesPositions = getNearestFiveEntriesPositions();
   }
 
   LeaderboardModel({this.leaderboardEntries, this.user}) {
