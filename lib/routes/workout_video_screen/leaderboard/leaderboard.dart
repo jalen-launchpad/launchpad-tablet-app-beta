@@ -13,7 +13,7 @@ import 'leaderboard_model.dart';
 // User user
 // List<LeaderboardEntryModel> currentLeaderboards
 class Leaderboard extends StatefulWidget {
-  static double workoutLeaderboardHeight = SizeConfig.blockSizeVertical * 70;
+  static double workoutLeaderboardHeight = SizeConfig.blockSizeVertical * 74;
   static double workoutLeaderboardWidth = SizeConfig.blockSizeHorizontal * 25;
 
   static double borderRadius = SizeConfig.blockSizeHorizontal * 3;
@@ -30,80 +30,118 @@ class _LeaderboardState extends State<Leaderboard> {
         width: Leaderboard.workoutLeaderboardWidth,
         height: Leaderboard.workoutLeaderboardHeight,
         decoration: BoxDecoration(
-          color: ColorConstants.launchpadPrimaryWhite,
+          color: ColorConstants.launchpadPrimaryBlack,
           borderRadius: BorderRadius.circular(borderRadius),
         ),
         child: StoreBuilder<WorkoutVideoScreenState>(builder: (context, store) {
-          var returnValue = Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          var returnValue = Stack(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(borderRadius),
-                    topRight: Radius.circular(borderRadius),
+              Positioned(
+                top: SizeConfig.blockSizeVertical * 3,
+                child: Container(
+                  child: Center(
+                    child: Text(
+                      store.state.currentExercise.isRest
+                          ? "Previous Set"
+                          : "Current Set",
+                      style: TextStyle(
+                        color: ColorConstants.launchpadPrimaryWhite,
+                        fontSize: SizeConfig.blockSizeHorizontal * 1.8,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                  color: Colors.black,
+                  width: Leaderboard.workoutLeaderboardWidth,
                 ),
-                height: Leaderboard.workoutLeaderboardHeight / 3 - 2,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              ),
+              Positioned(
+                top: SizeConfig.blockSizeVertical * 8,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(borderRadius),
+                      topRight: Radius.circular(borderRadius),
+                    ),
+                    color: Colors.black,
+                  ),
+                  height: Leaderboard.workoutLeaderboardHeight / 4,
+                  width: Leaderboard.workoutLeaderboardWidth,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        LeaderboardEntry(
+                          topThree: true,
+                          nearestFive: false,
+                          position: 0,
+                        ),
+                        LeaderboardEntry(
+                          topThree: true,
+                          nearestFive: false,
+                          position: 1,
+                        ),
+                        LeaderboardEntry(
+                          topThree: true,
+                          nearestFive: false,
+                          position: 2,
+                        ),
+                      ]),
+                ),
+              ),
+              Positioned(
+                top: SizeConfig.blockSizeVertical * 27,
+                child: Container(
+                    height: SizeConfig.blockSizeVertical * 3,
+                    width: Leaderboard.workoutLeaderboardWidth,
+                    child: Center(
+                      child: Container(
+                        height: SizeConfig.blockSizeVertical * 0.25,
+                        width: Leaderboard.workoutLeaderboardWidth -
+                            SizeConfig.blockSizeHorizontal * 3,
+                        color: ColorConstants.launchpadPrimaryWhite,
+                      ),
+                    )),
+              ),
+              Positioned(
+                bottom: SizeConfig.blockSizeVertical * 4,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(borderRadius),
+                      bottomRight: Radius.circular(borderRadius),
+                    ),
+                  ),
+                  height: (2 * Leaderboard.workoutLeaderboardHeight / 4),
+                  width: Leaderboard.workoutLeaderboardWidth,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       LeaderboardEntry(
-                        topThree: true,
-                        nearestFive: false,
+                        topThree: false,
+                        nearestFive: true,
                         position: 0,
                       ),
                       LeaderboardEntry(
-                        topThree: true,
-                        nearestFive: false,
+                        topThree: false,
+                        nearestFive: true,
                         position: 1,
                       ),
                       LeaderboardEntry(
-                        topThree: true,
-                        nearestFive: false,
+                        topThree: false,
+                        nearestFive: true,
                         position: 2,
                       ),
-                    ]),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(borderRadius),
-                    bottomRight: Radius.circular(borderRadius),
+                      LeaderboardEntry(
+                        topThree: false,
+                        nearestFive: true,
+                        position: 3,
+                      ),
+                      LeaderboardEntry(
+                        topThree: false,
+                        nearestFive: true,
+                        position: 4,
+                      ),
+                    ],
                   ),
-                  color: Colors.black,
-                ),
-                height: (2 * Leaderboard.workoutLeaderboardHeight / 3) - 2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    LeaderboardEntry(
-                      topThree: false,
-                      nearestFive: true,
-                      position: 0,
-                    ),
-                    LeaderboardEntry(
-                      topThree: false,
-                      nearestFive: true,
-                      position: 1,
-                    ),
-                    LeaderboardEntry(
-                      topThree: false,
-                      nearestFive: true,
-                      position: 2,
-                    ),
-                    LeaderboardEntry(
-                      topThree: false,
-                      nearestFive: true,
-                      position: 3,
-                    ),
-                    LeaderboardEntry(
-                      topThree: false,
-                      nearestFive: true,
-                      position: 4,
-                    ),
-                  ],
                 ),
               )
             ],

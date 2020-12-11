@@ -84,6 +84,7 @@ class WorkoutCard extends StatelessWidget {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         padding: EdgeInsets.only(
@@ -99,10 +100,10 @@ class WorkoutCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Image.asset(
-                        'assets/images/smallTimeVector.png',
-                        height: SizeConfig.blockSizeHorizontal * 1.2,
-                        width: SizeConfig.blockSizeHorizontal * 1.2,
+                      Icon(
+                        Icons.access_time,
+                        size: SizeConfig.blockSizeHorizontal * 1.2,
+                        color: ColorConstants.launchpadPrimaryWhite,
                       ),
                     ],
                   ),

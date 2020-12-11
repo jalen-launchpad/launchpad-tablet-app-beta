@@ -50,11 +50,13 @@ class ExerciseBucket extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                    padding:
-                        EdgeInsets.only(left: SizeConfig.blockSizeHorizontal),
-                    child: Image.asset(
-                      'assets/images/exerciseCountVector.png',
-                      height: SizeConfig.blockSizeVertical * 4,
+                    padding: EdgeInsets.only(
+                      left: SizeConfig.blockSizeHorizontal * 1.25,
+                    ),
+                    child: Icon(
+                      Icons.fitness_center,
+                      color: ColorConstants.launchpadSecondaryLightBlue,
+                      size: SizeConfig.blockSizeHorizontal * 3,
                     ),
                   ),
                 ),
@@ -62,7 +64,7 @@ class ExerciseBucket extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: Container(
                     padding: EdgeInsets.only(
-                      right: SizeConfig.blockSizeHorizontal,
+                      right: SizeConfig.blockSizeHorizontal * 1.5,
                     ),
                     child: Text(
                       distinctExerciseList.length.toString() + " exe",

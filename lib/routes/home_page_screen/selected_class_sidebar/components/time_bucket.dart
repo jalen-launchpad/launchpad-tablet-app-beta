@@ -56,11 +56,12 @@ class TimeBucket extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Container(
                     padding: EdgeInsets.only(
-                      left: SizeConfig.blockSizeHorizontal,
+                      left: SizeConfig.blockSizeHorizontal * 1.25,
                     ),
-                    child: Image.asset(
-                      'assets/images/timeVector.png',
-                      height: SizeConfig.blockSizeVertical * 4,
+                    child: Icon(
+                      Icons.timer,
+                      size: SizeConfig.blockSizeHorizontal * 3,
+                      color: ColorConstants.launchpadGreen,
                     ),
                   ),
                 ),
@@ -68,7 +69,7 @@ class TimeBucket extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: Container(
                     padding: EdgeInsets.only(
-                      right: SizeConfig.blockSizeHorizontal,
+                      right: SizeConfig.blockSizeHorizontal * 1.5,
                     ),
                     child: Text(
                       (details.duration ~/ 60).toString() + " min",

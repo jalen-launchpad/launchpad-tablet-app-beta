@@ -88,6 +88,8 @@ final Function(WorkoutVideoScreenState, AddScoreValueAction)
     addScoreValueAction =
     (WorkoutVideoScreenState state, AddScoreValueAction action) {
   var newState = state.copyWith();
+
+  print(state.currentWorkoutSetIndex);
   if (newState.currentExercise.isRest == true) {
     return newState;
   }
@@ -118,6 +120,7 @@ Function(WorkoutVideoScreenState, ChangeToNextExerciseAction)
     changeToNextExerciseReducer =
     (WorkoutVideoScreenState state, ChangeToNextExerciseAction action) {
   var newState = state.copyWith();
+  print("changeToNextExerciseReducer invoked");
   newState.updateCuumulativeLeaderboard();
   newState.changeToNextExercise();
   return newState;

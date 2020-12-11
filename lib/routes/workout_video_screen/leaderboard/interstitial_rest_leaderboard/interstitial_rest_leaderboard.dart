@@ -9,7 +9,7 @@ import 'interstitial_rest_leaderboard_entry.dart';
 
 // @params
 // User user
-// List<InterstitialRestInterstitialRestLeaderboardEntryModel> currentLeaderboards
+// List<InterstitialRestInterstitialRestInterstitialRestLeaderboardEntryModel> currentLeaderboards
 class InterstitialRestLeaderboard extends StatefulWidget {
   static double workoutLeaderboardHeight = SizeConfig.blockSizeVertical * 70;
   static double workoutLeaderboardWidth = SizeConfig.blockSizeHorizontal * 25;
@@ -29,85 +29,122 @@ class _InterstitialRestLeaderboardState
     return Row(
       children: [
         Leaderboard(),
+        Container(width: SizeConfig.blockSizeHorizontal * 4),
         Container(
             width: Leaderboard.workoutLeaderboardWidth,
             height: Leaderboard.workoutLeaderboardHeight,
             decoration: BoxDecoration(
-              color: ColorConstants.launchpadPrimaryWhite,
+              color: ColorConstants.launchpadPrimaryBlack,
               borderRadius: BorderRadius.circular(borderRadius),
             ),
             child: StoreBuilder<WorkoutVideoScreenState>(
                 builder: (context, store) {
-               return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              return Stack(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(borderRadius),
-                        topRight: Radius.circular(borderRadius),
+                  Positioned(
+                    top: SizeConfig.blockSizeVertical * 3,
+                    child: Container(
+                      child: Center(
+                        child: Text(
+                          "Overall",
+                          style: TextStyle(
+                            color: ColorConstants.launchpadPrimaryWhite,
+                            fontSize: SizeConfig.blockSizeHorizontal * 1.8,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                      color: Colors.black,
+                      width: Leaderboard.workoutLeaderboardWidth,
                     ),
-                    height: Leaderboard.workoutLeaderboardHeight / 3 - 2,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  ),
+                  Positioned(
+                    top: SizeConfig.blockSizeVertical * 8,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(borderRadius),
+                          topRight: Radius.circular(borderRadius),
+                        ),
+                        color: Colors.black,
+                      ),
+                      height: Leaderboard.workoutLeaderboardHeight / 4,
+                      width: Leaderboard.workoutLeaderboardWidth,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InterstitialRestLeaderboardEntry(
+                              topThree: true,
+                              nearestFive: false,
+                              position: 0,
+                            ),
+                            InterstitialRestLeaderboardEntry(
+                              topThree: true,
+                              nearestFive: false,
+                              position: 1,
+                            ),
+                            InterstitialRestLeaderboardEntry(
+                              topThree: true,
+                              nearestFive: false,
+                              position: 2,
+                            ),
+                          ]),
+                    ),
+                  ),
+                  Positioned(
+                    top: SizeConfig.blockSizeVertical * 27,
+                    child: Container(
+                        height: SizeConfig.blockSizeVertical * 3,
+                        width: Leaderboard.workoutLeaderboardWidth,
+                        child: Center(
+                          child: Container(
+                            height: SizeConfig.blockSizeVertical * 0.25,
+                            width: Leaderboard.workoutLeaderboardWidth -
+                                SizeConfig.blockSizeHorizontal * 3,
+                            color: ColorConstants.launchpadPrimaryWhite,
+                          ),
+                        )),
+                  ),
+                  Positioned(
+                    bottom: SizeConfig.blockSizeVertical * 4,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(borderRadius),
+                          bottomRight: Radius.circular(borderRadius),
+                        ),
+                      ),
+                      height: (2 * Leaderboard.workoutLeaderboardHeight / 4),
+                      width: Leaderboard.workoutLeaderboardWidth,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           InterstitialRestLeaderboardEntry(
-                            topThree: true,
-                            nearestFive: false,
+                            topThree: false,
+                            nearestFive: true,
                             position: 0,
                           ),
                           InterstitialRestLeaderboardEntry(
-                            topThree: true,
-                            nearestFive: false,
+                            topThree: false,
+                            nearestFive: true,
                             position: 1,
                           ),
                           InterstitialRestLeaderboardEntry(
-                            topThree: true,
-                            nearestFive: false,
+                            topThree: false,
+                            nearestFive: true,
                             position: 2,
                           ),
-                        ]),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(borderRadius),
-                        bottomRight: Radius.circular(borderRadius),
+                          InterstitialRestLeaderboardEntry(
+                            topThree: false,
+                            nearestFive: true,
+                            position: 3,
+                          ),
+                          InterstitialRestLeaderboardEntry(
+                            topThree: false,
+                            nearestFive: true,
+                            position: 4,
+                          ),
+                        ],
                       ),
-                      color: Colors.black,
-                    ),
-                    height: (2 * Leaderboard.workoutLeaderboardHeight / 3) - 2,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InterstitialRestLeaderboardEntry(
-                          topThree: false,
-                          nearestFive: true,
-                          position: 0,
-                        ),
-                        InterstitialRestLeaderboardEntry(
-                          topThree: false,
-                          nearestFive: true,
-                          position: 1,
-                        ),
-                        InterstitialRestLeaderboardEntry(
-                          topThree: false,
-                          nearestFive: true,
-                          position: 2,
-                        ),
-                        InterstitialRestLeaderboardEntry(
-                          topThree: false,
-                          nearestFive: true,
-                          position: 3,
-                        ),
-                        InterstitialRestLeaderboardEntry(
-                          topThree: false,
-                          nearestFive: true,
-                          position: 4,
-                        ),
-                      ],
                     ),
                   )
                 ],

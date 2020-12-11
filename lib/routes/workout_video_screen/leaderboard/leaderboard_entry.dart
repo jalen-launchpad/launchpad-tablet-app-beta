@@ -47,7 +47,7 @@ class _LeaderboardEntryState extends State<LeaderboardEntry> {
                     .username;
 
         return Container(
-            height: SizeConfig.blockSizeVertical * 3,
+            height: SizeConfig.blockSizeVertical * 5,
             child: Stack(
               children: [
                 Align(
@@ -56,16 +56,23 @@ class _LeaderboardEntryState extends State<LeaderboardEntry> {
                     padding: EdgeInsets.only(
                       left: SizeConfig.blockSizeHorizontal * 2,
                     ),
-                    child: Text(
-                      (position + 1).toString() + ".",
-                      style: TextStyle(
-                        color: isUser
-                            ? ColorConstants.launchpadGreen
-                            : ColorConstants.launchpadPrimaryWhite,
-                        fontSize: fontSize,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: Icon(
+                      Icons.emoji_events,
+                      size: SizeConfig.blockSizeVertical * 3,
+                      color: position == 0
+                          ? Colors.yellow[600]
+                          : position == 1
+                              ? Colors.grey[350]
+                              : Colors.deepOrange[900],
                     ),
+                  ),
+                ),
+                Positioned(
+                  left: SizeConfig.blockSizeHorizontal * 5,
+                  child: Image.network(
+                    store.state.currentLeaderboard.topThreeEntries[position]
+                        .user.avatarUrl,
+                    height: SizeConfig.blockSizeVertical * 4,
                   ),
                 ),
                 Align(
@@ -109,7 +116,7 @@ class _LeaderboardEntryState extends State<LeaderboardEntry> {
                 store.state.currentLeaderboard.nearestFiveEntries[position].user
                     .username;
         return Container(
-            height: SizeConfig.blockSizeVertical * 3,
+            height: SizeConfig.blockSizeVertical * 5,
             child: Stack(
               children: [
                 Align(
@@ -131,6 +138,14 @@ class _LeaderboardEntryState extends State<LeaderboardEntry> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                  ),
+                ),
+                Positioned(
+                  left: SizeConfig.blockSizeHorizontal * 5,
+                  child: Image.network(
+                    store.state.currentLeaderboard.nearestFiveEntries[position]
+                        .user.avatarUrl,
+                    height: SizeConfig.blockSizeVertical * 4,
                   ),
                 ),
                 Align(

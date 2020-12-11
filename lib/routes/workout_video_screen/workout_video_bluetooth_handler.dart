@@ -12,7 +12,9 @@ class WorkoutVideoBluetoothHandler {
   final BluetoothDevice device;
   final Store<WorkoutVideoScreenState> store;
 
-  WorkoutVideoBluetoothHandler(this.device, this.store);
+  WorkoutVideoBluetoothHandler(this.device, this.store) {
+    print("this.hashCode: " + this.hashCode.toString());
+  }
 
   // This function takes in a List<int> that represents a byte array.
   // Each int in the list will range from 0-255.
@@ -40,9 +42,13 @@ class WorkoutVideoBluetoothHandler {
       if (characteristics[x].uuid.toString() ==
           BluetoothUUID.totalScoreUpdate) {
         characteristics[x].value.listen((event) {
-        print("total score update was found");
+          print("total score update was found");
           if (event.isEmpty) return;
           // Reflect this in the store.
+          print("currentWorkoutSetIndex in bluetooth handler" +
+              store.state.currentExerciseIndex.toString());
+          print("this.hashCode: " + this.hashCode.toString());
+
           store.dispatch(AddScoreValueAction(
               newScoreValue: convertByteArrayToInt64(event),
               scoreTag: BluetoothUUID.totalScoreTag));
@@ -53,7 +59,7 @@ class WorkoutVideoBluetoothHandler {
           BluetoothUUID.xScoreUpdate) {
         characteristics[x].value.listen((event) {
           if (event.isEmpty) return;
-        print("x score update was found");
+          print("x score update was found");
           // Reflect this in the store.
           store.dispatch(AddScoreValueAction(
               newScoreValue: convertByteArrayToInt64(event),
@@ -64,7 +70,7 @@ class WorkoutVideoBluetoothHandler {
       } else if (characteristics[x].uuid.toString() ==
           BluetoothUUID.yScoreUpdate) {
         characteristics[x].value.listen((event) async {
-        print("y score update was found");
+          print("y score update was found");
           if (event.isEmpty) return;
           // Reflect this in the store.
           store.dispatch(AddScoreValueAction(

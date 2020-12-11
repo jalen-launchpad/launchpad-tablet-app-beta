@@ -38,6 +38,20 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  final List<AssetImage> exerciseCardImages = [
+    AssetImage('assets/images/exerciseCard1.jpg'),
+    AssetImage('assets/images/exerciseCard2.jpg'),
+    AssetImage('assets/images/exerciseCard3.jpg'),
+    AssetImage('assets/images/exerciseCard4.jpg'),
+    AssetImage('assets/images/exerciseCard5.jpg'),
+  ];
+
+  @override
   Widget build(BuildContext context) {
     return StoreBuilder<HomePageScreenState>(
       builder: (context, store) {
@@ -61,15 +75,18 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                 child: Row(
                   children: [
                     Container(
-                      child: Image.asset('assets/images/calendarVector.png',
-                          height: SizeConfig.blockSizeVertical * 3.5),
+                      child: Icon(
+                        Icons.event,
+                        color: ColorConstants.launchpadMenuSecondaryBlue,
+                        size: SizeConfig.blockSizeHorizontal * 2,
+                      ),
                     ),
                     Container(
                       child: Text(
                         "Today's Workout",
                         style: TextStyle(
                             color: ColorConstants.launchpadMenuSecondaryBlue,
-                            fontSize: SizeConfig.blockSizeHorizontal,
+                            fontSize: SizeConfig.blockSizeHorizontal * 1.5,
                             fontFamily: 'Jost',
                             fontWeight: FontWeight.bold),
                       ),
@@ -135,7 +152,10 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
                 ),
               ),
 
-              WorkoutDetailsScrollView(distinctExerciseList),
+              WorkoutDetailsScrollView(
+                distinctExerciseList: distinctExerciseList,
+                exerciseCardImages: exerciseCardImages,
+              ),
 
               Container(
                 padding: EdgeInsets.only(

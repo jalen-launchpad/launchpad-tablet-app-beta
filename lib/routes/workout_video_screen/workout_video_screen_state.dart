@@ -41,7 +41,10 @@ class WorkoutVideoScreenState {
     this.showNotification = false,
     this.workoutNotification,
     this.secondsElapsed = 0,
-  });
+  }) {
+    print("this.currentWorkoutSetIndex: " +
+        this.currentWorkoutSetIndex.toString());
+  }
 
   WorkoutVideoScreenState copyWith({
     WorkoutDetails workoutDetails,
@@ -76,6 +79,7 @@ class WorkoutVideoScreenState {
   }
 
   void changeToNextExercise() {
+    print("changeToNextExercise() called!");
     currentWorkoutSetIndex++;
   }
 

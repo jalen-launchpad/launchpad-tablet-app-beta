@@ -28,7 +28,7 @@ class ClassPreview extends StatelessWidget {
               child: FittedBox(
                 fit: BoxFit.fill,
                 child: Image.asset(
-                  "assets/images/backgroundPlaceholder.png",
+                  "assets/images/backgroundPlaceholder3.jpg",
                 ),
               ),
             ),

@@ -75,8 +75,8 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                       SizeConfig.blockSizeHorizontal * 0.25),
                   color: ColorConstants.launchpadRed,
                 ),
-                width: SizeConfig.blockSizeHorizontal * 4,
-                height: SizeConfig.blockSizeVertical * 4,
+                width: SizeConfig.blockSizeHorizontal * 10,
+                height: SizeConfig.blockSizeVertical * 6,
                 child: Center(
                   child: Text(
                     "Back",
@@ -104,7 +104,7 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: ColorConstants.launchpadPrimaryBlue,
-                      fontSize: 25,
+                      fontSize: SizeConfig.blockSizeHorizontal * 2,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -117,7 +117,7 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                           "Error connecting to device, please make sure LCA is open.",
                           style: TextStyle(
                             color: ColorConstants.launchpadRed,
-                            fontSize: 25,
+                            fontSize: SizeConfig.blockSizeHorizontal,
                             fontWeight: FontWeight.bold,
                           ),
                         ))
@@ -188,23 +188,38 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                 ),
                 FlatButton(
                     color: ColorConstants.launchpadPrimaryBlue,
-                    child: Text(
-                      "Scan for Devices",
-                      style: TextStyle(
-                        color: ColorConstants.launchpadPrimaryWhite,
-                        fontWeight: FontWeight.bold,
+                    child: Container(
+                      width: SizeConfig.blockSizeHorizontal * 10,
+                      height: SizeConfig.blockSizeVertical * 6,
+                      child: Center(
+                        child: Text(
+                          "Scan for Devices",
+                          style: TextStyle(
+                              color: ColorConstants.launchpadPrimaryWhite,
+                              fontWeight: FontWeight.bold,
+                              fontSize: SizeConfig.blockSizeHorizontal),
+                        ),
                       ),
                     ),
                     onPressed: () {
                       scanBluetooth();
                     }),
+                Container(
+                  height: SizeConfig.blockSizeVertical * 3,
+                ),
                 FlatButton(
                     color: ColorConstants.launchpadPrimaryBlue,
-                    child: Text(
-                      "Skip",
-                      style: TextStyle(
-                        color: ColorConstants.launchpadPrimaryWhite,
-                        fontWeight: FontWeight.bold,
+                    child: Container(
+                      width: SizeConfig.blockSizeHorizontal * 10,
+                      height: SizeConfig.blockSizeVertical * 6,
+                      child: Center(
+                        child: Text(
+                          "Skip",
+                          style: TextStyle(
+                              color: ColorConstants.launchpadPrimaryWhite,
+                              fontWeight: FontWeight.bold,
+                              fontSize: SizeConfig.blockSizeHorizontal),
+                        ),
                       ),
                     ),
                     onPressed: () {
