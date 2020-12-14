@@ -7,45 +7,31 @@ import 'package:video_player/video_player.dart';
 import 'workout_video_screen_actions.dart';
 
 class WorkoutVideoScreenModel {
-  final Store<WorkoutVideoScreenState> store;
-  final VideoPlayerController controller;
-  WorkoutVideoScreenModel(this.store, this.controller);
-
-  // Start a timer that continuously adds on the next timer and
-  // updates set informations.
-  void startWorkout() {
-    startExerciseRotation();
-  }
-
-  Future<int> getSecondsElapsed() async {
-    return (await controller.position).inSeconds;
-  }
-
   // Set a timer that checks the video controller to see if
   // a change to the next exercise after the current exercise
   // should be done.
-  void startExerciseRotation() {
+  void startWorkout(
+      Store<WorkoutVideoScreenState> store, VideoPlayerController controller) {
     // Check every second whether the next exercise should rotate in.
     store.state.exerciseTimer = Timer.periodic(
         Duration(
           milliseconds: 500,
         ), (Timer timer) async {
       // If it was the last set, don't do anything and return.
-      int secondsElapsed = (await getSecondsElapsed());
+      int secondsElapsed = (await controller.position).inSeconds;
+      print(secondsElapsed);
       store.dispatch(UpdateSecondsElapsedAction(secondsElapsed));
       if (store.state.classIsOver) {
-        print("Class is over");
         return;
       }
+      print(secondsElapsed >= store.state.currentExercise.videoEndTimestamp);
+      print(
+          "videoEndTimestamp: ${store.state.currentExercise.videoEndTimestamp}");
       // If the timestamp of the video controller has past the timestamp of the next exercise...
       if (secondsElapsed >= store.state.currentExercise.videoEndTimestamp) {
         // Change state to next exercise.
-        changeToNextExercise();
+        store.dispatch(ChangeToNextExerciseAction());
       }
     });
-  }
-
-  void changeToNextExercise() {
-    store.dispatch(ChangeToNextExerciseAction());
   }
 }

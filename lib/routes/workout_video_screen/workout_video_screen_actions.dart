@@ -1,4 +1,3 @@
-import 'notification_bar/workout_notification.dart';
 
 class ChangeToNextExerciseAction {}
 
@@ -22,10 +21,6 @@ class AddBadRepAction {}
 
 class ClearScoreAction {}
 
-class UpdateNotificationBarAction {
-  final WorkoutNotification workoutNotification;
-  UpdateNotificationBarAction({this.workoutNotification});
-}
 
 class UpdateSecondsElapsedAction {
   final int secondsElapsed;

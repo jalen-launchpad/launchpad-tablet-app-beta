@@ -15,10 +15,6 @@ WorkoutVideoScreenState Function(WorkoutVideoScreenState, dynamic) rootReducer =
   TypedReducer<WorkoutVideoScreenState, AddGoodRepAction>(addGoodRepReducer),
   TypedReducer<WorkoutVideoScreenState, AddBadRepAction>(addBadRepReducer),
   TypedReducer<WorkoutVideoScreenState, ClearScoreAction>(clearScoreReducer),
-  TypedReducer<WorkoutVideoScreenState, UpdateNotificationBarAction>(
-      updateNotificationBarReducer),
-  TypedReducer<WorkoutVideoScreenState, ClearNotificationBarAction>(
-      clearNotificationBarReducer),
   TypedReducer<WorkoutVideoScreenState, UpdateSecondsElapsedAction>(
       updateSecondsElapsedReducer),
   TypedReducer<WorkoutVideoScreenState, UpdatePostWorkoutSurveyInputAction>(
@@ -33,34 +29,14 @@ final Function(WorkoutVideoScreenState, UpdateSecondsElapsedAction)
   );
 };
 
-final Function(WorkoutVideoScreenState, ClearNotificationBarAction)
-    clearNotificationBarReducer =
-    (WorkoutVideoScreenState state, ClearNotificationBarAction action) {
-  return state.copyWith(
-    showNotification: false,
-    workoutNotification: null,
-  );
-};
-
-final Function(WorkoutVideoScreenState, UpdateNotificationBarAction)
-    updateNotificationBarReducer =
-    (WorkoutVideoScreenState state, UpdateNotificationBarAction action) {
-  print(action.workoutNotification.notification);
-  var newState = state.copyWith(
-    showNotification: true,
-    workoutNotification: action.workoutNotification,
-  );
-  print(newState.workoutNotification.notification);
-  return newState;
-};
 // Clear Score Reducer
 final Function(WorkoutVideoScreenState, ClearScoreAction) clearScoreReducer =
     (WorkoutVideoScreenState state, ClearScoreAction action) {
   var newState = state.copyWith();
   var list = newState.leaderboards;
-  list[newState.currentExerciseIndex].userEntry.score.goodReps = 0;
-  list[newState.currentExerciseIndex].userEntry.score.badReps = 0;
-  list[newState.currentExerciseIndex].userEntry.score.value = 0;
+  list[newState.currentWorkoutSetIndex].userEntry.score.goodReps = 0;
+  list[newState.currentWorkoutSetIndex].userEntry.score.badReps = 0;
+  list[newState.currentWorkoutSetIndex].userEntry.score.value = 0;
   return newState;
 };
 
@@ -70,7 +46,7 @@ final Function(WorkoutVideoScreenState, AddGoodRepAction) addGoodRepReducer =
   // UPDATE ALL SCORE REFERENCES IN OTHER REDUCERS!!
   var newState = state.copyWith();
   newState
-      .leaderboards[newState.currentExerciseIndex].userEntry.score.goodReps++;
+      .leaderboards[newState.currentWorkoutSetIndex].userEntry.score.goodReps++;
   return newState;
 };
 
@@ -79,7 +55,7 @@ final Function(WorkoutVideoScreenState, AddBadRepAction) addBadRepReducer =
     (WorkoutVideoScreenState state, AddBadRepAction action) {
   var newState = state.copyWith();
   newState
-      .leaderboards[newState.currentExerciseIndex].userEntry.score.badReps++;
+      .leaderboards[newState.currentWorkoutSetIndex].userEntry.score.badReps++;
   return newState;
 };
 
@@ -100,10 +76,10 @@ final Function(WorkoutVideoScreenState, AddScoreValueAction)
     return newState;
   }
 
-  newState.leaderboards[newState.currentExerciseIndex].userEntry.score.value +=
-      (state.currentExercise.exerciseSetDefinition.scoreMultiplier *
-              action.newScoreValue)
-          .floor();
+  newState.leaderboards[newState.currentWorkoutSetIndex].userEntry.score
+      .value += (state.currentExercise.exerciseSetDefinition.scoreMultiplier *
+          action.newScoreValue)
+      .floor();
   if (newState.currentExercise.exerciseSetDefinition.maxScore != null &&
       newState.currentUserScore >
           newState.currentExercise.exerciseSetDefinition.maxScore) {
@@ -119,10 +95,14 @@ final Function(WorkoutVideoScreenState, AddScoreValueAction)
 Function(WorkoutVideoScreenState, ChangeToNextExerciseAction)
     changeToNextExerciseReducer =
     (WorkoutVideoScreenState state, ChangeToNextExerciseAction action) {
-  var newState = state.copyWith();
-  print("changeToNextExerciseReducer invoked");
-  newState.updateCuumulativeLeaderboard();
-  newState.changeToNextExercise();
+  var newState = state.copyWith(
+    cuumulativeLeaderboards: state.updateCuumulativeLeaderboard(
+      state.leaderboards,
+      state.cumulativeLeaderboards,
+      state.currentExercise.isRest,
+    ),
+    currentWorkoutSetIndex: state.currentWorkoutSetIndex + 1,
+  );
   return newState;
 };
 
@@ -161,7 +141,8 @@ final Function(WorkoutVideoScreenState, UpdateUserPositionAction)
     updateUserPositionReducer =
     (WorkoutVideoScreenState state, UpdateUserPositionAction action) {
   var newState = state.copyWith();
-  var currentLeaderboard = newState.leaderboards[newState.currentExerciseIndex];
+  var currentLeaderboard =
+      newState.leaderboards[newState.currentWorkoutSetIndex];
   for (int index = currentLeaderboard.userPosition;
       index < currentLeaderboard.maxPosition;
       index++) {
@@ -185,8 +166,6 @@ final Function(WorkoutVideoScreenState, UpdateUserPositionAction)
       // If the user score is larger than next to beat,
       // there is a change in position.
 
-      // IS THIS EASIER TO DO WITH REMOVING INDEX, THEN ADDING BACK IN?
-
       // Overtaken entry.
       var overtakenEntry = currentLeaderboard
           .leaderboardEntries[currentLeaderboard.userPosition + 1];
@@ -207,5 +186,6 @@ final Function(WorkoutVideoScreenState, UpdateUserPositionAction)
       newState.currentLeaderboard.getTopThreeEntries();
   newState.currentLeaderboard.nearestFiveEntriesPositions =
       newState.currentLeaderboard.getNearestFiveEntriesPositions();
+
   return newState;
 };

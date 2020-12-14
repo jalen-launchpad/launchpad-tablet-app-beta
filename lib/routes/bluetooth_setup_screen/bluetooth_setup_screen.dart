@@ -223,23 +223,26 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(WorkoutVideoScreen.routeName,
-                              arguments: WorkoutVideoScreenArguments(
-                                WorkoutVideoScreenState(
-                                    workoutMetadata: workoutMetadata,
-                                    currentWorkoutSetIndex: 0,
-                                    leaderboards:
-                                        PlaceholderValues().getleaderboards(),
-                                    cumulativeLeaderboards: HashMap(),
-                                    postWorkoutSurveyResponseBoxModel:
-                                        PostWorkoutSurveyResponseBoxModel
-                                            .initialize(),
-                                    user: UserModel(
-                                      username: "jalen",
-                                    ),
-                                    bluetoothDevice: null),
-                              ));
+                      Navigator.of(context).pushReplacementNamed(
+                          WorkoutVideoScreen.routeName,
+                          arguments: WorkoutVideoScreenArguments(
+                            WorkoutVideoScreenState(
+                                workoutMetadata: workoutMetadata,
+                                currentWorkoutSetIndex: 0,
+                                leaderboards:
+                                    PlaceholderValues().getleaderboards(),
+                                cumulativeLeaderboards: WorkoutVideoScreenState
+                                    .initializeCuumulativeLeaderboard(
+                                  PlaceholderValues().getleaderboards(),
+                                ),
+                                postWorkoutSurveyResponseBoxModel:
+                                    PostWorkoutSurveyResponseBoxModel
+                                        .initialize(),
+                                user: UserModel(
+                                  username: "jalen",
+                                ),
+                                bluetoothDevice: null),
+                          ));
                     })
               ],
             ),

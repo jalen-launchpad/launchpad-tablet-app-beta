@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:redux/redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/routes/bluetooth_setup_screen/bluetooth_setup_screen_arguments.dart';
@@ -13,11 +11,7 @@ import 'models/workout_metadata.dart';
 import 'routes/bluetooth_setup_screen/bluetooth_setup_screen.dart';
 import 'routes/home_page_screen/home_page_screen_state.dart';
 import 'package:http/http.dart' as http;
-import 'routes/workout_video_screen/post_workout_survey/post_workout_survey.dart';
-import 'routes/workout_video_screen/post_workout_survey/post_workout_survey_response_box_model.dart';
 import 'routes/workout_video_screen/workout_video_screen.dart';
-import 'routes/workout_video_screen/workout_video_screen_reducers.dart';
-import 'routes/workout_video_screen/workout_video_screen_state.dart';
 
 void main() {
   runApp(MyApp());

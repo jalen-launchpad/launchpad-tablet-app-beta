@@ -4,6 +4,8 @@ import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 
+import '../leaderboard_model.dart';
+
 class InterstitialRestLeaderboardEntry extends StatefulWidget {
   // Is this the user or a launchpad leaderboard entry?
   final bool topThree;
@@ -38,149 +40,147 @@ class _InterstitialRestLeaderboardEntryState
   // Consumes -> LeaderboardModel (from Leaderboard)
   @override
   Widget build(BuildContext context) {
-    return StoreBuilder<WorkoutVideoScreenState>(builder: (context, store) {
-      var cumulativeLeaderboard =
-          store.state.getCumulativeLeaderboard(store.state.user);
-      if (topThree == true) {
-        bool isUser = store.state.user ==
-            cumulativeLeaderboard.topThreeEntries[position].user;
-        return Container(
-            height: SizeConfig.blockSizeVertical * 5,
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: SizeConfig.blockSizeHorizontal * 2,
-                    ),
-                    child: Icon(
-                      Icons.emoji_events,
-                      size: SizeConfig.blockSizeVertical * 3,
-                      color: position == 0
-                          ? Colors.yellow[600]
-                          : position == 1
-                              ? Colors.grey[350]
-                              : Colors.deepOrange[900],
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    cumulativeLeaderboard
-                        .topThreeEntries[position].user.username,
-                    style: TextStyle(
-                      color: isUser
-                          ? ColorConstants.launchpadGreen
-                          : ColorConstants.launchpadPrimaryWhite,
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: SizeConfig.blockSizeHorizontal * 5,
-                  child: Image.network(
-                    store.state.currentLeaderboard.topThreeEntries[position]
-                        .user.avatarUrl,
-                    height: SizeConfig.blockSizeVertical * 4,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        right: SizeConfig.blockSizeHorizontal * 2),
-                    child: Text(
-                      cumulativeLeaderboard
-                          .topThreeEntries[position].score.value
-                          .toString(),
-                      style: TextStyle(
-                        color: isUser
-                            ? ColorConstants.launchpadGreen
-                            : ColorConstants.launchpadPrimaryWhite,
-                        fontSize: fontSize,
-                        fontWeight: FontWeight.bold,
+    return StoreConnector<WorkoutVideoScreenState, LeaderboardModel>(
+        converter: (store) => store.state.getCumulativeLeaderboard(
+              store.state.cumulativeLeaderboards,
+              store.state.user,
+            ),
+        builder: (context, leaderboard) {
+          if (topThree == true) {
+            bool isUser =
+                leaderboard.user == leaderboard.topThreeEntries[position].user;
+            return Container(
+                height: SizeConfig.blockSizeVertical * 5,
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: SizeConfig.blockSizeHorizontal * 2,
+                        ),
+                        child: Icon(
+                          Icons.emoji_events,
+                          size: SizeConfig.blockSizeVertical * 3,
+                          color: position == 0
+                              ? Colors.yellow[600]
+                              : position == 1
+                                  ? Colors.grey[350]
+                                  : Colors.deepOrange[900],
+                        ),
                       ),
                     ),
-                  ),
-                )
-              ],
-            ));
-      } else if (nearestFive == true) {
-        print(cumulativeLeaderboard.nearestFiveEntries[position]);
-        bool isUser = cumulativeLeaderboard.getUserEntry.user.username ==
-            cumulativeLeaderboard.nearestFiveEntries[position].user.username;
-        return Container(
-            height: SizeConfig.blockSizeVertical * 5,
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: SizeConfig.blockSizeHorizontal * 2,
-                    ),
-                    child: Text(
-                      cumulativeLeaderboard
-                              .nearestFiveEntriesPositions[position]
-                              .toString() +
-                          ".",
-                      style: TextStyle(
-                        color: isUser
-                            ? ColorConstants.launchpadGreen
-                            : ColorConstants.launchpadPrimaryWhite,
-                        fontSize: fontSize,
-                        fontWeight: FontWeight.bold,
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        leaderboard.topThreeEntries[position].user.username,
+                        style: TextStyle(
+                          color: isUser
+                              ? ColorConstants.launchpadGreen
+                              : ColorConstants.launchpadPrimaryWhite,
+                          fontSize: fontSize,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    cumulativeLeaderboard
-                        .nearestFiveEntries[position].user.username,
-                    style: TextStyle(
-                      color: isUser
-                          ? ColorConstants.launchpadGreen
-                          : ColorConstants.launchpadPrimaryWhite,
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: SizeConfig.blockSizeHorizontal * 5,
-                  child: Image.network(
-                    store.state.currentLeaderboard.nearestFiveEntries[position]
-                        .user.avatarUrl,
-                    height: SizeConfig.blockSizeVertical * 4,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        right: SizeConfig.blockSizeHorizontal * 2),
-                    child: Text(
-                      cumulativeLeaderboard
-                          .nearestFiveEntries[position].score.value
-                          .toString(),
-                      style: TextStyle(
-                        color: isUser
-                            ? ColorConstants.launchpadGreen
-                            : ColorConstants.launchpadPrimaryWhite,
-                        fontSize: fontSize,
-                        fontWeight: FontWeight.bold,
+                    Positioned(
+                      left: SizeConfig.blockSizeHorizontal * 5,
+                      child: Image.network(
+                        leaderboard.topThreeEntries[position].user.avatarUrl,
+                        height: SizeConfig.blockSizeVertical * 4,
                       ),
                     ),
-                  ),
-                )
-              ],
-            ));
-      }
-    });
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            right: SizeConfig.blockSizeHorizontal * 2),
+                        child: Text(
+                          leaderboard.topThreeEntries[position].score.value
+                              .toString(),
+                          style: TextStyle(
+                            color: isUser
+                                ? ColorConstants.launchpadGreen
+                                : ColorConstants.launchpadPrimaryWhite,
+                            fontSize: fontSize,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ));
+          } else if (nearestFive == true) {
+            print(leaderboard.nearestFiveEntries[position]);
+            bool isUser = leaderboard.getUserEntry.user.username ==
+                leaderboard.nearestFiveEntries[position].user.username;
+            return Container(
+                height: SizeConfig.blockSizeVertical * 5,
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: SizeConfig.blockSizeHorizontal * 2,
+                        ),
+                        child: Text(
+                          leaderboard.nearestFiveEntriesPositions[position]
+                                  .toString() +
+                              ".",
+                          style: TextStyle(
+                            color: isUser
+                                ? ColorConstants.launchpadGreen
+                                : ColorConstants.launchpadPrimaryWhite,
+                            fontSize: fontSize,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        leaderboard.nearestFiveEntries[position].user.username,
+                        style: TextStyle(
+                          color: isUser
+                              ? ColorConstants.launchpadGreen
+                              : ColorConstants.launchpadPrimaryWhite,
+                          fontSize: fontSize,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: SizeConfig.blockSizeHorizontal * 5,
+                      child: Image.network(
+                        leaderboard.nearestFiveEntries[position].user.avatarUrl,
+                        height: SizeConfig.blockSizeVertical * 4,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            right: SizeConfig.blockSizeHorizontal * 2),
+                        child: Text(
+                          leaderboard.nearestFiveEntries[position].score.value
+                              .toString(),
+                          style: TextStyle(
+                            color: isUser
+                                ? ColorConstants.launchpadGreen
+                                : ColorConstants.launchpadPrimaryWhite,
+                            fontSize: fontSize,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ));
+          } else {
+            return Container();
+          }
+        });
   }
 }
