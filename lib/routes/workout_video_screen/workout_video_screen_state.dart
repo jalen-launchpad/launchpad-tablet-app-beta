@@ -25,6 +25,30 @@ class WorkoutVideoScreenState {
   final PostWorkoutSurveyResponseBoxModel postWorkoutSurveyResponseBoxModel;
   final UserModel user;
 
+  LeaderboardModel get currentLeaderboard =>
+      leaderboards[currentWorkoutSetIndex];
+
+  List<WorkoutSetModel> get workoutSets => workoutMetadata.workoutSets;
+
+  WorkoutSetModel get currentExercise => workoutSets[currentWorkoutSetIndex];
+
+  WorkoutSetModel get previousExercise =>
+      workoutSets[currentWorkoutSetIndex > 0 ? currentWorkoutSetIndex - 1 : 0];
+
+  WorkoutSetModel get nextExercise =>
+      !isLastSet ? workoutSets[currentWorkoutSetIndex + 1] : null;
+
+  bool get isLastSet => currentWorkoutSetIndex == (workoutSets.length - 1);
+
+  bool get classIsOver => currentWorkoutSetIndex >= workoutSets.length;
+
+  int get currentUserScore =>
+      leaderboards[currentWorkoutSetIndex].userEntry.score.value;
+
+  set currentUserScore(int score) {
+    leaderboards[currentWorkoutSetIndex].userEntry.score.value = score;
+  }
+
   WorkoutVideoScreenState({
     @required this.workoutMetadata,
     @required this.bluetoothDevice,
@@ -115,29 +139,5 @@ class WorkoutVideoScreenState {
     exerciseTimer.cancel();
     // Disconnect the bluetooth device
     if (bluetoothDevice != null) bluetoothDevice.disconnect();
-  }
-
-  LeaderboardModel get currentLeaderboard =>
-      leaderboards[currentWorkoutSetIndex];
-
-  List<WorkoutSetModel> get workoutSets => workoutMetadata.workoutSets;
-
-  WorkoutSetModel get currentExercise => workoutSets[currentWorkoutSetIndex];
-
-  WorkoutSetModel get previousExercise =>
-      workoutSets[currentWorkoutSetIndex > 0 ? currentWorkoutSetIndex - 1 : 0];
-
-  WorkoutSetModel get nextExercise =>
-      !isLastSet ? workoutSets[currentWorkoutSetIndex + 1] : null;
-
-  bool get isLastSet => currentWorkoutSetIndex == (workoutSets.length - 1);
-
-  bool get classIsOver => currentWorkoutSetIndex >= workoutSets.length;
-
-  int get currentUserScore =>
-      leaderboards[currentWorkoutSetIndex].userEntry.score.value;
-
-  set currentUserScore(int score) {
-    leaderboards[currentWorkoutSetIndex].userEntry.score.value = score;
   }
 }

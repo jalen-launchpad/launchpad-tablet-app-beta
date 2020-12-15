@@ -8,52 +8,28 @@ import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen.dart';
 import 'package:redux/redux.dart';
 import 'package:http/http.dart' as http;
+import 'package:tabletapp/routes/home_page_screen/home_page_screen_model.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
+import 'package:tabletapp/routes/workout_video_screen/post_workout_survey/post_workout_survey_response_box_model.dart';
 import 'package:video_player/video_player.dart';
 import '../workout_video_screen_state.dart';
 import 'post_workout_survey_response_box.dart';
 
-class PostWorkoutSurvey extends StatefulWidget {
+class PostWorkoutSurvey extends StatelessWidget {
   final WorkoutVideoScreenState workoutVideoScreenState;
   // Video Player Controller to dispose of before returning to main menu.
   final VideoPlayerController controller;
-  PostWorkoutSurvey(this.workoutVideoScreenState, this.controller);
-  @override
-  _PostWorkoutSurveyState createState() => _PostWorkoutSurveyState();
-}
 
-class _PostWorkoutSurveyState extends State<PostWorkoutSurvey> {
   // Workouts to show on homepage
   List<WorkoutMetadata> workouts;
   // Has data been loaded from DB yet?
   bool initialDataLoadDone = false;
 
-  // Retrieve workouts to surface on homepage from DB.
-  retrieveWorkouts() async {
-    // print('\n\n\n\nTESTTESTTEST\n\n\n\n');
-    var url = 'https://launchpad-demo.herokuapp.com/getAllWorkouts';
-    var response = await http.get(url);
-    // Parse result into a List of JSON in Map<string, dynamic> form.
-    print(response.body);
-    List<dynamic> allWorkoutsAsString = jsonDecode(response.body);
-    List<WorkoutMetadata> list = [];
-    allWorkoutsAsString.forEach((json) {
-      // Convert Map<string, dynamic> to WorkoutDetails class
-      WorkoutMetadata workoutDetails = WorkoutMetadata.fromJson(json);
-      print(workoutDetails.workoutDetails.title);
-      list.add(workoutDetails);
-    });
-    // Save workouts to class variable.
-    workouts = list;
-    setState(() {
-      // Let Flutter know DB is done loading to show homepage.
+  PostWorkoutSurvey(this.workoutVideoScreenState, this.controller) {
+    HomePageScreenModel.retrieveWorkouts().then((response) {
       initialDataLoadDone = true;
+      workouts = response;
     });
-    // print("AlternativeWorkouts.length" + workouts.length.toString());
-  }
-
-  _PostWorkoutSurveyState() {
-    retrieveWorkouts();
   }
 
   @override
@@ -69,7 +45,7 @@ class _PostWorkoutSurveyState extends State<PostWorkoutSurvey> {
             bottom: SizeConfig.blockSizeVertical * 15,
             child: PostWorkoutSurveyResponseBox(),
           ),
-          _finishWorkoutButton(),
+          _finishWorkoutButton(context),
         ],
       ),
       color: ColorConstants.launchpadPrimaryBlue,
@@ -91,7 +67,7 @@ class _PostWorkoutSurveyState extends State<PostWorkoutSurvey> {
     );
   }
 
-  Widget _finishWorkoutButton() {
+  Widget _finishWorkoutButton(BuildContext context) {
     return Positioned(
       bottom: SizeConfig.blockSizeVertical * 15,
       right: SizeConfig.blockSizeHorizontal * 4,

@@ -4,11 +4,7 @@ import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 
-import 'leaderboard.dart';
-import 'leaderboard_entry_model.dart';
-import 'leaderboard_model.dart';
-
-class LeaderboardEntry extends StatefulWidget {
+class LeaderboardEntry extends StatelessWidget {
   // Is this the user or a launchpad leaderboard entry?
   final bool topThree;
   final int position;
@@ -21,22 +17,9 @@ class LeaderboardEntry extends StatefulWidget {
     @required this.position,
     @required this.nearestFive,
   });
-  @override
-  _LeaderboardEntryState createState() => _LeaderboardEntryState(
-      topThree: this.topThree,
-      nearestFive: this.nearestFive,
-      position: this.position);
-}
-
-class _LeaderboardEntryState extends State<LeaderboardEntry> {
-  final bool topThree;
-  final int position;
-  final bool nearestFive;
-  _LeaderboardEntryState({this.topThree, this.nearestFive, this.position});
 
   static double fontSize = SizeConfig.blockSizeVertical * 2.5;
 
-  // Consumes -> LeaderboardModel (from Leaderboard)
   @override
   Widget build(BuildContext context) {
     return StoreBuilder<WorkoutVideoScreenState>(builder: (context, store) {
@@ -183,6 +166,8 @@ class _LeaderboardEntryState extends State<LeaderboardEntry> {
                 )
               ],
             ));
+      } else {
+        return Container();
       }
     });
   }

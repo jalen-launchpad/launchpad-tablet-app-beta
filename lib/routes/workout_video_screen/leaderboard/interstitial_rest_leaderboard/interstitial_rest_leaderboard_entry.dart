@@ -6,7 +6,7 @@ import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state
 
 import '../leaderboard_model.dart';
 
-class InterstitialRestLeaderboardEntry extends StatefulWidget {
+class InterstitialRestLeaderboardEntry extends StatelessWidget {
   // Is this the user or a launchpad leaderboard entry?
   final bool topThree;
   final int position;
@@ -14,28 +14,13 @@ class InterstitialRestLeaderboardEntry extends StatefulWidget {
 
   static double height = SizeConfig.blockSizeHorizontal * 3;
 
+  static double fontSize = SizeConfig.blockSizeVertical * 2.5;
+
   InterstitialRestLeaderboardEntry({
     @required this.topThree,
     @required this.position,
     @required this.nearestFive,
   });
-  @override
-  _InterstitialRestLeaderboardEntryState createState() =>
-      _InterstitialRestLeaderboardEntryState(
-          topThree: this.topThree,
-          nearestFive: this.nearestFive,
-          position: this.position);
-}
-
-class _InterstitialRestLeaderboardEntryState
-    extends State<InterstitialRestLeaderboardEntry> {
-  final bool topThree;
-  final int position;
-  final bool nearestFive;
-  _InterstitialRestLeaderboardEntryState(
-      {this.topThree, this.nearestFive, this.position});
-
-  static double fontSize = SizeConfig.blockSizeVertical * 2.5;
 
   // Consumes -> LeaderboardModel (from Leaderboard)
   @override

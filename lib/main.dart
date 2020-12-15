@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tabletapp/constants/colors.dart';
@@ -9,8 +7,8 @@ import 'package:tabletapp/routes/home_page_screen/home_page_screen.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_arguments.dart';
 import 'models/workout_metadata.dart';
 import 'routes/bluetooth_setup_screen/bluetooth_setup_screen.dart';
+import 'routes/home_page_screen/home_page_screen_model.dart';
 import 'routes/home_page_screen/home_page_screen_state.dart';
-import 'package:http/http.dart' as http;
 import 'routes/workout_video_screen/workout_video_screen.dart';
 
 void main() {
@@ -85,31 +83,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<WorkoutMetadata> workouts;
+  WorkoutMetadata recommendedClass;
+
   // Has data been loaded from DB yet?
   bool initialDataLoadDone = false;
-
-  // Retrieve workouts to surface on homepage from DB.
-  retrieveWorkouts() async {
-    // print('\n\n\n\nTESTTESTTEST\n\n\n\n');
-    var url = 'https://launchpad-demo.herokuapp.com/getAllWorkouts';
-    var response = await http.get(url);
-    // Parse result into a List of JSON in Map<string, dynamic> form.
-    print(response.body);
-    List<dynamic> allWorkoutsAsString = jsonDecode(response.body);
-    List<WorkoutMetadata> list = [];
-    allWorkoutsAsString.forEach((json) {
-      // Convert Map<string, dynamic> to WorkoutDetails class
-      WorkoutMetadata workoutDetails = WorkoutMetadata.fromJson(json);
-      list.add(workoutDetails);
-    });
-    // Save workouts to class variable.
-    workouts = list;
-    setState(() {
-      // Let Flutter know DB is done loading to show homepage.
-      initialDataLoadDone = true;
-    });
-    // print("AlternativeWorkouts.length" + workouts.length.toString());
-  }
 
   @override
   didChangeDependencies() {
@@ -118,25 +95,19 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _MyHomePageState() {
-    retrieveWorkouts();
+    HomePageScreenModel.retrieveWorkouts().then((value) {
+      setState(() {
+        workouts = value;
+        recommendedClass = workouts.first;
+        initialDataLoadDone = true;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
     SizeConfig().init(context);
-    /*
-    return Scaffold(
-        body: StoreProvider<WorkoutVideoScreenState>(
-            child: PostWorkoutSurvey(WorkoutVideoScreenState()),
-            store: Store<WorkoutVideoScreenState>(
-              rootReducer,
-              initialState: WorkoutVideoScreenState(
-                  postWorkoutSurveyResponseBoxModel:
-                      PostWorkoutSurveyResponseBoxModel.initialize()),
-            )));
-            */
-
     return (!initialDataLoadDone
         // Splash Screen while fetching data from database
         ? Container(
@@ -146,8 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ))
         : HomePageScreen(
             HomePageScreenState(
-              recommendedClass: workouts[0],
-              sidebarClass: workouts[0],
+              recommendedClass: recommendedClass,
+              sidebarClass: recommendedClass,
               alternativeClasses: workouts,
             ),
           ));

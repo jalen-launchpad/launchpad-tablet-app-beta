@@ -4,13 +4,13 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
-import 'package:tabletapp/routes/workout_video_screen/progress_bar.dart';
+import 'package:tabletapp/routes/workout_video_screen/progress_bar/progress_bar.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_bluetooth_handler.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 import 'package:redux/redux.dart';
 import 'package:video_player/video_player.dart';
-import 'constants.dart';
+import 'workout_video_screen_alignment_constants.dart';
 import 'leaderboard/interstitial_rest_leaderboard/interstitial_rest_leaderboard.dart';
 import 'leaderboard/leaderboard.dart';
 import 'post_workout_survey/post_workout_survey.dart';
@@ -40,8 +40,6 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
   @override
   void initState() {
     super.initState();
-    print('\n\n\n\n');
-    print(widget.workoutVideoScreenState);
     store = Store(
       rootReducer,
       initialState: widget.workoutVideoScreenState,

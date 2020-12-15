@@ -44,14 +44,10 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
 
   _BluetoothSetupScreenState(this.workoutMetadata, this.homePageScreenState);
 
-  void scanBluetooth() async {
-    await bluetoothSetupScreenModel.scanBluetooth();
-  }
-
   @override
   void initState() {
     super.initState();
-    scanBluetooth();
+    bluetoothSetupScreenModel.scanBluetooth();
   }
 
   @override
@@ -201,8 +197,8 @@ class _BluetoothSetupScreenState extends State<BluetoothSetupScreen> {
                         ),
                       ),
                     ),
-                    onPressed: () {
-                      scanBluetooth();
+                    onPressed: () async {
+                      await bluetoothSetupScreenModel.scanBluetooth();
                     }),
                 Container(
                   height: SizeConfig.blockSizeVertical * 3,

@@ -10,16 +10,9 @@ import 'leaderboard_entry.dart';
 // @params
 // User user
 // List<LeaderboardEntryModel> currentLeaderboards
-class Leaderboard extends StatefulWidget {
+class Leaderboard extends StatelessWidget {
   static double workoutLeaderboardHeight = SizeConfig.blockSizeVertical * 74;
   static double workoutLeaderboardWidth = SizeConfig.blockSizeHorizontal * 25;
-
-  static double borderRadius = SizeConfig.blockSizeHorizontal * 3;
-  @override
-  _LeaderboardState createState() => _LeaderboardState();
-}
-
-class _LeaderboardState extends State<Leaderboard> {
   static double borderRadius = SizeConfig.blockSizeHorizontal;
 
   @override

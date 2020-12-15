@@ -26,10 +26,48 @@ class LeaderboardModel {
   bool get userIsSecondToLast => userPosition == 1;
   bool get userIsLast => userPosition == 0;
   LeaderboardEntryModel get getUserEntry => leaderboardEntries[userPosition];
-
   List<LeaderboardEntryModel> get getTopTenScores =>
       leaderboardEntries.reversed.toList().sublist(0, 10);
 
+  // Generate a LeaderboardModel with empty user entries.
+  LeaderboardModel({this.leaderboardEntries, this.user}) {
+    userEntry = LeaderboardEntryModel(
+      exerciseSetDefinition: this.leaderboardEntries[0]?.exerciseSetDefinition,
+      user: user,
+      score: ExerciseScoreModel(
+        exerciseSetDefinition:
+            this.leaderboardEntries[0]?.exerciseSetDefinition,
+        value: 0,
+      ),
+    );
+    userPosition = 0;
+    this.leaderboardEntries.insert(userPosition, userEntry);
+    // Initialize the user leaderboard entries with default values.
+    this.topThreeEntries = getTopThreeEntries();
+    this.nearestFiveEntries = getNearestFiveEntries();
+    this.nearestFiveEntriesPositions = getNearestFiveEntriesPositions();
+  }
+
+  // Generate a leaderboard where the user already exists.
+  // This use case is for converting HashMap cumulative leaderboard
+  // to a LeaderboardModel.
+  LeaderboardModel.userEntryAlreadyExists(
+      {this.leaderboardEntries, this.user}) {
+    userPosition = this
+        .leaderboardEntries
+        .indexWhere((element) => element.user == this.user);
+    this.leaderboardEntries.forEach((element) {
+      print(element.score);
+    });
+    userEntry = this.leaderboardEntries[userPosition];
+    this.topThreeEntries = getTopThreeEntries();
+    this.nearestFiveEntries = getNearestFiveEntries();
+    this.nearestFiveEntriesPositions = getNearestFiveEntriesPositions();
+  }
+
+  // Get the nearest five leaderboard entries to the user, including the user.
+  // The entries correspond to the same index that represents their position
+  // in getNearestFiveEntriesPositions.
   List<LeaderboardEntryModel> getNearestFiveEntries() {
     List<LeaderboardEntryModel> list = [];
     if (userIsLeader) {
@@ -66,6 +104,7 @@ class LeaderboardModel {
     return list;
   }
 
+  // Get the leaderboard position of the nearest 5 positions to the user, including the user.
   List<int> getNearestFiveEntriesPositions() {
     List<int> list = [];
     if (userIsLeader || userIsSecondPlace) {
@@ -91,6 +130,8 @@ class LeaderboardModel {
     return list;
   }
 
+  // Return the top three entries from the current Leaderboard.
+  // Top entry is at index 0.
   List<LeaderboardEntryModel> getTopThreeEntries() {
     return [
       leaderboardEntries[leaderboardEntries.length - 1],
@@ -104,37 +145,5 @@ class LeaderboardModel {
       leaderboardEntries: this.leaderboardEntries,
       user: this.user,
     );
-  }
-
-  LeaderboardModel.userEntryAlreadyExists(
-      {this.leaderboardEntries, this.user}) {
-    userPosition = this
-        .leaderboardEntries
-        .indexWhere((element) => element.user == this.user);
-    this.leaderboardEntries.forEach((element) {
-      print(element.score);
-    });
-    userEntry = this.leaderboardEntries[userPosition];
-    this.topThreeEntries = getTopThreeEntries();
-    this.nearestFiveEntries = getNearestFiveEntries();
-    this.nearestFiveEntriesPositions = getNearestFiveEntriesPositions();
-  }
-
-  LeaderboardModel({this.leaderboardEntries, this.user}) {
-    userEntry = LeaderboardEntryModel(
-      exerciseSetDefinition: this.leaderboardEntries[0]?.exerciseSetDefinition,
-      user: user,
-      score: ExerciseScoreModel(
-        exerciseSetDefinition:
-            this.leaderboardEntries[0]?.exerciseSetDefinition,
-        value: 0,
-      ),
-    );
-    userPosition = 0;
-    this.leaderboardEntries.insert(userPosition, userEntry);
-    // Initialize the user leaderboard entries with default values.
-    this.topThreeEntries = getTopThreeEntries();
-    this.nearestFiveEntries = getNearestFiveEntries();
-    this.nearestFiveEntriesPositions = getNearestFiveEntriesPositions();
   }
 }

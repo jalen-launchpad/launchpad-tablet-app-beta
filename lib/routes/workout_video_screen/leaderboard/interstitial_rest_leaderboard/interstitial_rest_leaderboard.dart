@@ -1,27 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/size_config.dart';
-import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 import '../leaderboard.dart';
-import '../leaderboard_entry.dart';
 import 'interstitial_rest_leaderboard_entry.dart';
 
-// @params
-// User user
-// List<InterstitialRestInterstitialRestInterstitialRestLeaderboardEntryModel> currentLeaderboards
-class InterstitialRestLeaderboard extends StatefulWidget {
+class InterstitialRestLeaderboard extends StatelessWidget {
   static double workoutLeaderboardHeight = SizeConfig.blockSizeVertical * 70;
   static double workoutLeaderboardWidth = SizeConfig.blockSizeHorizontal * 25;
+  static double borderRadius = SizeConfig.blockSizeHorizontal;
 
   @override
-  _InterstitialRestLeaderboardState createState() =>
-      _InterstitialRestLeaderboardState();
-}
-
-class _InterstitialRestLeaderboardState
-    extends State<InterstitialRestLeaderboard> {
-  static double borderRadius = SizeConfig.blockSizeHorizontal;
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+            width: Leaderboard.workoutLeaderboardWidth,
+            height: Leaderboard.workoutLeaderboardHeight,
+            decoration: BoxDecoration(
+              color: ColorConstants.launchpadPrimaryBlack,
+              borderRadius: BorderRadius.circular(borderRadius),
+            ),
+            child: Stack(
+              children: [
+                _leaderboardLabel(),
+                _topThree(),
+                _whiteLineDivider(),
+                _nearestFive(),
+              ],
+            ))
+      ],
+    );
+  }
 
   Widget _leaderboardLabel() {
     return Positioned(
@@ -55,24 +64,26 @@ class _InterstitialRestLeaderboardState
         ),
         height: Leaderboard.workoutLeaderboardHeight / 4,
         width: Leaderboard.workoutLeaderboardWidth,
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          InterstitialRestLeaderboardEntry(
-            topThree: true,
-            nearestFive: false,
-            position: 0,
-          ),
-          InterstitialRestLeaderboardEntry(
-            topThree: true,
-            nearestFive: false,
-            position: 1,
-          ),
-          InterstitialRestLeaderboardEntry(
-            topThree: true,
-            nearestFive: false,
-            position: 2,
-          ),
-        ]),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            InterstitialRestLeaderboardEntry(
+              topThree: true,
+              nearestFive: false,
+              position: 0,
+            ),
+            InterstitialRestLeaderboardEntry(
+              topThree: true,
+              nearestFive: false,
+              position: 1,
+            ),
+            InterstitialRestLeaderboardEntry(
+              topThree: true,
+              nearestFive: false,
+              position: 2,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -137,29 +148,6 @@ class _InterstitialRestLeaderboardState
           ],
         ),
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-            width: Leaderboard.workoutLeaderboardWidth,
-            height: Leaderboard.workoutLeaderboardHeight,
-            decoration: BoxDecoration(
-              color: ColorConstants.launchpadPrimaryBlack,
-              borderRadius: BorderRadius.circular(borderRadius),
-            ),
-            child: Stack(
-              children: [
-                _leaderboardLabel(),
-                _topThree(),
-                _whiteLineDivider(),
-                _nearestFive(),
-              ],
-            ))
-      ],
     );
   }
 }

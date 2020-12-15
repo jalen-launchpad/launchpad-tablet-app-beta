@@ -4,21 +4,17 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:tabletapp/constants/bluetooth_uuid.dart';
 
 class BluetoothSetupScreenModel {
+  final FlutterBlue _flutterBlue = FlutterBlue.instance;
   static const String launchpadCompanionAppAbbreviation = "LCA";
   static const int scanTimeDuration = 3;
-
   BluetoothDevice connectedDevice;
-
   List<BluetoothDevice> _devicesList = [];
-  List<BluetoothDevice> get devicesList => _devicesList;
-
   StreamSubscription<List<ScanResult>> scanResultListener;
-
-  final FlutterBlue _flutterBlue = FlutterBlue.instance;
-  FlutterBlue get flutterBlue => _flutterBlue;
-
   BluetoothConnectionStatusEnum _bluetoothStatus =
       BluetoothConnectionStatusEnum.notConnected;
+
+  FlutterBlue get flutterBlue => _flutterBlue;
+  List<BluetoothDevice> get devicesList => _devicesList;
   BluetoothConnectionStatusEnum get bluetoothStatus => _bluetoothStatus;
   bool get isConnected =>
       _bluetoothStatus == BluetoothConnectionStatusEnum.isConnected;
@@ -28,14 +24,11 @@ class BluetoothSetupScreenModel {
   bool get isNotConnected =>
       _bluetoothStatus == BluetoothConnectionStatusEnum.notConnected;
 
-  void cancelListeners() {
-    scanResultListener.cancel();
-  }
-
   // Set up bluetooth on instantiation.
   BluetoothSetupScreenModel() {
     _setupBluetooth();
   }
+
 // This is the bluetooth functionality that is called when connected.
   void _setupBluetooth() {
     // No LCA app currently found, so prepare for a bluetooth scan.
@@ -46,6 +39,10 @@ class BluetoothSetupScreenModel {
       // Set the bluetooth connection status and
       // connect to device if applicable.
     });
+  }
+
+  void cancelListeners() {
+    scanResultListener.cancel();
   }
 
   // Filter any devices that arent from the LCA and add the LCA to devicesList
@@ -79,8 +76,8 @@ class BluetoothSetupScreenModel {
       print("service count: " + services.length.toString());
       print(services.indexWhere(
           (element) => element.uuid.toString() == BluetoothUUID.service));
-      if (services.indexWhere((element) =>
-              element.uuid.toString() == BluetoothUUID.service) ==
+      if (services.indexWhere(
+              (element) => element.uuid.toString() == BluetoothUUID.service) ==
           -1) {
         await device.disconnect();
         return false;

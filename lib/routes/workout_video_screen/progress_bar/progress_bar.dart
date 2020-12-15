@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
-import 'package:tabletapp/routes/workout_video_screen/constants.dart';
+import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_alignment_constants.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
+
+import 'progress_bar_model.dart';
 
 class ProgressBar extends StatefulWidget {
   @override
@@ -13,13 +15,6 @@ class ProgressBar extends StatefulWidget {
 }
 
 class _ProgressBarState extends State<ProgressBar> {
-  String _printDuration(double secondsToGo) {
-    String twoDigits(int n) => n.toString().padLeft(2, "0");
-    var duration = Duration(seconds: secondsToGo.toInt());
-    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-    return "$twoDigitMinutes:$twoDigitSeconds";
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +35,7 @@ class _ProgressBarState extends State<ProgressBar> {
                       top: SizeConfig.blockSizeVertical * 2.5,
                       right: WorkoutVideoScreenConstants.leftPaddingAlign),
                   child: Text(
-                    "${_printDuration(state.workoutMetadata.workoutDetails.duration - state.secondsElapsed)}",
+                    "${ProgressBarModel.printDuration(state.workoutMetadata.workoutDetails.duration - state.secondsElapsed)}",
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       color: ColorConstants.launchpadPrimaryWhite,

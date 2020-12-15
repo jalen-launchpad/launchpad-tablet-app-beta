@@ -1,21 +1,9 @@
 import 'dart:convert';
 
-import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:http/http.dart' as http;
+import 'package:tabletapp/models/workout_metadata.dart';
 
-class PostWorkoutSurveyResponseBoxModel {
-  final int overall;
-  final int instructor;
-  final int fun;
-  final int difficulty;
-
-  PostWorkoutSurveyResponseBoxModel(
-      this.overall, this.instructor, this.fun, this.difficulty);
-
-  static PostWorkoutSurveyResponseBoxModel initialize() {
-    return PostWorkoutSurveyResponseBoxModel(5, 5, 5, 5);
-  }
-
+class HomePageScreenModel {
   // Retrieve workouts to surface on homepage from DB.
   static Future<List<WorkoutMetadata>> retrieveWorkouts() async {
     // print('\n\n\n\nTESTTESTTEST\n\n\n\n');
