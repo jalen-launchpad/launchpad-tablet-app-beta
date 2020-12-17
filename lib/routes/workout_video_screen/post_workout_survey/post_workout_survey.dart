@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/models/workout_metadata.dart';
@@ -18,7 +19,7 @@ import 'post_workout_survey_response_box.dart';
 class PostWorkoutSurvey extends StatelessWidget {
   final WorkoutVideoScreenState workoutVideoScreenState;
   // Video Player Controller to dispose of before returning to main menu.
-  final VideoPlayerController controller;
+  final VlcPlayerController controller;
 
   // Workouts to show on homepage
   List<WorkoutMetadata> workouts;

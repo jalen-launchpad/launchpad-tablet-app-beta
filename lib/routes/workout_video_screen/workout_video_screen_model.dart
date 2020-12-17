@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 import 'package:redux/redux.dart';
 import 'package:video_player/video_player.dart';
@@ -11,14 +12,14 @@ class WorkoutVideoScreenModel {
   // a change to the next exercise after the current exercise
   // should be done.
   void startWorkout(
-      Store<WorkoutVideoScreenState> store, VideoPlayerController controller) {
+      Store<WorkoutVideoScreenState> store, VlcPlayerController controller) {
     // Check every second whether the next exercise should rotate in.
     store.state.exerciseTimer = Timer.periodic(
         Duration(
           milliseconds: 500,
         ), (Timer timer) async {
       // If it was the last set, don't do anything and return.
-      int secondsElapsed = (await controller.position).inSeconds;
+      int secondsElapsed = controller.position.inSeconds;
       print(secondsElapsed);
       store.dispatch(UpdateSecondsElapsedAction(secondsElapsed));
       if (store.state.classIsOver) {

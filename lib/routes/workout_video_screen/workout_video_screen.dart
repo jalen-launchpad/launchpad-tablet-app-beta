@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
+import 'package:tabletapp/routes/workout_video_screen/leaderboard/interstitial_rest_leaderboard/interstitial_rest_menu.dart';
 import 'package:tabletapp/routes/workout_video_screen/progress_bar/progress_bar.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_bluetooth_handler.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
@@ -11,7 +13,6 @@ import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state
 import 'package:redux/redux.dart';
 import 'package:video_player/video_player.dart';
 import 'workout_video_screen_alignment_constants.dart';
-import 'leaderboard/interstitial_rest_leaderboard/interstitial_rest_leaderboard.dart';
 import 'leaderboard/leaderboard.dart';
 import 'post_workout_survey/post_workout_survey.dart';
 import 'workout_video_screen_arguments.dart';
@@ -31,11 +32,11 @@ class WorkoutVideoScreen extends StatefulWidget {
 
 class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
   // The controller for the streaming video.
-  VideoPlayerController controller;
+  VlcPlayerController controller;
   WorkoutVideoScreenBluetoothHandler bluetoothHandler;
+  String streamUri;
   WorkoutVideoScreenModel model;
   Store<WorkoutVideoScreenState> store;
-  bool initialized = false;
 
   @override
   void initState() {
@@ -49,70 +50,69 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
           WorkoutVideoScreenBluetoothHandler(widget.bluetoothDevice, store);
     }
     // Load video.
-    controller =
-        VideoPlayerController.network(store.state.workoutMetadata.streamUri);
-    // Initialize the controller.
-    controller
-      ..initialize().then((_) {
-        // Play video.
-        controller.play();
-        initialized = true;
+    controller = new VlcPlayerController(
+      // Start playing as soon as the video is loaded.
+      onInit: () {
+        print("initiated");
+        this.controller.play();
         model = WorkoutVideoScreenModel();
         // Start timer on workout to auto-rotate through exercises.
         model.startWorkout(store, controller);
-        setState(() {});
-      });
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return !initialized
-        ? Container()
-        : StoreProvider<WorkoutVideoScreenState>(
-            store: store,
-            child: Scaffold(
-              body: StoreBuilder<WorkoutVideoScreenState>(
-                builder: (context, store) {
-                  var classIsOver = store.state.classIsOver;
-                  return Stack(children: [
-                    // Video Player.
-                    _videoPlayer(
-                      classIsOver,
-                    ),
-                    // Blue gradient effect from left side of screen.
-                    _blueGradient(),
-                    //Progress bar.
-                    ProgressBar(),
-                    // Exercise Name.
-                    _exerciseName(
-                      // This check is necessary because classIsOver
-                      // is determined by workoutSetIndex >= number of exercises.
-                      // Therefore, is classIsOver is true,
-                      // currentExercise will throw an index out of bounds error.
-                      !classIsOver
-                          ? store.state.currentExercise.exerciseSetDefinition
-                              .exerciseName
-                          : "",
-                    ),
-                    // Leaderboard or Workout Set Statistics
-                    _leaderboard(
-                      // This check is necessary because classIsOver
-                      // is determined by workoutSetIndex >= number of exercises.
-                      // Therefore, is classIsOver is true,
-                      // currentExercise will throw an index out of bounds error.
-                      !classIsOver ? store.state.currentExercise.isRest : null,
-                      classIsOver,
-                    ),
-                    // Check to see if class is over...
-                    // If the class is over.
-                    classIsOver
-                        ? _endClassAndOverlayPostWorkoutSurvey(store)
-                        : Container()
-                  ]);
-                },
+    return StoreProvider<WorkoutVideoScreenState>(
+      store: store,
+      child: Scaffold(
+        body: StoreBuilder<WorkoutVideoScreenState>(
+          builder: (context, store) {
+            var classIsOver = store.state.classIsOver;
+            print(store.state.workoutMetadata.streamUri);
+            return Stack(children: [
+              // Video Player.
+              _videoPlayer(
+                classIsOver,
+                store.state.workoutMetadata.streamUri,
               ),
-            ),
-          );
+              // Blue gradient effect from left side of screen.
+              _blueGradient(),
+              //Progress bar.
+              ProgressBar(),
+              // Exercise Name.
+              _exerciseName(
+                // This check is necessary because classIsOver
+                // is determined by workoutSetIndex >= number of exercises.
+                // Therefore, is classIsOver is true,
+                // currentExercise will throw an index out of bounds error.
+                !classIsOver
+                    ? store.state.currentExercise.isRest
+                        ? "Rest"
+                        : store.state.currentExercise.exerciseSetDefinition
+                            .exerciseName
+                    : "",
+              ),
+              // Leaderboard or Workout Set Statistics
+              _leaderboard(
+                // This check is necessary because classIsOver
+                // is determined by workoutSetIndex >= number of exercises.
+                // Therefore, is classIsOver is true,
+                // currentExercise will throw an index out of bounds error.
+                !classIsOver ? store.state.currentExercise.isRest : null,
+                classIsOver,
+              ),
+              // Check to see if class is over...
+              // If the class is over.
+              classIsOver
+                  ? _endClassAndOverlayPostWorkoutSurvey(store)
+                  : Container()
+            ]);
+          },
+        ),
+      ),
+    );
   }
 
   Widget _exerciseName(String exerciseName) {
@@ -141,24 +141,21 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
     );
   }
 
-  Widget _videoPlayer(bool classIsOver) {
+  Widget _videoPlayer(bool classIsOver, String streamUri) {
     if (!classIsOver)
       return Align(
-        alignment: Alignment.topLeft,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-                width: MediaQuery.of(context).size.width,
-                child: controller.value.initialized
-                    ? AspectRatio(
-                        aspectRatio: MediaQuery.of(context).size.width /
-                            MediaQuery.of(context).size.height,
-                        child: VideoPlayer(controller))
-                    : Container()),
-          ],
-        ),
-      );
+          alignment: Alignment.topLeft,
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            SizedBox(
+                height: SizeConfig.screenHeight,
+                width: SizeConfig.screenWidth,
+                child: new VlcPlayer(
+                  aspectRatio: SizeConfig.screenWidth / SizeConfig.screenHeight,
+                  url: streamUri,
+                  controller: controller,
+                  placeholder: Center(child: CircularProgressIndicator()),
+                ))
+          ]));
     return Container();
   }
 
@@ -214,8 +211,8 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
           left: WorkoutVideoScreenConstants.leftPaddingAlign,
         );
       } else {
-        Positioned(
-          child: InterstitialRestLeaderboard(),
+        return Positioned(
+          child: InterstitialRestMenu(),
           bottom: WorkoutVideoScreenConstants.bottomPaddingAlign,
           left: WorkoutVideoScreenConstants.leftPaddingAlign,
         );
