@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/routes/bluetooth_setup_screen/bluetooth_setup_screen_arguments.dart';
@@ -76,7 +77,6 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -84,7 +84,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<WorkoutMetadata> workouts;
   WorkoutMetadata recommendedClass;
-
+  VlcPlayerController controller;
   // Has data been loaded from DB yet?
   bool initialDataLoadDone = false;
 
@@ -102,8 +102,14 @@ class _MyHomePageState extends State<MyHomePage> {
         initialDataLoadDone = true;
       });
     });
+    controller = new VlcPlayerController(
+        // Start playing as soon as the video is loaded.
+        onInit: () {
+      this.controller.play();
+    });
   }
 
+ 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);

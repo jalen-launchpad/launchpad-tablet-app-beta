@@ -3,15 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
 import 'package:tabletapp/models/exercise_model.dart';
-import 'package:tabletapp/models/workout_metadata.dart';
-import 'package:tabletapp/placeholder_values.dart';
 import 'package:tabletapp/routes/bluetooth_setup_screen/bluetooth_setup_screen.dart';
 import 'package:tabletapp/routes/bluetooth_setup_screen/bluetooth_setup_screen_arguments.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/routes/home_page_screen/selected_class_sidebar/constants.dart';
-import 'package:tabletapp/routes/workout_video_screen/workout_video_screen.dart';
-import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state.dart';
 import 'components/exercise_bucket.dart';
 import 'components/intensity_graph.dart';
 import 'components/time_bucket.dart';
@@ -39,7 +35,6 @@ class _SelectedClassSidebarState extends State<SelectedClassSidebar> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 

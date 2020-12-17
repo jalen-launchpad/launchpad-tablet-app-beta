@@ -1,16 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
-import 'package:tabletapp/models/workout_metadata.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen.dart';
-import 'package:redux/redux.dart';
-import 'package:http/http.dart' as http;
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_model.dart';
 import 'package:tabletapp/routes/home_page_screen/home_page_screen_state.dart';
-import 'package:tabletapp/routes/workout_video_screen/post_workout_survey/post_workout_survey_response_box_model.dart';
 import 'package:video_player/video_player.dart';
 import '../workout_video_screen_state.dart';
 import 'post_workout_survey_response_box.dart';
@@ -20,15 +14,12 @@ class PostWorkoutSurvey extends StatelessWidget {
   // Video Player Controller to dispose of before returning to main menu.
   final VideoPlayerController controller;
 
-  // Workouts to show on homepage
-  List<WorkoutMetadata> workouts;
-  // Has data been loaded from DB yet?
-  bool initialDataLoadDone = false;
+  final HomePageScreenModel model = HomePageScreenModel();
 
   PostWorkoutSurvey(this.workoutVideoScreenState, this.controller) {
     HomePageScreenModel.retrieveWorkouts().then((response) {
-      initialDataLoadDone = true;
-      workouts = response;
+      model.initialDataLoadDone = true;
+      model.workouts = response;
     });
   }
 
@@ -73,12 +64,12 @@ class PostWorkoutSurvey extends StatelessWidget {
       right: SizeConfig.blockSizeHorizontal * 4,
       child: FlatButton(
         onPressed: () async {
-          if (initialDataLoadDone) {
+          if (model.initialDataLoadDone) {
             Navigator.pushReplacementNamed(context, HomePageScreen.routeName,
                 arguments: HomePageScreenState(
-                    recommendedClass: workouts[0],
-                    sidebarClass: workouts[0],
-                    alternativeClasses: workouts));
+                    recommendedClass: model.workouts[0],
+                    sidebarClass: model.workouts[0],
+                    alternativeClasses: model.workouts));
           }
         },
         child: Container(

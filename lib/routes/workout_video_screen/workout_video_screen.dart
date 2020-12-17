@@ -4,6 +4,7 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:tabletapp/constants/colors.dart';
 import 'package:tabletapp/constants/size_config.dart';
+import 'package:tabletapp/routes/workout_video_screen/leaderboard/interstitial_rest_leaderboard/interstitial_rest_menu.dart';
 import 'package:tabletapp/routes/workout_video_screen/progress_bar/progress_bar.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_bluetooth_handler.dart';
 import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_model.dart';
@@ -11,7 +12,6 @@ import 'package:tabletapp/routes/workout_video_screen/workout_video_screen_state
 import 'package:redux/redux.dart';
 import 'package:video_player/video_player.dart';
 import 'workout_video_screen_alignment_constants.dart';
-import 'leaderboard/interstitial_rest_leaderboard/interstitial_rest_leaderboard.dart';
 import 'leaderboard/leaderboard.dart';
 import 'post_workout_survey/post_workout_survey.dart';
 import 'workout_video_screen_arguments.dart';
@@ -90,8 +90,10 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
                       // Therefore, is classIsOver is true,
                       // currentExercise will throw an index out of bounds error.
                       !classIsOver
-                          ? store.state.currentExercise.exerciseSetDefinition
-                              .exerciseName
+                          ? store.state.currentExercise.isRest
+                              ? "Rest"
+                              : store.state.currentExercise
+                                  .exerciseSetDefinition.exerciseName
                           : "",
                     ),
                     // Leaderboard or Workout Set Statistics
@@ -214,8 +216,8 @@ class _WorkoutVideoScreenState extends State<WorkoutVideoScreen> {
           left: WorkoutVideoScreenConstants.leftPaddingAlign,
         );
       } else {
-        Positioned(
-          child: InterstitialRestLeaderboard(),
+        return Positioned(
+          child: InterstitialRestMenu(),
           bottom: WorkoutVideoScreenConstants.bottomPaddingAlign,
           left: WorkoutVideoScreenConstants.leftPaddingAlign,
         );

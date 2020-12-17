@@ -65,7 +65,6 @@ final Function(WorkoutVideoScreenState, AddScoreValueAction)
     (WorkoutVideoScreenState state, AddScoreValueAction action) {
   var newState = state.copyWith();
 
-  print(state.currentWorkoutSetIndex);
   if (newState.currentExercise.isRest == true) {
     return newState;
   }
@@ -126,13 +125,6 @@ Function(WorkoutVideoScreenState, UpdatePostWorkoutSurveyInputAction)
         : state.postWorkoutSurveyResponseBoxModel.difficulty,
   ));
 
-  print("Overall: " +
-      newState.postWorkoutSurveyResponseBoxModel.overall.toString());
-  print("Instructor: " +
-      newState.postWorkoutSurveyResponseBoxModel.instructor.toString());
-  print("Fun: " + newState.postWorkoutSurveyResponseBoxModel.fun.toString());
-  print("Difficulty: " +
-      newState.postWorkoutSurveyResponseBoxModel.difficulty.toString());
   return newState;
 };
 
@@ -148,7 +140,6 @@ final Function(WorkoutVideoScreenState, UpdateUserPositionAction)
       index++) {
     // If the user is now the leader, exit.
     if (currentLeaderboard.userIsLeader) {
-      print("User is the leader of the leaderboard.");
       break;
     }
 
@@ -156,11 +147,6 @@ final Function(WorkoutVideoScreenState, UpdateUserPositionAction)
     // no change in position.
     if (currentLeaderboard.getUserEntry.score.getValue <
         currentLeaderboard.nextScoreToBeat) {
-      print("Current Score is: " +
-          currentLeaderboard.getUserEntry.score.getValue.toString() +
-          ". Next score to beat is: " +
-          currentLeaderboard.nextScoreToBeat.toString());
-
       break;
     } else {
       // If the user score is larger than next to beat,

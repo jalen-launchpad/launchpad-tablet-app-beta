@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tabletapp/constants/bluetooth_uuid.dart';
 
 part 'exercise_set_model.g.dart';
 

@@ -4,6 +4,9 @@ import 'package:http/http.dart' as http;
 import 'package:tabletapp/models/workout_metadata.dart';
 
 class HomePageScreenModel {
+  List<WorkoutMetadata> workouts;
+  bool initialDataLoadDone = false;
+
   // Retrieve workouts to surface on homepage from DB.
   static Future<List<WorkoutMetadata>> retrieveWorkouts() async {
     // print('\n\n\n\nTESTTESTTEST\n\n\n\n');

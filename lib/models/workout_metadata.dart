@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'workout_details.dart';
@@ -13,8 +12,7 @@ class WorkoutMetadata {
   final WorkoutDetails workoutDetails;
   final String streamUri;
 
-  WorkoutMetadata(@required this.workoutSets, @required this.workoutDetails,
-      @required this.streamUri);
+  WorkoutMetadata(this.workoutSets, this.workoutDetails, this.streamUri);
   factory WorkoutMetadata.fromJson(Map<String, dynamic> json) =>
       _$WorkoutMetadataFromJson(json);
   Map<String, dynamic> toJson() => _$WorkoutMetadataToJson(this);
