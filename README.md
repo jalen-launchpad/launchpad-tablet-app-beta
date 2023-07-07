@@ -1,6 +1,9 @@
 # tabletapp
 
-A new Flutter project.
+NOTE: This internal beta app is now deprecated and public.
+Launchpad's original connected fitness beta application. Requires the launchpad-phone-app repo to use.
+
+This tablet receives PoseNet scoring metadata from the iPhone app via Bluetooth and surfaces the information in a mid-workout leaderboard.
 
 ## Getting Started
 
